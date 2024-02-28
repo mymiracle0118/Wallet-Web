@@ -1,0 +1,24 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "components": ["./app/components"],
+      "layouts/*": ["./app/layouts/*"],
+      "pages/*": ["./app/pages/*"],
+      "assets/*": ["./assets/*"],
+      "helpers/*": ["./helpers/*"],
+      "theme/*": ["./theme/*"],
+      "lib/*": ["./lib/*"],
+      "@src/*": ["./*"]
+    },
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "moduleResolution": "node",
+    "types": ["chrome"]
+  },
+  "exclude": ["./node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"]
+}

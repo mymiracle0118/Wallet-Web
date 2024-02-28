@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signing Request renders correctly Connect Request Page 1`] = `
+<DocumentFragment>
+  <div
+    class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+  >
+    <div
+      class="flex flex-row relative justify-between items-center h-16"
+    >
+      <button
+        class="profile-btn flex items-center mr-1 text-inherit font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-3 rounded-md"
+        type="button"
+      >
+        @
+        <chevron-right.svg
+          classname="stroke-custom-black dark:stroke-custom-white"
+        />
+      </button>
+    </div>
+    <div
+      class="w-full h-full overflow-auto"
+    >
+      <div
+        class="p-4 "
+      >
+        <div
+          class="flex gap-4"
+        >
+          <img
+            alt="token-thumbnail"
+            class="h-9 w-9 rounded-full"
+            src="https://example.walletconnect.org/favicon.ico"
+          />
+          <div
+            class="text-h2 text-custom-black dark:text-custom-white"
+          >
+            WalletConnect Example
+          </div>
+        </div>
+        <div
+          class="text-link mt-4 text-primary dark:text-secondary"
+        >
+          https://example.walletconnect.org
+        </div>
+        <div
+          class="text-h1 my-4 text-custom-black dark:text-custom-white"
+        >
+          Signature Request
+        </div>
+        <div
+          class="overflow-hidden rounded-lg py-3 px-3 bg-gray-dark"
+        >
+          <div
+            class="max-h-64 overflow-y-scroll"
+          >
+            <div
+              class="text-body line leading-5  break-words text-custom-black dark:text-custom-white"
+            >
+              undefined (0x)
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex gap-2 mt-6"
+        >
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+            type="button"
+          >
+            Deny
+          </button>
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] text-custom-white dark:text-custom-white hover:bg-primary-alt dark:hover:bg-primary-alt bg-primary"
+            type="submit"
+          >
+            Approve
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

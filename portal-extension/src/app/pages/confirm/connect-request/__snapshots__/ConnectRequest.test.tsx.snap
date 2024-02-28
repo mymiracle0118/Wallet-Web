@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConnectRequest /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+  >
+    <div
+      class="flex flex-row relative justify-between items-center h-16"
+    />
+    <div
+      class="w-full h-full overflow-auto"
+    >
+      <div
+        class="p-4 "
+      >
+        <div
+          class="flex gap-4"
+        >
+          <img
+            alt="token-thumbnail"
+            class="h-9 w-9 rounded-full"
+            src="https://walletconnect.org/walletconnect-logo.png"
+          />
+          <div
+            class="text-h2 text-custom-black dark:text-custom-white"
+          >
+            WalletConnect
+          </div>
+        </div>
+        <div
+          class="text-link mt-4 text-primary dark:text-secondary"
+        >
+          https://walletconnect.org
+        </div>
+        <div
+          class="text-h1 my-4 text-custom-black dark:text-custom-white"
+        >
+          Connect request
+        </div>
+        <div
+          class="text-body line leading-5 text-custom-black dark:text-custom-white"
+        >
+          By granting permission, you allow this site to view the addresses of your permitted accounts. Only connect with sites you trust.
+        </div>
+        <div
+          class="my-4"
+        >
+          <div
+            class="w-full flex items-center p-4 -mx-4 hover:dark:bg-custom-white10 hover:bg-custom-grey10 shadow-sm dark:shadow-custom-white10 shadow-custom-grey10"
+          >
+            <div
+              class="flex items-center gap-2 rounded-full"
+            >
+              <input
+                checked=""
+                class="relative w-6 h-6 appearance-none border-2 border-solid border-[transparent] rounded-[4px] bg-custom-grey/10 cursor-pointer checked:before:bg-check"
+                id="checkbox"
+                type="checkbox"
+                value=""
+              />
+            </div>
+            <div
+              class="text-h4 text-custom-black dark:text-custom-white"
+            >
+              account-1
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex gap-2  "
+        >
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+            type="button"
+          >
+            Deny
+          </button>
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] text-custom-white dark:text-custom-white hover:bg-primary-alt dark:hover:bg-primary-alt bg-primary"
+            type="button"
+          >
+            Allow
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,544 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auto Lock Timer Page UI renders correctly Auto Lock Timer Page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+      >
+        <div
+          class="flex flex-row relative justify-between items-center h-16"
+        >
+          <button
+            class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+            type="button"
+          >
+            <arrow-left.svg
+              classname="text-xl stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+          <div
+            class="flex-1 text-center"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+              data-aid="autoLockHead"
+            >
+              Security.autoLockTimer
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-full h-full overflow-auto"
+        >
+          <div
+            class="p-4"
+          >
+            <p
+              class="text-sm text-custom-white pb-4"
+            >
+              Set the idle time 
+              <span
+                class="font-extrabold"
+              >
+                in minutes
+              </span>
+               before the wallet will be locked.
+            </p>
+            <div
+              class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+            >
+              <input
+                autocomplete="off"
+                class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                data-aid="inputTime"
+                data-testid="input-lock-time"
+                name="test"
+                placeholder="1-120 minutes"
+                type="number"
+                value="1"
+              />
+            </div>
+            <div
+              class="flex mt-4 justify-center gap-2"
+            >
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+                data-aid="cancelButton"
+                type="button"
+              >
+                Actions.cancel
+              </button>
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] text-custom-white dark:text-custom-white hover:bg-primary-alt dark:hover:bg-primary-alt bg-primary"
+                data-aid="saveButton"
+                data-testid="button-save"
+                type="button"
+              >
+                Actions.save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+    >
+      <div
+        class="flex flex-row relative justify-between items-center h-16"
+      >
+        <button
+          class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+          type="button"
+        >
+          <arrow-left.svg
+            classname="text-xl stroke-custom-black dark:stroke-custom-white"
+          />
+        </button>
+        <div
+          class="flex-1 text-center"
+        >
+          <div
+            class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+            data-aid="autoLockHead"
+          >
+            Security.autoLockTimer
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full h-full overflow-auto"
+      >
+        <div
+          class="p-4"
+        >
+          <p
+            class="text-sm text-custom-white pb-4"
+          >
+            Set the idle time 
+            <span
+              class="font-extrabold"
+            >
+              in minutes
+            </span>
+             before the wallet will be locked.
+          </p>
+          <div
+            class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+          >
+            <input
+              autocomplete="off"
+              class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+              data-aid="inputTime"
+              data-testid="input-lock-time"
+              name="test"
+              placeholder="1-120 minutes"
+              type="number"
+              value="1"
+            />
+          </div>
+          <div
+            class="flex mt-4 justify-center gap-2"
+          >
+            <button
+              class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+              data-aid="cancelButton"
+              type="button"
+            >
+              Actions.cancel
+            </button>
+            <button
+              class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] text-custom-white dark:text-custom-white hover:bg-primary-alt dark:hover:bg-primary-alt bg-primary"
+              data-aid="saveButton"
+              data-testid="button-save"
+              type="button"
+            >
+              Actions.save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Security Page UI renders correctly Security Page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+      >
+        <div
+          class="flex flex-row relative justify-between items-center h-16"
+        >
+          <button
+            class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+            type="button"
+          >
+            <arrow-left.svg
+              classname="text-xl stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+          <div
+            class="flex-1 text-center"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+            >
+              Security
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-full h-full overflow-auto"
+        >
+          <div
+            class="MuiBox-root css-10l65i2"
+          >
+            <div
+              style="width: 70%;"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                data-aid="secretRecoveryPhraseNavigation"
+              >
+                Security.secretRecoveryPhrase
+              </div>
+            </div>
+            <svg
+              class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+              style="height: 1em; width: 1em;"
+            >
+              <arrow-right.svg />
+            </svg>
+          </div>
+          <div
+            class="MuiBox-root css-1mdx561"
+          >
+            <div
+              style="width: 70%;"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                data-aid="passwordProtectionPop"
+              >
+                Security.passwordProtectionTitle
+              </div>
+              <div
+                class="text-custom-grey100 dark:text-custom-white40 text-sm font-regular"
+                data-aid="passwordProtectionPop"
+              >
+                Security.passwordProtectionSubTitle
+              </div>
+            </div>
+            <button
+              aria-checked="false"
+              class="!bg-custom-grey10 dark:!bg-custom-white40 relative inline-flex h-8 w-14 items-center rounded-[22px] transition-colors"
+              data-aid="passwordSwitch"
+              data-testid="switch-switch-enable-password-protection"
+              id="headlessui-switch-:r0:"
+              role="switch"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="translate-x-1 inline-block h-6 w-6 rounded-[18px] bg-custom-white transform transition ease-in-out duration-200 shadow-md"
+              />
+            </button>
+          </div>
+          <div
+            class="MuiBox-root css-10l65i2"
+          >
+            <div
+              style="width: 70%;"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                data-aid="autoLockNavigation"
+              >
+                Security.autoLockTimer
+              </div>
+            </div>
+            <svg
+              class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+              style="height: 1em; width: 1em;"
+            >
+              <arrow-right.svg />
+            </svg>
+          </div>
+          <div
+            class="MuiBox-root css-10l65i2"
+          >
+            <div
+              style="width: 70%;"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                data-aid="passwordChangeNavigation"
+              >
+                Security.changePassword
+              </div>
+            </div>
+            <svg
+              class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+              style="height: 1em; width: 1em;"
+            >
+              <arrow-right.svg />
+            </svg>
+          </div>
+          <div
+            style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      id="headlessui-portal-root"
+    >
+      <div
+        data-headlessui-portal=""
+      >
+        <div />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+    >
+      <div
+        class="flex flex-row relative justify-between items-center h-16"
+      >
+        <button
+          class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+          type="button"
+        >
+          <arrow-left.svg
+            classname="text-xl stroke-custom-black dark:stroke-custom-white"
+          />
+        </button>
+        <div
+          class="flex-1 text-center"
+        >
+          <div
+            class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+          >
+            Security
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full h-full overflow-auto"
+      >
+        <div
+          class="MuiBox-root css-10l65i2"
+        >
+          <div
+            style="width: 70%;"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+              data-aid="secretRecoveryPhraseNavigation"
+            >
+              Security.secretRecoveryPhrase
+            </div>
+          </div>
+          <svg
+            class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+            style="height: 1em; width: 1em;"
+          >
+            <arrow-right.svg />
+          </svg>
+        </div>
+        <div
+          class="MuiBox-root css-1mdx561"
+        >
+          <div
+            style="width: 70%;"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+              data-aid="passwordProtectionPop"
+            >
+              Security.passwordProtectionTitle
+            </div>
+            <div
+              class="text-custom-grey100 dark:text-custom-white40 text-sm font-regular"
+              data-aid="passwordProtectionPop"
+            >
+              Security.passwordProtectionSubTitle
+            </div>
+          </div>
+          <button
+            aria-checked="false"
+            class="!bg-custom-grey10 dark:!bg-custom-white40 relative inline-flex h-8 w-14 items-center rounded-[22px] transition-colors"
+            data-aid="passwordSwitch"
+            data-testid="switch-switch-enable-password-protection"
+            id="headlessui-switch-:r0:"
+            role="switch"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="translate-x-1 inline-block h-6 w-6 rounded-[18px] bg-custom-white transform transition ease-in-out duration-200 shadow-md"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiBox-root css-10l65i2"
+        >
+          <div
+            style="width: 70%;"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+              data-aid="autoLockNavigation"
+            >
+              Security.autoLockTimer
+            </div>
+          </div>
+          <svg
+            class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+            style="height: 1em; width: 1em;"
+          >
+            <arrow-right.svg />
+          </svg>
+        </div>
+        <div
+          class="MuiBox-root css-10l65i2"
+        >
+          <div
+            style="width: 70%;"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+              data-aid="passwordChangeNavigation"
+            >
+              Security.changePassword
+            </div>
+          </div>
+          <svg
+            class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+            style="height: 1em; width: 1em;"
+          >
+            <arrow-right.svg />
+          </svg>
+        </div>
+        <div
+          style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -1,0 +1,3791 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddToken Page renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+      >
+        <div
+          class="flex flex-row relative justify-between items-center h-16"
+        >
+          <button
+            class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+            type="button"
+          >
+            <arrow-left.svg
+              classname="text-xl stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+          <div
+            class="flex-1 text-center"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+            >
+              Add token
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-full h-full overflow-auto"
+        >
+          <div
+            aria-orientation="horizontal"
+            class="w-full flex justify-around"
+            role="tablist"
+          >
+            <button
+              aria-selected="true"
+              class="outline-0"
+              data-testid="tab-Search"
+              id="headlessui-tabs-tab-:r0:"
+              role="tab"
+              tabindex="0"
+              type="button"
+            >
+              <div
+                class="py-4 text-h4 dark:text-custom-white text-primary"
+              >
+                Search
+              </div>
+            </button>
+            <button
+              aria-selected="false"
+              class="outline-0"
+              data-testid="tab-Custom-tokens"
+              id="headlessui-tabs-tab-:r1:"
+              role="tab"
+              tabindex="-1"
+              type="button"
+            >
+              <div
+                class="py-4 text-h4 dark:text-custom-white40 text-custom-grey40"
+              >
+                Custom tokens
+              </div>
+            </button>
+          </div>
+          <div
+            style="height: 492px; display: flex; flex-direction: column;"
+          >
+            <div
+              style="flex: 1; overflow: scroll;"
+            >
+              <div
+                aria-labelledby="simple-tab-0"
+                data-testid="search-add-token-tab"
+                id="simple-tabpanel-0"
+                role="tabpanel"
+              >
+                <div
+                  class="MuiBox-root css-0"
+                >
+                  <div
+                    class="text-custom-black dark:text-custom-white"
+                  >
+                    <div
+                      class="py-8 px-4"
+                    >
+                      <div
+                        class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+                      >
+                        <input
+                          autocomplete="off"
+                          class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                          placeholder="Asset name or symbol"
+                          value=""
+                        />
+                        <div
+                          class="pr-3.5"
+                        >
+                          <svg
+                            class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-xl"
+                            style="height: 1em; width: 1em;"
+                          >
+                            <search.svg />
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        style="margin-top: 32px;"
+                      >
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                ETH
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                ETH
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                ETH
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Kovan
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/325/large/Tether-logo.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                USDT
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/325/large/Tether-logo.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                USDT
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                USDC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                USDC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                USDC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                USDC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Kovan
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                BUSD
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                BUSD
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                BUSD
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                BUSD
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Kovan
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/11939/large/shiba.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                SHIB
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/11939/large/shiba.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                SHIB
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                MATIC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                MATIC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                MATIC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/9956/large/4943.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                DAI
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/9956/large/4943.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                DAI
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/9956/large/4943.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                DAI
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/9956/large/4943.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                DAI
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Kovan
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                UNI
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                UNI
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                UNI
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                WBTC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                WBTC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                WBTC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                WBTC
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Kovan
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/8418/large/leo-token.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                LEO
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/8418/large/leo-token.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                LEO
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/2518/large/weth.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                WETH
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ethereum
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/2518/large/weth.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                WETH
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Goerli
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/2518/large/weth.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                WETH
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Ropsten
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                        <button
+                          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                          type="button"
+                        >
+                          <div
+                            class="relative"
+                          >
+                            <img
+                              alt="token-thumbnail"
+                              class="h-[36px] w-[36px] rounded-full"
+                              src="https://assets.coingecko.com/coins/images/2518/large/weth.png"
+                            />
+                          </div>
+                          <div
+                            class="MuiBox-root css-182u9mc"
+                          >
+                            <div
+                              class="MuiBox-root css-k008qs"
+                            >
+                              <div
+                                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                                style="margin-right: 4px;"
+                              >
+                                WETH
+                              </div>
+                              <div
+                                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                              >
+                                <span
+                                  class="text-gradient"
+                                >
+                                  Kovan
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="MuiBox-root css-qfdd9t"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                            >
+                              0.0
+                            </div>
+                            <div
+                              class="text-custom-grey text-sm font-regular"
+                            />
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-labelledby="simple-tab-1"
+                data-testid="custom-add-token-tab"
+                hidden=""
+                id="simple-tabpanel-1"
+                role="tabpanel"
+              />
+            </div>
+            <div
+              class="flex p-4 gap-2"
+            >
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+                type="button"
+              >
+                Actions.cancel
+              </button>
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+                data-testid="add-token-btn"
+                disabled=""
+                type="button"
+              >
+                Actions.add
+              </button>
+            </div>
+          </div>
+          <div
+            style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      id="headlessui-portal-root"
+    >
+      <div
+        data-headlessui-portal=""
+      >
+        <div />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+    >
+      <div
+        class="flex flex-row relative justify-between items-center h-16"
+      >
+        <button
+          class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+          type="button"
+        >
+          <arrow-left.svg
+            classname="text-xl stroke-custom-black dark:stroke-custom-white"
+          />
+        </button>
+        <div
+          class="flex-1 text-center"
+        >
+          <div
+            class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+          >
+            Add token
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full h-full overflow-auto"
+      >
+        <div
+          aria-orientation="horizontal"
+          class="w-full flex justify-around"
+          role="tablist"
+        >
+          <button
+            aria-selected="true"
+            class="outline-0"
+            data-testid="tab-Search"
+            id="headlessui-tabs-tab-:r0:"
+            role="tab"
+            tabindex="0"
+            type="button"
+          >
+            <div
+              class="py-4 text-h4 dark:text-custom-white text-primary"
+            >
+              Search
+            </div>
+          </button>
+          <button
+            aria-selected="false"
+            class="outline-0"
+            data-testid="tab-Custom-tokens"
+            id="headlessui-tabs-tab-:r1:"
+            role="tab"
+            tabindex="-1"
+            type="button"
+          >
+            <div
+              class="py-4 text-h4 dark:text-custom-white40 text-custom-grey40"
+            >
+              Custom tokens
+            </div>
+          </button>
+        </div>
+        <div
+          style="height: 492px; display: flex; flex-direction: column;"
+        >
+          <div
+            style="flex: 1; overflow: scroll;"
+          >
+            <div
+              aria-labelledby="simple-tab-0"
+              data-testid="search-add-token-tab"
+              id="simple-tabpanel-0"
+              role="tabpanel"
+            >
+              <div
+                class="MuiBox-root css-0"
+              >
+                <div
+                  class="text-custom-black dark:text-custom-white"
+                >
+                  <div
+                    class="py-8 px-4"
+                  >
+                    <div
+                      class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+                    >
+                      <input
+                        autocomplete="off"
+                        class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                        placeholder="Asset name or symbol"
+                        value=""
+                      />
+                      <div
+                        class="pr-3.5"
+                      >
+                        <svg
+                          class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-xl"
+                          style="height: 1em; width: 1em;"
+                        >
+                          <search.svg />
+                        </svg>
+                      </div>
+                    </div>
+                    <div
+                      style="margin-top: 32px;"
+                    >
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              ETH
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              ETH
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              ETH
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Kovan
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/325/large/Tether-logo.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              USDT
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/325/large/Tether-logo.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              USDT
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              USDC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              USDC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              USDC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              USDC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Kovan
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              BUSD
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              BUSD
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              BUSD
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/9576/large/BUSD.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              BUSD
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Kovan
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/11939/large/shiba.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              SHIB
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/11939/large/shiba.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              SHIB
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              MATIC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              MATIC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              MATIC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/9956/large/4943.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              DAI
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/9956/large/4943.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              DAI
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/9956/large/4943.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              DAI
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/9956/large/4943.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              DAI
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Kovan
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              UNI
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              UNI
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/12504/large/uniswap-uni.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              UNI
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              WBTC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              WBTC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              WBTC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              WBTC
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Kovan
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/8418/large/leo-token.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              LEO
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/8418/large/leo-token.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              LEO
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/2518/large/weth.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              WETH
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ethereum
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/2518/large/weth.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              WETH
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Goerli
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/2518/large/weth.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              WETH
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Ropsten
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                      <button
+                        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+                        type="button"
+                      >
+                        <div
+                          class="relative"
+                        >
+                          <img
+                            alt="token-thumbnail"
+                            class="h-[36px] w-[36px] rounded-full"
+                            src="https://assets.coingecko.com/coins/images/2518/large/weth.png"
+                          />
+                        </div>
+                        <div
+                          class="MuiBox-root css-182u9mc"
+                        >
+                          <div
+                            class="MuiBox-root css-k008qs"
+                          >
+                            <div
+                              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                              style="margin-right: 4px;"
+                            >
+                              WETH
+                            </div>
+                            <div
+                              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                            >
+                              <span
+                                class="text-gradient"
+                              >
+                                Kovan
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="MuiBox-root css-qfdd9t"
+                        >
+                          <div
+                            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                          >
+                            0.0
+                          </div>
+                          <div
+                            class="text-custom-grey text-sm font-regular"
+                          />
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              aria-labelledby="simple-tab-1"
+              data-testid="custom-add-token-tab"
+              hidden=""
+              id="simple-tabpanel-1"
+              role="tabpanel"
+            />
+          </div>
+          <div
+            class="flex p-4 gap-2"
+          >
+            <button
+              class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+              type="button"
+            >
+              Actions.cancel
+            </button>
+            <button
+              class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+              data-testid="add-token-btn"
+              disabled=""
+              type="button"
+            >
+              Actions.add
+            </button>
+          </div>
+        </div>
+        <div
+          style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

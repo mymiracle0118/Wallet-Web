@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TokenAsset /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+  >
+    <div
+      class="flex flex-row relative justify-between items-center h-16"
+    >
+      <button
+        class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center"
+        type="button"
+      >
+        <arrow-left.svg
+          classname="text-xl stroke-custom-black dark:stroke-custom-white"
+        />
+      </button>
+      <button
+        class="profile-btn flex items-center mr-1 text-inherit font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-3 rounded-md"
+        type="button"
+      >
+        @
+        <chevron-right.svg
+          classname="stroke-custom-black dark:stroke-custom-white"
+        />
+      </button>
+    </div>
+    <div
+      class="w-full h-full overflow-auto"
+    >
+      <div
+        class="MuiBox-root css-1cc42ae"
+      >
+        <div
+          class="bg-gradient-bg dark:bg-gradient-bg rounded-lg py-4 px-6"
+        >
+          <div
+            class="relative flex items-center mb-2"
+          >
+            <img
+              alt="token-thumbnail"
+              class="h-9 w-9 rounded-full"
+              src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+            />
+            <div
+              style="flex: 1; margin-left: 16px;"
+            >
+              <div
+                class="break-all text-custom-white text-[1.75rem] font-light"
+              >
+                0 ETH
+              </div>
+              <div>
+                <div
+                  class="text-custom-white text-sm font-extrabold"
+                >
+                  $0
+                </div>
+              </div>
+            </div>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              class="self-start h-[20px] w-[20px] cursor-pointer hover:bg-custom-white10 rounded-full"
+              id="headlessui-listbox-button-:r0:"
+              type="button"
+            >
+              <more-horizontal.svg
+                classname="text-xl stroke-custom-white"
+              />
+            </button>
+          </div>
+          <div
+            class="text-custom-white border-[1px] border-solid h-8  border-custom-white40 rounded-xl flex items-center justify-center w-fit px-3"
+          >
+            <div
+              class="text-note text-inherit"
+            >
+              0x63C1...675c
+            </div>
+            <div
+              class="relative"
+            >
+              <button
+                aria-expanded="false"
+                class="ml-1 p-1 focus:outline-none"
+                id="headlessui-popover-button-:r2:"
+                type="button"
+              >
+                <copy.svg
+                  class="fill-custom-white"
+                />
+              </button>
+            </div>
+            <button
+              class="ml-0.5 flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[16px] w-[16px] !p-1 !rounded-full dark:hover:bg-custom-white10"
+              type="button"
+            >
+              <external-link.svg
+                classname="fill-custom-white"
+              />
+            </button>
+          </div>
+          <div
+            class="flex gap-3 mt-4 mb-3 items-center justify-between "
+          >
+            <button
+              class="bg-custom-white40 w-4/12 text-custom-white rounded-md p-[12px] max-h-[44px] hover:bg-custom-white hover:text-primary font-bold fill-custom-white hover:fill-primary"
+              data-aid="receiveButton"
+              type="button"
+            >
+              Receive
+            </button>
+            <button
+              class="bg-custom-white40 w-4/12 text-custom-white rounded-md p-[12px] max-h-[44px] hover:bg-custom-white hover:text-primary font-bold fill-custom-white hover:fill-primary"
+              data-aid="sendButton"
+              type="button"
+            >
+              Send
+            </button>
+          </div>
+          <div
+            class="flex items-center"
+          >
+            <div
+              class="asset-text flex-1 ml-2.5 text-custom-white text-sm font-extrabold"
+            />
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-hqnnjl"
+        >
+          <div
+            class="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+            role=""
+            style="width: 132px;"
+            tabindex="0"
+          >
+            <div
+              class="title-wrapper MuiBox-root css-1lekzkb"
+            >
+              <div
+                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              >
+                ETH Price
+              </div>
+            </div>
+            <div
+              class="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            >
+              0
+            </div>
+            0
+          </div>
+          <div
+            class="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+            role=""
+            style="width: 132px;"
+            tabindex="0"
+          >
+            <div
+              class="title-wrapper MuiBox-root css-1lekzkb"
+            >
+              <div
+                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              >
+                Profit Loss
+              </div>
+            </div>
+            <div
+              class="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            >
+              $0
+            </div>
+            <div
+              class="flex items-center gap-1 text-feedback-negative dark:text-feedback-negative text-sm font-extrabold"
+            >
+              <svg
+                class="inline-block select-none shrink-0 stroke-feedback-positive text-xl"
+                style="height: 1em; width: 1em;"
+              >
+                <trending-down.svg />
+              </svg>
+              0%
+            </div>
+          </div>
+        </div>
+        <a
+          href="https://www.coingecko.com/en/coins/goerlieth"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <div
+            class="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+            role=""
+            style="width: auto;"
+            tabindex="0"
+          >
+            <div
+              class="title-wrapper MuiBox-root css-1lekzkb"
+            >
+              <div
+                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              >
+                Price Chart
+              </div>
+              <svg
+                class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+                style="height: 1em; width: 1em;"
+              >
+                <external-link.svg
+                  classname="dark:fill-custom-white fill-custom-black"
+                />
+              </svg>
+            </div>
+          </div>
+        </a>
+        <div
+          class="MuiBox-root css-69i1ev"
+        >
+          <div
+            class="mt-4 text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+          >
+            Activity
+          </div>
+        </div>
+      </div>
+      <div
+        data-testid="0xea76c54c02ed88249e4037c0636b85509926b6572b1e250e24d8acac21f70d3c"
+      >
+        <div
+          class="MuiBox-root css-v18s91"
+        >
+          <div>
+            <svg
+              class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+              style="height: 1em; width: 1em;"
+            >
+              <arrow-up-right.svg />
+            </svg>
+          </div>
+          <div
+            style="margin-left: 28px; flex: 1;"
+          >
+            <div
+              class="text-h4 text-custom-black dark:text-custom-white"
+            >
+              Send
+            </div>
+            <div
+              class="text-subtitle1 text-custom-grey100 dark:text-custom-white40"
+            >
+              Invalid date
+            </div>
+          </div>
+          <div
+            style="text-align: right;"
+          >
+            <div
+              class="text-h4 text-custom-black dark:text-custom-white"
+            >
+              0.01 ETH
+            </div>
+            <div
+              class="text-subtitle1 text-custom-black dark:text-custom-white"
+            >
+              Completed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

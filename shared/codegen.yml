@@ -1,0 +1,9 @@
+schema:
+  - http://localhost:8080/graphql
+documents: 'graphql/*.graphql'
+generates:
+  ./graphql/index.ts:
+    plugins:
+      - '@graphql-codegen/typescript'
+      - '@graphql-codegen/typescript-operations'
+      - '@graphql-codegen/typescript-urql'

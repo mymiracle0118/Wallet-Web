@@ -1,0 +1,418 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImportPrivateKey /> renders correctly ImportPrivateKey Page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+      >
+        <div
+          class="flex flex-row relative justify-between items-center h-16"
+        >
+          <button
+            class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+            type="button"
+          >
+            <arrow-left.svg
+              classname="text-xl stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+          <div
+            class="flex-1 text-center"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+            >
+              Import account
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-full h-full overflow-auto"
+        >
+          <form>
+             
+            <div
+              class="css-1vn5bei"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-regular"
+              >
+                Account.importAccountMessage
+              </div>
+              <div
+                class="MuiBox-root css-1jrf70h"
+              >
+                <div
+                  class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+                >
+                  <input
+                    autocomplete="off"
+                    class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                    disabled=""
+                    name="test"
+                    placeholder="Private Key"
+                    value="Private Key"
+                  />
+                </div>
+                <div
+                  class="relative flex flex-col items-center group"
+                >
+                  <div
+                    class="css-mzan16"
+                  >
+                    <svg
+                      class="inline-block select-none shrink-0 m-auto fill-custom-black dark:fill-custom-white text-2xl"
+                      style="height: 1em; width: 1em;"
+                    >
+                      <help-circle.svg />
+                    </svg>
+                  </div>
+                  <div
+                    class="absolute bottom-0 flex flex-col items-center hidden mb-6 group-hover:flex right-0 undefined"
+                  >
+                    <span
+                      class="rounded-md dark:bg-surface-dark-alt bg-surface-light relative z-10 p-2 text-xs leading-none dark:text-custom-white text-custom-grey100 whitespace-no-wrap bg-black shadow-lg w-max max-w-[300px] mb-2"
+                    >
+                      Private Key
+                    </span>
+                    <div
+                      class="w-3 h-3 -mt-2 rotate-45 bg-black"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mt-4 mb-8"
+              >
+                <div
+                  class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+                >
+                  <input
+                    autocomplete="off"
+                    class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                    data-testid="private-key-input"
+                    id="private-key"
+                    name="privateKey"
+                    placeholder="Enter your private key"
+                    type="password"
+                    value=""
+                  />
+                  <div
+                    class="pr-3.5"
+                  >
+                    <button
+                      aria-label="toggle password visibility"
+                      class="dark:stroke-custom-white stroke-custom-black w-6"
+                      data-aid="privateKeyShowHide"
+                      tabindex="-1"
+                      type="button"
+                    >
+                      <eye-off.svg
+                        classname="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class=" mt-2 text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              >
+                Account.enterPassword
+              </div>
+              <div
+                class="mt-4 mb-8"
+              >
+                <div
+                  class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+                >
+                  <input
+                    autocomplete="off"
+                    class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                    data-testid="password"
+                    id="enter-password"
+                    name="password"
+                    placeholder="Account.enterPassword"
+                    type="password"
+                    value=""
+                  />
+                  <div
+                    class="pr-3.5"
+                  >
+                    <button
+                      aria-label="toggle password visibility"
+                      class="dark:stroke-custom-white stroke-custom-black w-6"
+                      data-aid="passwordShowHide"
+                      tabindex="-1"
+                      type="button"
+                    >
+                      <eye-off.svg
+                        classname="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="mt-2 ml-1 dark:text-white text-custom-grey100 font-normal text-[12px]"
+                >
+                  Min 8 characters
+                </div>
+              </div>
+              <div
+                class="flex mt-4 gap-2"
+              >
+                <button
+                  class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+                  type="button"
+                >
+                  Actions.cancel
+                </button>
+                <button
+                  class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+                  data-testid="import-privatekey-btn"
+                  disabled=""
+                  type="submit"
+                >
+                  Actions.import
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+    >
+      <div
+        class="flex flex-row relative justify-between items-center h-16"
+      >
+        <button
+          class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+          type="button"
+        >
+          <arrow-left.svg
+            classname="text-xl stroke-custom-black dark:stroke-custom-white"
+          />
+        </button>
+        <div
+          class="flex-1 text-center"
+        >
+          <div
+            class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+          >
+            Import account
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full h-full overflow-auto"
+      >
+        <form>
+           
+          <div
+            class="css-1vn5bei"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-regular"
+            >
+              Account.importAccountMessage
+            </div>
+            <div
+              class="MuiBox-root css-1jrf70h"
+            >
+              <div
+                class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+              >
+                <input
+                  autocomplete="off"
+                  class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                  disabled=""
+                  name="test"
+                  placeholder="Private Key"
+                  value="Private Key"
+                />
+              </div>
+              <div
+                class="relative flex flex-col items-center group"
+              >
+                <div
+                  class="css-mzan16"
+                >
+                  <svg
+                    class="inline-block select-none shrink-0 m-auto fill-custom-black dark:fill-custom-white text-2xl"
+                    style="height: 1em; width: 1em;"
+                  >
+                    <help-circle.svg />
+                  </svg>
+                </div>
+                <div
+                  class="absolute bottom-0 flex flex-col items-center hidden mb-6 group-hover:flex right-0 undefined"
+                >
+                  <span
+                    class="rounded-md dark:bg-surface-dark-alt bg-surface-light relative z-10 p-2 text-xs leading-none dark:text-custom-white text-custom-grey100 whitespace-no-wrap bg-black shadow-lg w-max max-w-[300px] mb-2"
+                  >
+                    Private Key
+                  </span>
+                  <div
+                    class="w-3 h-3 -mt-2 rotate-45 bg-black"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="mt-4 mb-8"
+            >
+              <div
+                class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+              >
+                <input
+                  autocomplete="off"
+                  class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                  data-testid="private-key-input"
+                  id="private-key"
+                  name="privateKey"
+                  placeholder="Enter your private key"
+                  type="password"
+                  value=""
+                />
+                <div
+                  class="pr-3.5"
+                >
+                  <button
+                    aria-label="toggle password visibility"
+                    class="dark:stroke-custom-white stroke-custom-black w-6"
+                    data-aid="privateKeyShowHide"
+                    tabindex="-1"
+                    type="button"
+                  >
+                    <eye-off.svg
+                      classname="w-5 h-5"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class=" mt-2 text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+            >
+              Account.enterPassword
+            </div>
+            <div
+              class="mt-4 mb-8"
+            >
+              <div
+                class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+              >
+                <input
+                  autocomplete="off"
+                  class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                  data-testid="password"
+                  id="enter-password"
+                  name="password"
+                  placeholder="Account.enterPassword"
+                  type="password"
+                  value=""
+                />
+                <div
+                  class="pr-3.5"
+                >
+                  <button
+                    aria-label="toggle password visibility"
+                    class="dark:stroke-custom-white stroke-custom-black w-6"
+                    data-aid="passwordShowHide"
+                    tabindex="-1"
+                    type="button"
+                  >
+                    <eye-off.svg
+                      classname="w-5 h-5"
+                    />
+                  </button>
+                </div>
+              </div>
+              <div
+                class="mt-2 ml-1 dark:text-white text-custom-grey100 font-normal text-[12px]"
+              >
+                Min 8 characters
+              </div>
+            </div>
+            <div
+              class="flex mt-4 gap-2"
+            >
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+                type="button"
+              >
+                Actions.cancel
+              </button>
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+                data-testid="import-privatekey-btn"
+                disabled=""
+                type="submit"
+              >
+                Actions.import
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

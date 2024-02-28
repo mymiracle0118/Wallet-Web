@@ -1,0 +1,328 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TokensTab /> renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="p-4 min-h-[277px]"
+      >
+        <div
+          class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10 search-input font-bold"
+        >
+          <input
+            autocomplete="off"
+            class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+            data-aid="searchBar"
+            placeholder="Search"
+            value=""
+          />
+          <div
+            class="pr-3.5"
+          >
+            <svg
+              class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+              style="height: 1em; width: 1em;"
+            >
+              <search.svg
+                class="stroke-custom-black dark:stroke-custom-white"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-1dqmdil"
+        >
+          <div
+            class="flex items-center gap-2"
+          >
+            <input
+              class="relative w-6 h-6 appearance-none border-2 border-solid border-[transparent] rounded-[4px] bg-custom-grey/10 cursor-pointer checked:before:bg-check"
+              id="checkbox"
+              type="checkbox"
+              value=""
+            />
+            <div
+              class="ml-2 text-note w-fit text-custom-black dark:text-custom-white"
+            >
+              Hide zero balance
+            </div>
+          </div>
+          <div
+            class="flex gap-2"
+          >
+            <div
+              class="relative"
+            >
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                class="relative"
+                id="headlessui-listbox-button-:r0:"
+                type="button"
+              >
+                <sort-2.svg
+                  classname="fill-custom-black dark:fill-custom-white text-2xl"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+          type="button"
+        >
+          <div
+            class="relative"
+          >
+            <img
+              alt="token-thumbnail"
+              class="h-[36px] w-[36px] rounded-full"
+              src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+            />
+          </div>
+          <div
+            class="MuiBox-root css-182u9mc"
+          >
+            <div
+              class="MuiBox-root css-k008qs"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                style="margin-right: 4px;"
+              >
+                ETH
+              </div>
+              <div
+                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              >
+                <span
+                  class="text-gradient"
+                >
+                  Ethereum
+                </span>
+              </div>
+            </div>
+            <div
+              class="text-left text-custom-grey100 dark:text-custom-white40 text-sm font-regular"
+            >
+              Ethereum
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-qfdd9t"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+            >
+              0.0
+            </div>
+            <div
+              class="text-custom-grey text-sm font-regular"
+            >
+              $0
+            </div>
+          </div>
+        </button>
+        <div
+          style="padding: 24px 0px;"
+        >
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+            data-aid="addToken"
+            type="button"
+          >
+            Add token
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="p-4 min-h-[277px]"
+    >
+      <div
+        class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10 search-input font-bold"
+      >
+        <input
+          autocomplete="off"
+          class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+          data-aid="searchBar"
+          placeholder="Search"
+          value=""
+        />
+        <div
+          class="pr-3.5"
+        >
+          <svg
+            class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+            style="height: 1em; width: 1em;"
+          >
+            <search.svg
+              class="stroke-custom-black dark:stroke-custom-white"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="MuiBox-root css-1dqmdil"
+      >
+        <div
+          class="flex items-center gap-2"
+        >
+          <input
+            class="relative w-6 h-6 appearance-none border-2 border-solid border-[transparent] rounded-[4px] bg-custom-grey/10 cursor-pointer checked:before:bg-check"
+            id="checkbox"
+            type="checkbox"
+            value=""
+          />
+          <div
+            class="ml-2 text-note w-fit text-custom-black dark:text-custom-white"
+          >
+            Hide zero balance
+          </div>
+        </div>
+        <div
+          class="flex gap-2"
+        >
+          <div
+            class="relative"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              class="relative"
+              id="headlessui-listbox-button-:r0:"
+              type="button"
+            >
+              <sort-2.svg
+                classname="fill-custom-black dark:fill-custom-white text-2xl"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <button
+        class="w-full bg-surface-light dark:bg-surface-dark h-[56px] flex items-center px-4 -ml-4 -mr-4 hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer"
+        type="button"
+      >
+        <div
+          class="relative"
+        >
+          <img
+            alt="token-thumbnail"
+            class="h-[36px] w-[36px] rounded-full"
+            src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
+          />
+        </div>
+        <div
+          class="MuiBox-root css-182u9mc"
+        >
+          <div
+            class="MuiBox-root css-k008qs"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+              style="margin-right: 4px;"
+            >
+              ETH
+            </div>
+            <div
+              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+            >
+              <span
+                class="text-gradient"
+              >
+                Ethereum
+              </span>
+            </div>
+          </div>
+          <div
+            class="text-left text-custom-grey100 dark:text-custom-white40 text-sm font-regular"
+          >
+            Ethereum
+          </div>
+        </div>
+        <div
+          class="MuiBox-root css-qfdd9t"
+        >
+          <div
+            class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          >
+            0.0
+          </div>
+          <div
+            class="text-custom-grey text-sm font-regular"
+          >
+            $0
+          </div>
+        </div>
+      </button>
+      <div
+        style="padding: 24px 0px;"
+      >
+        <button
+          class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+          data-aid="addToken"
+          type="button"
+        >
+          Add token
+        </button>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

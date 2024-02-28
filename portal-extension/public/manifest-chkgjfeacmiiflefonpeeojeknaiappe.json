@@ -1,0 +1,45 @@
+{
+  "name": "Shuttle Wallet - Nightly TEST",
+  "description": "Shuttle Wallet - NIGHTLY TEST build\nNon-custodial wallet for holding Ethereum and tokens.",
+  "version": "2022.06.02-212134",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./images/logo_16.png",
+      "48": "./images/logo_48.png",
+      "128": "./images/logo_128.png"
+    },
+    "default_title": "Shuttle Wallet - Nightly TEST"
+  },
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+
+  "short_name": "Shuttle Wallet - ALPHA",
+
+  "icons": {
+    "16": "./images/logo_16.png",
+    "48": "./images/logo_48.png",
+    "128": "./images/logo_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentScript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "clipboardWrite"
+  ]
+}

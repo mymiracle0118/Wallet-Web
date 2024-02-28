@@ -1,0 +1,1088 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NFT /> renders correctly 1`] = `
+<div
+  className="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+>
+  <div
+    className="flex flex-row relative justify-between items-center h-16"
+  >
+    <button
+      className="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center"
+      onClick={[Function]}
+      type="button"
+    >
+      <arrow-left.svg
+        className="text-xl stroke-custom-black dark:stroke-custom-white"
+      />
+    </button>
+    <button
+      className="profile-btn flex items-center mr-1 text-inherit font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-3 rounded-md"
+      onClick={[Function]}
+      type="button"
+    >
+      @
+      <chevron-right.svg
+        className="stroke-custom-black dark:stroke-custom-white"
+      />
+    </button>
+  </div>
+  <div
+    className="w-full h-full overflow-auto"
+  >
+    <div
+      className="MuiBox-root css-1w1rbvj"
+    >
+      <div
+        className="cover MuiBox-root css-8vs0al"
+      >
+        <network-eth.svg
+          style={
+            Object {
+              "alignSelf": "flex-end",
+              "height": "72px",
+              "width": "72px",
+            }
+          }
+        />
+      </div>
+      <div
+        className="text-custom-black dark:text-custom-white text-lg font-extrabold"
+        style={
+          Object {
+            "WebkitLineClamp": "3",
+            "marginBottom": 4,
+            "marginTop": 4,
+          }
+        }
+      >
+        Machine Hallucinations - Huble Dreams - NG Collector's Edition #4/10
+      </div>
+      <div
+        className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+        style={
+          Object {
+            "WebkitLineClamp": "3",
+            "marginBottom": 4,
+            "marginTop": 4,
+          }
+        }
+      >
+        Edition 4 of 10
+      </div>
+      <button
+        className="my-1 flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] text-custom-white dark:text-custom-white hover:bg-primary-alt dark:hover:bg-primary-alt bg-primary"
+        onClick={[Function]}
+        type="button"
+      >
+        Token.send
+      </button>
+      <div
+        className="MuiBox-root css-218b0q"
+      >
+        <svg
+          className="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+          style={
+            Object {
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+        >
+          <gas.svg />
+        </svg>
+        <div
+          className="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+              "flex": 1,
+            }
+          }
+        >
+          120 Gwei ≈ $14
+        </div>
+        <button
+          className="px-4 flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+          type="button"
+        >
+          Token.alerts
+        </button>
+      </div>
+      <div
+        className="MuiBox-root css-wbjjkw"
+      >
+        <div
+          className="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Nft.artworkAddress
+        </div>
+        <div
+          className="text-custom-white border-[1px] border-solid h-8  border-custom-white40 rounded-xl flex items-center justify-center w-fit px-3"
+        >
+          <div
+            className="text-note text-inherit"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            0x1096...b19q
+          </div>
+          <div
+            className="relative"
+          >
+            <button
+              aria-expanded={false}
+              className="ml-1 p-1 focus:outline-none"
+              id="headlessui-popover-button-:r0:"
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              type="button"
+            >
+              <copy.svg
+                className="fill-custom-white"
+              />
+            </button>
+          </div>
+          <button
+            className="ml-0.5 flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[16px] w-[16px] !p-1 !rounded-full dark:hover:bg-custom-white10"
+            onClick={[Function]}
+            type="button"
+          >
+            <external-link.svg
+              className="fill-custom-white"
+            />
+          </button>
+        </div>
+      </div>
+      <hr
+        className="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      <div
+        className="MuiBox-root css-1h1r0qh"
+      >
+        <div
+          className="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Nft.createdBy
+        </div>
+        <div
+          className="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+              "textAlign": "right",
+            }
+          }
+        >
+          Refik Anadol
+        </div>
+      </div>
+      <hr
+        className="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      <div
+        className="MuiBox-root css-1h1r0qh"
+      >
+        <div
+          className="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Nft.collection
+        </div>
+        <div
+          className="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+              "textAlign": "right",
+            }
+          }
+        >
+          Machine Hallucinations: Collectors Edition by Refik Anadol
+        </div>
+      </div>
+      <hr
+        className="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      <div
+        className="MuiBox-root css-1h1r0qh"
+      >
+        <div
+          className="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Network
+        </div>
+        <div
+          className="text-custom-black dark:text-custom-white text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+              "textAlign": "right",
+            }
+          }
+        >
+          Ethereum
+        </div>
+      </div>
+      <hr
+        className="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      <div
+        className="MuiBox-root css-1uiczfq"
+      >
+        <div
+          className="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+          role=""
+          style={
+            Object {
+              "width": "auto",
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="title-wrapper MuiBox-root css-1lekzkb"
+          >
+            <div
+              className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style={
+                Object {
+                  "WebkitLineClamp": "3",
+                }
+              }
+            >
+              You Bought For
+            </div>
+          </div>
+          <div
+            className="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            9000
+          </div>
+        </div>
+        <div
+          className="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+          role=""
+          style={
+            Object {
+              "width": "auto",
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="title-wrapper MuiBox-root css-1lekzkb"
+          >
+            <div
+              className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style={
+                Object {
+                  "WebkitLineClamp": "3",
+                }
+              }
+            >
+              Price Chart
+            </div>
+            <svg
+              className="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+              style={
+                Object {
+                  "height": "1em",
+                  "width": "1em",
+                }
+              }
+            >
+              <external-link.svg />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div
+        className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+        style={
+          Object {
+            "WebkitLineClamp": "3",
+            "marginBottom": 4,
+            "marginTop": 16,
+          }
+        }
+      >
+        Nft.collectionDailyStats
+      </div>
+      <div
+        className="MuiBox-root css-18v6if6"
+      >
+        <div
+          className="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+          role=""
+          style={
+            Object {
+              "width": 132,
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="title-wrapper MuiBox-root css-1lekzkb"
+          >
+            <div
+              className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style={
+                Object {
+                  "WebkitLineClamp": "3",
+                }
+              }
+            >
+              Total Supply
+            </div>
+          </div>
+          <div
+            className="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            10000
+          </div>
+        </div>
+        <div
+          className="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+          role=""
+          style={
+            Object {
+              "width": 132,
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="title-wrapper MuiBox-root css-1lekzkb"
+          >
+            <div
+              className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style={
+                Object {
+                  "WebkitLineClamp": "3",
+                }
+              }
+            >
+              Floor Price
+            </div>
+          </div>
+          <div
+            className="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            12000
+          </div>
+          <div
+            className="flex items-center gap-1 text-feedback-positive dark:text-feedback-positive text-sm font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            <svg
+              className="inline-block select-none shrink-0 stroke-feedback-positive text-xl"
+              style={
+                Object {
+                  "height": "1em",
+                  "width": "1em",
+                }
+              }
+            >
+              <trending-up.svg />
+            </svg>
+            0.8%
+          </div>
+        </div>
+      </div>
+      <div
+        className="MuiBox-root css-18v6if6"
+      >
+        <div
+          className="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+          role=""
+          style={
+            Object {
+              "width": 132,
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="title-wrapper MuiBox-root css-1lekzkb"
+          >
+            <div
+              className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style={
+                Object {
+                  "WebkitLineClamp": "3",
+                }
+              }
+            >
+              Avg. Sales Price
+            </div>
+          </div>
+          <div
+            className="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            20000
+          </div>
+          <div
+            className="flex items-center gap-1 text-feedback-positive dark:text-feedback-positive text-sm font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            <svg
+              className="inline-block select-none shrink-0 stroke-feedback-positive text-xl"
+              style={
+                Object {
+                  "height": "1em",
+                  "width": "1em",
+                }
+              }
+            >
+              <trending-up.svg />
+            </svg>
+            10.2%
+          </div>
+        </div>
+        <div
+          className="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+          role=""
+          style={
+            Object {
+              "width": 132,
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="title-wrapper MuiBox-root css-1lekzkb"
+          >
+            <div
+              className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style={
+                Object {
+                  "WebkitLineClamp": "3",
+                }
+              }
+            >
+              Highest ActiveGlobal Bid
+            </div>
+          </div>
+          <div
+            className="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            35000
+          </div>
+        </div>
+      </div>
+      <div
+        className="MuiBox-root css-18v6if6"
+      >
+        <div
+          className="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+          role=""
+          style={
+            Object {
+              "width": 132,
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="title-wrapper MuiBox-root css-1lekzkb"
+          >
+            <div
+              className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style={
+                Object {
+                  "WebkitLineClamp": "3",
+                }
+              }
+            >
+              Secondary Market Volume
+            </div>
+          </div>
+          <div
+            className="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            100000
+          </div>
+        </div>
+        <div
+          className="flex flex-col p-3 rounded-lg bg-custom-grey10 dark:bg-custom-white10"
+          role=""
+          style={
+            Object {
+              "width": 132,
+            }
+          }
+          tabIndex={0}
+        >
+          <div
+            className="title-wrapper MuiBox-root css-1lekzkb"
+          >
+            <div
+              className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style={
+                Object {
+                  "WebkitLineClamp": "3",
+                }
+              }
+            >
+              Secondary MarketSales
+            </div>
+          </div>
+          <div
+            className="mt-2 mb-2 text-custom-black dark:text-custom-white text-lg font-extrabold"
+            style={
+              Object {
+                "WebkitLineClamp": "3",
+              }
+            }
+          >
+            2
+          </div>
+        </div>
+      </div>
+      <button
+        className="my-2 flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+        onClick={[Function]}
+        type="button"
+      >
+        Nft.sell
+      </button>
+      <div
+        className="MuiBox-root css-1vjrblz"
+      >
+        <div
+          className="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Nft.artworkTradingHistory
+        </div>
+        <button
+          aria-expanded={false}
+          aria-haspopup={true}
+          className="relative"
+          disabled={false}
+          id="headlessui-listbox-button-:r3:"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          type="button"
+        >
+          <button
+            className="flex items-center flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] text-primary dark:text-custom-white dark:hover:bg-custom-white10 hover:text-primary-alt"
+            type="button"
+          >
+            Nft.all
+            <chevron-down.svg
+              className="stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+        </button>
+      </div>
+    </div>
+    <div
+      className="MuiBox-root css-v18s91"
+      onClick={[Function]}
+    >
+      <div>
+        <svg
+          className="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+          style={
+            Object {
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+        >
+          <arrow-down-left.svg />
+        </svg>
+      </div>
+      <div
+        style={
+          Object {
+            "flex": 1,
+            "marginLeft": 28,
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Received
+        </div>
+        <div
+          className="text-subtitle1 text-custom-grey100 dark:text-custom-white40"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Sept. 20 at 9:36 PM
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "textAlign": "right",
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          -
+        </div>
+        <div
+          className="text-subtitle1 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Completed
+        </div>
+      </div>
+    </div>
+    <div
+      className="MuiBox-root css-v18s91"
+      onClick={[Function]}
+    >
+      <div>
+        <svg
+          className="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+          style={
+            Object {
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+        >
+          <bought.svg />
+        </svg>
+      </div>
+      <div
+        style={
+          Object {
+            "flex": 1,
+            "marginLeft": 28,
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Bought by you
+        </div>
+        <div
+          className="text-subtitle1 text-custom-grey100 dark:text-custom-white40"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Sept. 20 at 9:36 PM
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "textAlign": "right",
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          $9,000
+        </div>
+        <div
+          className="text-subtitle1 dark:text-secondary text-primary-alt"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="MuiBox-root css-v18s91"
+      onClick={[Function]}
+    >
+      <div>
+        <svg
+          className="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+          style={
+            Object {
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+        >
+          <listed.svg />
+        </svg>
+      </div>
+      <div
+        style={
+          Object {
+            "flex": 1,
+            "marginLeft": 28,
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Listed on OpenSea
+        </div>
+        <div
+          className="text-subtitle1 text-custom-grey100 dark:text-custom-white40"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Sept. 20 at 9:36 PM
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "textAlign": "right",
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          $6,000
+        </div>
+        <div
+          className="text-subtitle1 dark:text-secondary text-primary-alt"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="MuiBox-root css-v18s91"
+      onClick={[Function]}
+    >
+      <div>
+        <svg
+          className="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+          style={
+            Object {
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+        >
+          <bought.svg />
+        </svg>
+      </div>
+      <div
+        style={
+          Object {
+            "flex": 1,
+            "marginLeft": 28,
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Bought by 0x6d90...f757
+        </div>
+        <div
+          className="text-subtitle1 text-custom-grey100 dark:text-custom-white40"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Sept. 20 at 9:36 PM
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "textAlign": "right",
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          $4,000
+        </div>
+        <div
+          className="text-subtitle1 dark:text-secondary text-primary-alt"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="MuiBox-root css-v18s91"
+      onClick={[Function]}
+    >
+      <div>
+        <svg
+          className="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+          style={
+            Object {
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+        >
+          <listed.svg />
+        </svg>
+      </div>
+      <div
+        style={
+          Object {
+            "flex": 1,
+            "marginLeft": 28,
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Listed on Nifty Gateway
+        </div>
+        <div
+          className="text-subtitle1 text-custom-grey100 dark:text-custom-white40"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Sept. 20 at 9:36 PM
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "textAlign": "right",
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          $1,000
+        </div>
+        <div
+          className="text-subtitle1 dark:text-secondary text-primary-alt"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
+      className="MuiBox-root css-v18s91"
+      onClick={[Function]}
+    >
+      <div>
+        <svg
+          className="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-2xl"
+          style={
+            Object {
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+        >
+          <minted.svg />
+        </svg>
+      </div>
+      <div
+        style={
+          Object {
+            "flex": 1,
+            "marginLeft": 28,
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Minted on Nifty Gateway
+        </div>
+        <div
+          className="text-subtitle1 text-custom-grey100 dark:text-custom-white40"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Sept. 20 at 9:36 PM
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "textAlign": "right",
+          }
+        }
+      >
+        <div
+          className="text-h4 text-custom-black dark:text-custom-white"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        />
+        <div
+          className="text-subtitle1 dark:text-secondary text-primary-alt"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

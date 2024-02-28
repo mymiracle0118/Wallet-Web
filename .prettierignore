@@ -1,0 +1,9 @@
+# Ignore node modules
+node_modules/**
+
+# Ignore portal extension node modules
+portal-extension/node_modules/**
+portal-extension/reportWebVitals.ts
+
+# Ignore shared node modules
+shared/node_modules/**

@@ -1,0 +1,573 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SendNFT /> renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div />
+    <div>
+      <div
+        class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+      >
+        <div
+          class="flex flex-row relative justify-between items-center h-16"
+        >
+          <button
+            class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center"
+            type="button"
+          >
+            <arrow-left.svg
+              classname="text-xl stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+          <button
+            class="profile-btn flex items-center mr-1 text-inherit font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-3 rounded-md"
+            type="button"
+          >
+            @
+            <chevron-right.svg
+              classname="stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+        </div>
+        <div
+          class="w-full h-full overflow-auto"
+        >
+          <div
+            class="MuiBox-root css-10cpdan"
+          >
+            <div
+              class="MuiBox-root css-xgi4bw"
+            >
+              <div
+                class="MuiBox-root css-hxa509"
+              >
+                <svg
+                  class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-[inherit]]"
+                  style="height: 1em; width: 1em;"
+                >
+                  <eth.svg />
+                </svg>
+              </div>
+              <div
+                class="text-custom-black dark:text-custom-white text-[1.75rem] font-light"
+                style="margin-left: 16px;"
+              >
+                Send Artwork
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-13t3iqc"
+            >
+              <img
+                alt="nft-demo"
+                style="border-radius: 12px; min-width: 140px;"
+              />
+              <div
+                class="MuiBox-root css-1u72um6"
+              >
+                <div
+                  class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+                >
+                  Description data is missing
+                </div>
+                <div
+                  class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+                >
+                  Edition -- of 
+                  1
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              style="margin-bottom: 8px;"
+            >
+              To
+            </div>
+            <div
+              class="border-solid  dark:border-custom-white40 border-custom-grey40 rounded-md"
+              style="border-width: 0px;"
+            >
+              <div
+                class="relative"
+              >
+                <div
+                  class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+                >
+                  <input
+                    autocomplete="off"
+                    class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                    id="headlessui-popover-button-:r0:"
+                    placeholder="Username or address"
+                    value=""
+                  />
+                  <div
+                    class="pr-3.5"
+                  >
+                    <div
+                      class="css-171n8m5"
+                    >
+                      <book.svg />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="mt-8 mb-1 MuiBox-root css-k008qs"
+            >
+              <div
+                class="flex-1 MuiBox-root css-k008qs"
+              >
+                <div
+                  class="text-custom-grey100 dark:text-custom-white40"
+                >
+                  Max Fee
+                </div>
+                <div
+                  class="ml-1 text-custom-black dark:text-custom-white"
+                >
+                  0.00
+                   Gwei
+                </div>
+              </div>
+              <div
+                class="flex-1 MuiBox-root css-k008qs"
+              >
+                <div
+                  class="flex-1 text-right text-custom-grey100 dark:text-custom-white40"
+                >
+                  Max Priority Fee
+                </div>
+                <div
+                  class="ml-1 min-w-[4.5em] text-custom-black dark:text-custom-white"
+                >
+                  0
+                   Gwei
+                </div>
+              </div>
+            </div>
+            <span
+              class="MuiSlider-colorSecondary MuiSlider-sizeSmall MuiSlider-root css-lbpym0-MuiSlider-root"
+            >
+              <span
+                class="MuiSlider-rail css-14pt78w-MuiSlider-rail"
+              />
+              <span
+                class="MuiSlider-track css-1n40zqk-MuiSlider-track"
+                style="left: 0%; width: 50%;"
+              />
+              <span
+                class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+                data-index="0"
+                style="left: 0%;"
+              />
+              <span
+                class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+                data-index="1"
+                style="left: 50%;"
+              />
+              <span
+                class="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+                data-index="2"
+                style="left: 100%;"
+              />
+              <span
+                class="MuiSlider-thumbColorSecondary MuiSlider-thumbSizeSmall MuiSlider-thumb css-nfrlyi-MuiSlider-thumb"
+                data-index="0"
+                style="left: 50%;"
+              >
+                <input
+                  aria-label="Volume"
+                  aria-orientation="horizontal"
+                  aria-valuemax="3"
+                  aria-valuemin="1"
+                  aria-valuenow="2"
+                  data-index="0"
+                  max="3"
+                  min="1"
+                  step="1"
+                  style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+                  type="range"
+                  value="2"
+                />
+              </span>
+            </span>
+            <div
+              class="MuiBox-root css-1hprwxc"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                style="flex: 1;"
+              >
+                Estimated Gas Fee
+              </div>
+              <div>
+                <div
+                  class="text-right text-custom-black dark:text-custom-white text-sm font-extrabold"
+                >
+                  0.00000000
+                   ETH
+                </div>
+                <div
+                  class="text-right text-custom-black dark:text-custom-white"
+                >
+                  $0
+                </div>
+              </div>
+            </div>
+            <hr
+              class="MuiDivider-root MuiDivider-fullWidth css-1h3sccu-MuiDivider-root"
+            />
+            <div
+              class="MuiBox-root css-mifb2i"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                style="flex: 1;"
+              >
+                Estimated Time
+              </div>
+              <div>
+                <div
+                  class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                  style="text-align: right;"
+                >
+                  30 seconds
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-r0pdzr"
+            >
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+                data-testid="button-review"
+                disabled=""
+                type="button"
+              >
+                Review Transaction
+              </button>
+              <button
+                class="mt-1 mb-2 flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-grey40 dark:border-grey40 hover:bg-transparent dark:hover:bg-transparent bg-none"
+                disabled=""
+                type="button"
+              >
+                Send with lower gas fee later
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+    >
+      <div
+        class="flex flex-row relative justify-between items-center h-16"
+      >
+        <button
+          class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center"
+          type="button"
+        >
+          <arrow-left.svg
+            classname="text-xl stroke-custom-black dark:stroke-custom-white"
+          />
+        </button>
+        <button
+          class="profile-btn flex items-center mr-1 text-inherit font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-3 rounded-md"
+          type="button"
+        >
+          @
+          <chevron-right.svg
+            classname="stroke-custom-black dark:stroke-custom-white"
+          />
+        </button>
+      </div>
+      <div
+        class="w-full h-full overflow-auto"
+      >
+        <div
+          class="MuiBox-root css-10cpdan"
+        >
+          <div
+            class="MuiBox-root css-xgi4bw"
+          >
+            <div
+              class="MuiBox-root css-hxa509"
+            >
+              <svg
+                class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-[inherit]]"
+                style="height: 1em; width: 1em;"
+              >
+                <eth.svg />
+              </svg>
+            </div>
+            <div
+              class="text-custom-black dark:text-custom-white text-[1.75rem] font-light"
+              style="margin-left: 16px;"
+            >
+              Send Artwork
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-13t3iqc"
+          >
+            <img
+              alt="nft-demo"
+              style="border-radius: 12px; min-width: 140px;"
+            />
+            <div
+              class="MuiBox-root css-1u72um6"
+            >
+              <div
+                class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+              >
+                Description data is missing
+              </div>
+              <div
+                class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+              >
+                Edition -- of 
+                1
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-custom-grey100 dark:text-custom-white40 text-sm font-extrabold"
+            style="margin-bottom: 8px;"
+          >
+            To
+          </div>
+          <div
+            class="border-solid  dark:border-custom-white40 border-custom-grey40 rounded-md"
+            style="border-width: 0px;"
+          >
+            <div
+              class="relative"
+            >
+              <div
+                class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+              >
+                <input
+                  autocomplete="off"
+                  class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                  id="headlessui-popover-button-:r0:"
+                  placeholder="Username or address"
+                  value=""
+                />
+                <div
+                  class="pr-3.5"
+                >
+                  <div
+                    class="css-171n8m5"
+                  >
+                    <book.svg />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-8 mb-1 MuiBox-root css-k008qs"
+          >
+            <div
+              class="flex-1 MuiBox-root css-k008qs"
+            >
+              <div
+                class="text-custom-grey100 dark:text-custom-white40"
+              >
+                Max Fee
+              </div>
+              <div
+                class="ml-1 text-custom-black dark:text-custom-white"
+              >
+                0.00
+                 Gwei
+              </div>
+            </div>
+            <div
+              class="flex-1 MuiBox-root css-k008qs"
+            >
+              <div
+                class="flex-1 text-right text-custom-grey100 dark:text-custom-white40"
+              >
+                Max Priority Fee
+              </div>
+              <div
+                class="ml-1 min-w-[4.5em] text-custom-black dark:text-custom-white"
+              >
+                0
+                 Gwei
+              </div>
+            </div>
+          </div>
+          <span
+            class="MuiSlider-colorSecondary MuiSlider-sizeSmall MuiSlider-root css-lbpym0-MuiSlider-root"
+          >
+            <span
+              class="MuiSlider-rail css-14pt78w-MuiSlider-rail"
+            />
+            <span
+              class="MuiSlider-track css-1n40zqk-MuiSlider-track"
+              style="left: 0%; width: 50%;"
+            />
+            <span
+              class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+              data-index="0"
+              style="left: 0%;"
+            />
+            <span
+              class="MuiSlider-mark MuiSlider-markActive css-6cwnna-MuiSlider-mark"
+              data-index="1"
+              style="left: 50%;"
+            />
+            <span
+              class="MuiSlider-mark css-1tfve6q-MuiSlider-mark"
+              data-index="2"
+              style="left: 100%;"
+            />
+            <span
+              class="MuiSlider-thumbColorSecondary MuiSlider-thumbSizeSmall MuiSlider-thumb css-nfrlyi-MuiSlider-thumb"
+              data-index="0"
+              style="left: 50%;"
+            >
+              <input
+                aria-label="Volume"
+                aria-orientation="horizontal"
+                aria-valuemax="3"
+                aria-valuemin="1"
+                aria-valuenow="2"
+                data-index="0"
+                max="3"
+                min="1"
+                step="1"
+                style="border: 0px; height: 100%; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 100%; direction: ltr;"
+                type="range"
+                value="2"
+              />
+            </span>
+          </span>
+          <div
+            class="MuiBox-root css-1hprwxc"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+              style="flex: 1;"
+            >
+              Estimated Gas Fee
+            </div>
+            <div>
+              <div
+                class="text-right text-custom-black dark:text-custom-white text-sm font-extrabold"
+              >
+                0.00000000
+                 ETH
+              </div>
+              <div
+                class="text-right text-custom-black dark:text-custom-white"
+              >
+                $0
+              </div>
+            </div>
+          </div>
+          <hr
+            class="MuiDivider-root MuiDivider-fullWidth css-1h3sccu-MuiDivider-root"
+          />
+          <div
+            class="MuiBox-root css-mifb2i"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+              style="flex: 1;"
+            >
+              Estimated Time
+            </div>
+            <div>
+              <div
+                class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                style="text-align: right;"
+              >
+                30 seconds
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiBox-root css-r0pdzr"
+          >
+            <button
+              class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+              data-testid="button-review"
+              disabled=""
+              type="button"
+            >
+              Review Transaction
+            </button>
+            <button
+              class="mt-1 mb-2 flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-grey40 dark:border-grey40 hover:bg-transparent dark:hover:bg-transparent bg-none"
+              disabled=""
+              type="button"
+            >
+              Send with lower gas fee later
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

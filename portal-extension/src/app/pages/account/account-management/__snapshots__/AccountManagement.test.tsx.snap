@@ -1,0 +1,486 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account Management Page UI renders correctly Account Management Page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div />
+    <div />
+    <div>
+      <div
+        class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+      >
+        <div
+          class="flex flex-row relative justify-between items-center h-16"
+        >
+          <button
+            class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+            type="button"
+          >
+            <arrow-left.svg
+              classname="text-xl stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+          <div
+            class="flex-1 text-center"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+            >
+              Account.accountTitle
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-full h-full overflow-auto"
+        >
+          <div
+            class="flex flex-col h-full"
+          >
+            <div
+              class="flex-1"
+            >
+              <div
+                class="active MuiBox-root css-tb33on"
+              >
+                <div
+                  class="css-rpfcki"
+                >
+                  <svg
+                    class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+                    style="height: 1em; width: 1em;"
+                  >
+                    <logo.svg />
+                  </svg>
+                  <div
+                    class="badge-check"
+                  >
+                    <check.svg />
+                  </div>
+                </div>
+                <button
+                  class="flex flex-col w-full"
+                  data-testid="account-list-Account 1"
+                  type="button"
+                >
+                  <div
+                    class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                    style="flex: 1; margin-left: 8px;"
+                  >
+                    Account 1
+                  </div>
+                  <div
+                    class="text-custom-black dark:text-custom-white text-sm font-regular"
+                    style="flex: 1; margin-left: 8px;"
+                  >
+                    $
+                    0
+                  </div>
+                </button>
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  class="relative"
+                  data-testid="Account 1-more-options"
+                  id="headlessui-listbox-button-:r0:"
+                  type="button"
+                >
+                  <button
+                    class="rounded-full p-2 hover:bg-custom-grey10 dark:hover:bg-custom-white10 sort-btn"
+                    type="button"
+                  >
+                    <more-horizontal.svg />
+                  </button>
+                </button>
+                <div
+                  style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+                />
+              </div>
+              <div
+                class=" MuiBox-root css-tb33on"
+              >
+                <div
+                  class="css-rpfcki"
+                >
+                  <svg
+                    class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+                    style="height: 1em; width: 1em;"
+                  >
+                    <logo.svg />
+                  </svg>
+                </div>
+                <button
+                  class="flex flex-col w-full"
+                  data-testid="account-list-Account2"
+                  type="button"
+                >
+                  <div
+                    class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                    style="flex: 1; margin-left: 8px;"
+                  >
+                    Account2
+                  </div>
+                  <div
+                    class="text-custom-black dark:text-custom-white text-sm font-regular"
+                    style="flex: 1; margin-left: 8px;"
+                  >
+                    $
+                    0
+                  </div>
+                </button>
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  class="relative"
+                  data-testid="Account2-more-options"
+                  id="headlessui-listbox-button-:r2:"
+                  type="button"
+                >
+                  <button
+                    class="rounded-full p-2 hover:bg-custom-grey10 dark:hover:bg-custom-white10 sort-btn"
+                    type="button"
+                  >
+                    <more-horizontal.svg />
+                  </button>
+                </button>
+                <div
+                  style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+                />
+              </div>
+              <div
+                class="MuiBox-root css-ytqq2v"
+              >
+                <div
+                  class="css-tac3yh"
+                >
+                  <svg
+                    class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+                    style="height: 1em; width: 1em;"
+                  >
+                    <plus-circle.svg />
+                  </svg>
+                </div>
+                <div
+                  class="MuiBox-root css-hboir5"
+                >
+                  <div
+                    class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                    style="flex: 1; margin-left: 8px;"
+                  >
+                    Account.createSubAccount
+                  </div>
+                </div>
+              </div>
+              <div
+                class="MuiBox-root css-ytqq2v"
+              >
+                <div
+                  class="css-tac3yh"
+                >
+                  <svg
+                    class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+                    style="height: 1em; width: 1em;"
+                  >
+                    <key.svg />
+                  </svg>
+                </div>
+                <div
+                  class="MuiBox-root css-hboir5"
+                >
+                  <div
+                    class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                    style="flex: 1; margin-left: 8px;"
+                  >
+                    Account.importAccount
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="p-4 flex"
+            >
+              <button
+                class="w-full border-[1px] border-solid border-primary dark:border-custom-white40 dark:hover:border-primary rounded-xl profile-btn flex justify-center items-center mr-1 dark:text-custom-white font-bold hover:bg-custom-grey10 dark:hover:bg-transparent p-3 rounded-md text-custom-black dark:text-custom-white"
+                data-aid="logOutButton"
+                type="button"
+              >
+                Actions.logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      id="headlessui-portal-root"
+    >
+      <div
+        data-headlessui-portal=""
+      >
+        <div />
+      </div>
+      <div
+        data-headlessui-portal=""
+      >
+        <div />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+    >
+      <div
+        class="flex flex-row relative justify-between items-center h-16"
+      >
+        <button
+          class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+          type="button"
+        >
+          <arrow-left.svg
+            classname="text-xl stroke-custom-black dark:stroke-custom-white"
+          />
+        </button>
+        <div
+          class="flex-1 text-center"
+        >
+          <div
+            class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+          >
+            Account.accountTitle
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full h-full overflow-auto"
+      >
+        <div
+          class="flex flex-col h-full"
+        >
+          <div
+            class="flex-1"
+          >
+            <div
+              class="active MuiBox-root css-tb33on"
+            >
+              <div
+                class="css-rpfcki"
+              >
+                <svg
+                  class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+                  style="height: 1em; width: 1em;"
+                >
+                  <logo.svg />
+                </svg>
+                <div
+                  class="badge-check"
+                >
+                  <check.svg />
+                </div>
+              </div>
+              <button
+                class="flex flex-col w-full"
+                data-testid="account-list-Account 1"
+                type="button"
+              >
+                <div
+                  class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                  style="flex: 1; margin-left: 8px;"
+                >
+                  Account 1
+                </div>
+                <div
+                  class="text-custom-black dark:text-custom-white text-sm font-regular"
+                  style="flex: 1; margin-left: 8px;"
+                >
+                  $
+                  0
+                </div>
+              </button>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                class="relative"
+                data-testid="Account 1-more-options"
+                id="headlessui-listbox-button-:r0:"
+                type="button"
+              >
+                <button
+                  class="rounded-full p-2 hover:bg-custom-grey10 dark:hover:bg-custom-white10 sort-btn"
+                  type="button"
+                >
+                  <more-horizontal.svg />
+                </button>
+              </button>
+              <div
+                style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+              />
+            </div>
+            <div
+              class=" MuiBox-root css-tb33on"
+            >
+              <div
+                class="css-rpfcki"
+              >
+                <svg
+                  class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+                  style="height: 1em; width: 1em;"
+                >
+                  <logo.svg />
+                </svg>
+              </div>
+              <button
+                class="flex flex-col w-full"
+                data-testid="account-list-Account2"
+                type="button"
+              >
+                <div
+                  class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                  style="flex: 1; margin-left: 8px;"
+                >
+                  Account2
+                </div>
+                <div
+                  class="text-custom-black dark:text-custom-white text-sm font-regular"
+                  style="flex: 1; margin-left: 8px;"
+                >
+                  $
+                  0
+                </div>
+              </button>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                class="relative"
+                data-testid="Account2-more-options"
+                id="headlessui-listbox-button-:r2:"
+                type="button"
+              >
+                <button
+                  class="rounded-full p-2 hover:bg-custom-grey10 dark:hover:bg-custom-white10 sort-btn"
+                  type="button"
+                >
+                  <more-horizontal.svg />
+                </button>
+              </button>
+              <div
+                style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+              />
+            </div>
+            <div
+              class="MuiBox-root css-ytqq2v"
+            >
+              <div
+                class="css-tac3yh"
+              >
+                <svg
+                  class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+                  style="height: 1em; width: 1em;"
+                >
+                  <plus-circle.svg />
+                </svg>
+              </div>
+              <div
+                class="MuiBox-root css-hboir5"
+              >
+                <div
+                  class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                  style="flex: 1; margin-left: 8px;"
+                >
+                  Account.createSubAccount
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root css-ytqq2v"
+            >
+              <div
+                class="css-tac3yh"
+              >
+                <svg
+                  class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+                  style="height: 1em; width: 1em;"
+                >
+                  <key.svg />
+                </svg>
+              </div>
+              <div
+                class="MuiBox-root css-hboir5"
+              >
+                <div
+                  class="text-custom-black dark:text-custom-white text-sm font-extrabold"
+                  style="flex: 1; margin-left: 8px;"
+                >
+                  Account.importAccount
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="p-4 flex"
+          >
+            <button
+              class="w-full border-[1px] border-solid border-primary dark:border-custom-white40 dark:hover:border-primary rounded-xl profile-btn flex justify-center items-center mr-1 dark:text-custom-white font-bold hover:bg-custom-grey10 dark:hover:bg-transparent p-3 rounded-md text-custom-black dark:text-custom-white"
+              data-aid="logOutButton"
+              type="button"
+            >
+              Actions.logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

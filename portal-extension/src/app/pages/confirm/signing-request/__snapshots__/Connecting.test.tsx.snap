@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Connecting /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+  >
+    <div
+      class="flex flex-row relative justify-between items-center h-16"
+    >
+      <button
+        class="profile-btn flex items-center mr-1 text-inherit font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-3 rounded-md"
+        type="button"
+      >
+        @
+        <chevron-right.svg
+          classname="stroke-custom-black dark:stroke-custom-white"
+        />
+      </button>
+    </div>
+    <div
+      class="w-full h-full overflow-auto"
+    >
+      <div
+        class="flex items-center justify-center gap-4 mt-48"
+      >
+        <svg
+          class="inline-block select-none shrink-0 fill-custom-black dark:fill-custom-white text-4xl"
+          style="height: 1em; width: 1em;"
+        >
+          <eth.svg />
+        </svg>
+        <img
+          alt="my-gif"
+          class="w-32"
+          src="connecting.gif"
+        />
+        <img
+          alt="token-thumbnail"
+          class="h-9 w-9 rounded-full"
+          src="https://walletconnect.org/walletconnect-logo.png"
+        />
+      </div>
+      <div
+        class="text-xl text-center mt-8 !text-secondary font-bold text-custom-black dark:text-custom-white"
+      >
+        Connecting...
+      </div>
+      <div
+        style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

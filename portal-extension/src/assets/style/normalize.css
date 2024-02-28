@@ -1,0 +1,10 @@
+/* Remove scrollbar from application */
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: initial;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}

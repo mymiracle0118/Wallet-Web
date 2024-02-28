@@ -1,0 +1,12 @@
+query GetChainInfo($input: ChainInfoInput) {
+  getChainInfo(input: $input) {
+    market_price_usd
+    suggested_transaction_fee_gwei_options {
+      cheetah
+      fast
+      normal
+      slow
+      sloth
+    }
+  }
+}

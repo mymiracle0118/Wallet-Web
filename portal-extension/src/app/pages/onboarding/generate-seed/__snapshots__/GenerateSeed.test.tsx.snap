@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Send Page UI renders correctly Generate Seed Page 1`] = `
+<div
+  className="relative flex flex-col h-full justify-start"
+>
+  <div
+    className="css-hoslsy"
+  />
+  <div
+    className="flex flex-col min-h-[26rem] rounded-xl p-8 css-jyltus"
+  >
+    <div
+      className="text-custom-black dark:text-custom-white text-[1.75rem] leading-[2rem] font-extrabold"
+      data-aid="backUpPhrase"
+      style={
+        Object {
+          "WebkitLineClamp": "3",
+          "marginBottom": "32px",
+        }
+      }
+    >
+      Onboarding.generateSeedTitle
+    </div>
+    <div
+      className="p-3.5 border rounded-[12px] border-custom-grey40"
+    >
+      <p
+        className="text-gradient bg-gradient-text text-sm font-extrabold"
+        dataa-aid="phraseGuide"
+      >
+        Warning
+      </p>
+      <div
+        className="text-custom-black dark:text-custom-white"
+        data-aid="phraseGuide"
+        style={
+          Object {
+            "WebkitLineClamp": "3",
+          }
+        }
+      >
+        <ul
+          className="marker:text-sky-400 list-disc pl-5 space-y-3 text-slate-500 pt-2 [&>*]:text-white-80"
+        >
+          <li>
+            Onboarding.generateSeedInstructionsOne
+          </li>
+          <li>
+            Onboarding.generateSeedInstructionsTwo
+             
+          </li>
+          <li>
+            Onboarding.generateSeedInstructionsThree
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      className="css-fmhh8p"
+    >
+      <button
+        className="absolute w-full h-full flex flex-col items-center justify-center	cursor-pointer backdrop-blur-lg"
+        data-aid="click-to-reveal"
+        onClick={[Function]}
+        type="button"
+      >
+        <div
+          className="text-[32px] stroke-custom-black dark:stroke-custom-white"
+        >
+          <svg
+            fill="none"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z"
+              stroke="inherit"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+              stroke="inherit"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+        <div
+          className="text-body  dark:text-custom-white80 text-custom-grey100"
+          style={
+            Object {
+              "WebkitLineClamp": "3",
+            }
+          }
+        >
+          Onboarding.clickToReveal
+        </div>
+      </button>
+    </div>
+    <div
+      className="mt-4 flex gap-2"
+    >
+      <button
+        className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap subpixel-antialiased overflow-hidden tap-highlight-transparent data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 border-medium bg-transparent px-unit-4 min-w-unit-20 gap-unit-2 [&>svg]:max-w-[theme(spacing.unit-8)] data-[pressed=true]:scale-[0.97] transition-transform-colors motion-reduce:transition-none border-custom-white40 !border border-solid custom-text-white outline-none text-sm h-11 w-full font-extrabold rounded-md dark:text-custom-white dark:focus-visible:outline-none dark:focus:outline-none"
+        data-aid="backNavigation"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragStart={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchCancel={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        type="button"
+      >
+        Actions.back
+      </button>
+      <button
+        className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap subpixel-antialiased overflow-hidden tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 px-unit-4 min-w-unit-20 gap-unit-2 [&>svg]:max-w-[theme(spacing.unit-8)] data-[pressed=true]:scale-[0.97] transition-transform-colors motion-reduce:transition-none opacity-40 !bg-custom-grey pointer-events-none cursor-not-allowed text-custom-grey40 text-sm h-11 w-full font-extrabold rounded-md dark:text-custom-white dark:focus-visible:outline-none dark:focus:outline-none"
+        data-aid="nextNavigation"
+        data-disabled="true"
+        disabled={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragStart={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchCancel={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        type="button"
+      >
+        Onboarding.savedIt
+      </button>
+    </div>
+  </div>
+</div>
+`;

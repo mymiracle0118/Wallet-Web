@@ -1,0 +1,29 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "es5",
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "lib": ["dom", "dom.iterable", "esnext", "es5", "es2015.collection", "es2015.iterable"],
+    "declaration": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "incremental": true
+  },
+  "paths": {
+    "@portal/shared": ["./shared/*"]
+  },
+  "include": ["./**/*"],
+  "exclude": ["**/node_modules/*", "**/.tmp/*", "**/dist/*"]
+}

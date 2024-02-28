@@ -1,0 +1,655 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create Account UI renders correctly Create Account Page - Import Wallet flow 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <form>
+         
+        <div
+          class="text-h1 mb-6 -tracking-[0.018rem] text-custom-black dark:text-custom-white"
+          data-aid="accountCreationHead"
+        >
+          Onboarding.createAccount
+        </div>
+        <div
+          class="text-body mb-4 pr-2 leading-5 dark:text-custom-white80 text-custom-grey100"
+          data-aid="creationSubHead"
+        >
+          Onboarding.createAccountSubTitle
+        </div>
+        <div
+          class="mb-6"
+        >
+          <div
+            class="flex relative rounded-md items-center hover:shadow-md w-auto bg-input-light-bg dark:bg-custom-white10"
+          >
+            <input
+              class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+              data-aid="userName"
+              id="username"
+              name="username"
+              placeholder="Onboarding.username"
+              value=""
+            />
+            <div
+              class="pr-3.5"
+            >
+              <div
+                class="text-[12px] text-fotter-dark-inactive"
+              >
+                0
+                /10
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-4"
+        >
+          <div
+            class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+          >
+            <input
+              class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+              data-aid="password"
+              data-testid="password"
+              id="set-password"
+              name="password"
+              placeholder="Onboarding.setPassword"
+              type="password"
+              value=""
+            />
+            <div
+              class="pr-3.5"
+            >
+              <button
+                aria-label="toggle password visibility"
+                class="dark:stroke-custom-white stroke-custom-black w-6"
+                data-aid="passwordShowHide"
+                tabindex="-1"
+                type="button"
+              >
+                <eye-off.svg
+                  classname="w-5 h-5"
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            class="mt-2 ml-1 dark:text-white text-custom-grey100 font-normal text-[12px]"
+          >
+            Min 8 characters
+          </div>
+        </div>
+        <div
+          class="mt-4"
+        >
+          <div
+            class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+          >
+            <input
+              class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+              data-aid="confirmPassword"
+              data-testid="password"
+              id="confirm-password"
+              name="confirmPassword"
+              placeholder="Onboarding.confirmPassword"
+              type="password"
+              value=""
+            />
+            <div
+              class="pr-3.5"
+            >
+              <button
+                aria-label="toggle password visibility"
+                class="dark:stroke-custom-white stroke-custom-black w-6"
+                data-aid="confirmPasswordShowHide"
+                tabindex="-1"
+                type="button"
+              >
+                <eye-off.svg
+                  classname="w-5 h-5"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 flex gap-2"
+        >
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+            data-aid="backNavigation"
+            type="button"
+          >
+            Actions.back
+          </button>
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+            data-aid="nextNavigation"
+            disabled=""
+            id="create-next-btn"
+            type="submit"
+          >
+            Actions.next
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>,
+  "container": <div>
+    <form>
+       
+      <div
+        class="text-h1 mb-6 -tracking-[0.018rem] text-custom-black dark:text-custom-white"
+        data-aid="accountCreationHead"
+      >
+        Onboarding.createAccount
+      </div>
+      <div
+        class="text-body mb-4 pr-2 leading-5 dark:text-custom-white80 text-custom-grey100"
+        data-aid="creationSubHead"
+      >
+        Onboarding.createAccountSubTitle
+      </div>
+      <div
+        class="mb-6"
+      >
+        <div
+          class="flex relative rounded-md items-center hover:shadow-md w-auto bg-input-light-bg dark:bg-custom-white10"
+        >
+          <input
+            class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+            data-aid="userName"
+            id="username"
+            name="username"
+            placeholder="Onboarding.username"
+            value=""
+          />
+          <div
+            class="pr-3.5"
+          >
+            <div
+              class="text-[12px] text-fotter-dark-inactive"
+            >
+              0
+              /10
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <div
+          class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+        >
+          <input
+            class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+            data-aid="password"
+            data-testid="password"
+            id="set-password"
+            name="password"
+            placeholder="Onboarding.setPassword"
+            type="password"
+            value=""
+          />
+          <div
+            class="pr-3.5"
+          >
+            <button
+              aria-label="toggle password visibility"
+              class="dark:stroke-custom-white stroke-custom-black w-6"
+              data-aid="passwordShowHide"
+              tabindex="-1"
+              type="button"
+            >
+              <eye-off.svg
+                classname="w-5 h-5"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="mt-2 ml-1 dark:text-white text-custom-grey100 font-normal text-[12px]"
+        >
+          Min 8 characters
+        </div>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <div
+          class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+        >
+          <input
+            class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+            data-aid="confirmPassword"
+            data-testid="password"
+            id="confirm-password"
+            name="confirmPassword"
+            placeholder="Onboarding.confirmPassword"
+            type="password"
+            value=""
+          />
+          <div
+            class="pr-3.5"
+          >
+            <button
+              aria-label="toggle password visibility"
+              class="dark:stroke-custom-white stroke-custom-black w-6"
+              data-aid="confirmPasswordShowHide"
+              tabindex="-1"
+              type="button"
+            >
+              <eye-off.svg
+                classname="w-5 h-5"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-8 flex gap-2"
+      >
+        <button
+          class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+          data-aid="backNavigation"
+          type="button"
+        >
+          Actions.back
+        </button>
+        <button
+          class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+          data-aid="nextNavigation"
+          disabled=""
+          id="create-next-btn"
+          type="submit"
+        >
+          Actions.next
+        </button>
+      </div>
+    </form>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Create Account UI renders correctly Create Account Page 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <form>
+         
+        <div
+          class="text-h1 mb-6 -tracking-[0.018rem] text-custom-black dark:text-custom-white"
+          data-aid="accountCreationHead"
+        >
+          Onboarding.createAccount
+        </div>
+        <div
+          class="text-body mb-4 pr-2 leading-5 dark:text-custom-white80 text-custom-grey100"
+          data-aid="creationSubHead"
+        >
+          Onboarding.createAccountSubTitle
+        </div>
+        <div
+          class="mb-6"
+        >
+          <div
+            class="flex relative rounded-md items-center hover:shadow-md w-auto bg-input-light-bg dark:bg-custom-white10"
+          >
+            <input
+              class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+              data-aid="userName"
+              id="username"
+              name="username"
+              placeholder="Onboarding.username"
+              value=""
+            />
+            <div
+              class="pr-3.5"
+            >
+              <div
+                class="text-[12px] text-fotter-dark-inactive"
+              >
+                0
+                /10
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-4"
+        >
+          <div
+            class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+          >
+            <input
+              class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+              data-aid="password"
+              data-testid="password"
+              id="set-password"
+              name="password"
+              placeholder="Onboarding.setPassword"
+              type="password"
+              value=""
+            />
+            <div
+              class="pr-3.5"
+            >
+              <button
+                aria-label="toggle password visibility"
+                class="dark:stroke-custom-white stroke-custom-black w-6"
+                data-aid="passwordShowHide"
+                tabindex="-1"
+                type="button"
+              >
+                <eye-off.svg
+                  classname="w-5 h-5"
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            class="mt-2 ml-1 dark:text-white text-custom-grey100 font-normal text-[12px]"
+          >
+            Min 8 characters
+          </div>
+        </div>
+        <div
+          class="mt-4"
+        >
+          <div
+            class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+          >
+            <input
+              class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+              data-aid="confirmPassword"
+              data-testid="password"
+              id="confirm-password"
+              name="confirmPassword"
+              placeholder="Onboarding.confirmPassword"
+              type="password"
+              value=""
+            />
+            <div
+              class="pr-3.5"
+            >
+              <button
+                aria-label="toggle password visibility"
+                class="dark:stroke-custom-white stroke-custom-black w-6"
+                data-aid="confirmPasswordShowHide"
+                tabindex="-1"
+                type="button"
+              >
+                <eye-off.svg
+                  classname="w-5 h-5"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-8 flex gap-2"
+        >
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+            data-aid="backNavigation"
+            type="button"
+          >
+            Actions.back
+          </button>
+          <button
+            class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+            data-aid="nextNavigation"
+            disabled=""
+            id="create-next-btn"
+            type="submit"
+          >
+            Actions.next
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>,
+  "container": <div>
+    <form>
+       
+      <div
+        class="text-h1 mb-6 -tracking-[0.018rem] text-custom-black dark:text-custom-white"
+        data-aid="accountCreationHead"
+      >
+        Onboarding.createAccount
+      </div>
+      <div
+        class="text-body mb-4 pr-2 leading-5 dark:text-custom-white80 text-custom-grey100"
+        data-aid="creationSubHead"
+      >
+        Onboarding.createAccountSubTitle
+      </div>
+      <div
+        class="mb-6"
+      >
+        <div
+          class="flex relative rounded-md items-center hover:shadow-md w-auto bg-input-light-bg dark:bg-custom-white10"
+        >
+          <input
+            class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+            data-aid="userName"
+            id="username"
+            name="username"
+            placeholder="Onboarding.username"
+            value=""
+          />
+          <div
+            class="pr-3.5"
+          >
+            <div
+              class="text-[12px] text-fotter-dark-inactive"
+            >
+              0
+              /10
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <div
+          class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+        >
+          <input
+            class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+            data-aid="password"
+            data-testid="password"
+            id="set-password"
+            name="password"
+            placeholder="Onboarding.setPassword"
+            type="password"
+            value=""
+          />
+          <div
+            class="pr-3.5"
+          >
+            <button
+              aria-label="toggle password visibility"
+              class="dark:stroke-custom-white stroke-custom-black w-6"
+              data-aid="passwordShowHide"
+              tabindex="-1"
+              type="button"
+            >
+              <eye-off.svg
+                classname="w-5 h-5"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="mt-2 ml-1 dark:text-white text-custom-grey100 font-normal text-[12px]"
+        >
+          Min 8 characters
+        </div>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <div
+          class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+        >
+          <input
+            class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+            data-aid="confirmPassword"
+            data-testid="password"
+            id="confirm-password"
+            name="confirmPassword"
+            placeholder="Onboarding.confirmPassword"
+            type="password"
+            value=""
+          />
+          <div
+            class="pr-3.5"
+          >
+            <button
+              aria-label="toggle password visibility"
+              class="dark:stroke-custom-white stroke-custom-black w-6"
+              data-aid="confirmPasswordShowHide"
+              tabindex="-1"
+              type="button"
+            >
+              <eye-off.svg
+                classname="w-5 h-5"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-8 flex gap-2"
+      >
+        <button
+          class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+          data-aid="backNavigation"
+          type="button"
+        >
+          Actions.back
+        </button>
+        <button
+          class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+          data-aid="nextNavigation"
+          disabled=""
+          id="create-next-btn"
+          type="submit"
+        >
+          Actions.next
+        </button>
+      </div>
+    </form>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

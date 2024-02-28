@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Mulish', 'sans-serif';
+  @apply text-sm font-regular text-custom-white;
+}
+link,
+a {
+  @apply text-sm font-semibold underline underline-offset-2;
+}
+ul,
+li {
+  line-height: 1.25rem;
+}
+
+@layer utilities {
+  .text-gradient {
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@layer components {
+  html {
+    line-height: inherit !important;
+  }
+  svg {
+    vertical-align: inherit;
+  }
+
+  .text-white-only {
+    color: #fff;
+  }
+
+  .badge-check {
+    background: linear-gradient(159deg, rgba(170, 55, 137, 1) 25%, rgba(255, 149, 200, 1) 86%);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button-hover {
+    padding: 0.4rem;
+  }
+
+  .button-hover:hover {
+    background-color: rgba(96, 121, 144, 0.1);
+    border-radius: 100%;
+  }
+  .dark .button-hover:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* [type='checkbox']:checked {
+    @apply bg-gradient-checkbox bg-origin-border rounded-full;
+  }
+
+  [type='checkbox']::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    height: 95%;
+    pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+  } */
+  .border-medium {
+    border-width: 1px !important;
+  }
+
+  .selected-tabs > span {
+    background-color: #fff !important;
+    box-shadow: none;
+  }
+  .text-grident-primary {
+    background-image: linear-gradient(270deg, #da8fff 0%, #f63190 26.04%, #9a47cf 64.58%, #95cee7 100%);
+  }
+}
+@layer base {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    @apply appearance-none;
+  }
+}

@@ -1,0 +1,274 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddAddress /> renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+      >
+        <div
+          class="flex flex-row relative justify-between items-center h-16"
+        >
+          <button
+            class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+            type="button"
+          >
+            <arrow-left.svg
+              classname="text-xl stroke-custom-black dark:stroke-custom-white"
+            />
+          </button>
+          <div
+            class="flex-1 text-center"
+          >
+            <div
+              class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+            >
+              Settings.addAddressTitle
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-full h-full overflow-auto"
+        >
+          <form>
+             
+            <div
+              class="px-4"
+            >
+              <div
+                class="text-custom-grey100 dark:text-custom-white40"
+                style="text-align: left; margin-bottom: 16px;"
+              >
+                Settings.addAddressSubTitle
+              </div>
+              <div
+                class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+              >
+                <input
+                  autocomplete="off"
+                  class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                  data-aid="address"
+                  data-testid="addAddress-address"
+                  id="address"
+                  name="address"
+                  placeholder="Address"
+                  value=""
+                />
+                <div
+                  class="pr-3.5"
+                >
+                  <div
+                    class="MuiInputAdornment-root MuiInputAdornment-positionEnd css-1laqsz7-MuiInputAdornment-root"
+                  >
+                    <button
+                      aria-label="toggle password visibility"
+                      class="rounded-full p-2 dark:hover:bg-custom-white40 hover:bg-custom-grey40"
+                      type="button"
+                    >
+                      <x-circle.svg
+                        classname="stroke-custom-black dark:stroke-custom-white"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10 mt-2"
+              >
+                <input
+                  autocomplete="off"
+                  class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                  data-aid="label"
+                  data-testid="addAddress-label"
+                  id="label"
+                  name="label"
+                  placeholder="Label"
+                  value=""
+                />
+              </div>
+              <div
+                class="flex gap-2 mt-3"
+              >
+                <button
+                  class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+                  type="button"
+                >
+                  Actions.cancel
+                </button>
+                <button
+                  class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+                  data-testid="add-address-btn"
+                  disabled=""
+                  type="submit"
+                >
+                  Actions.add
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="dark:bg-surface-dark bg-custom-white flex flex-col h-[600px] dark:text-custom-white text-custom-black"
+    >
+      <div
+        class="flex flex-row relative justify-between items-center h-16"
+      >
+        <button
+          class="h-[24px] w-[24px] p-1 ml-1 hover:bg-custom-grey10 dark:hover:bg-custom-white10 rounded-full flex items-center justify-center absolute"
+          type="button"
+        >
+          <arrow-left.svg
+            classname="text-xl stroke-custom-black dark:stroke-custom-white"
+          />
+        </button>
+        <div
+          class="flex-1 text-center"
+        >
+          <div
+            class="text-custom-black dark:text-custom-white text-lg font-extrabold"
+          >
+            Settings.addAddressTitle
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full h-full overflow-auto"
+      >
+        <form>
+           
+          <div
+            class="px-4"
+          >
+            <div
+              class="text-custom-grey100 dark:text-custom-white40"
+              style="text-align: left; margin-bottom: 16px;"
+            >
+              Settings.addAddressSubTitle
+            </div>
+            <div
+              class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10"
+            >
+              <input
+                autocomplete="off"
+                class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                data-aid="address"
+                data-testid="addAddress-address"
+                id="address"
+                name="address"
+                placeholder="Address"
+                value=""
+              />
+              <div
+                class="pr-3.5"
+              >
+                <div
+                  class="MuiInputAdornment-root MuiInputAdornment-positionEnd css-1laqsz7-MuiInputAdornment-root"
+                >
+                  <button
+                    aria-label="toggle password visibility"
+                    class="rounded-full p-2 dark:hover:bg-custom-white40 hover:bg-custom-grey40"
+                    type="button"
+                  >
+                    <x-circle.svg
+                      classname="stroke-custom-black dark:stroke-custom-white"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex relative rounded-md items-center hover:shadow-md w-full bg-input-light-bg dark:bg-custom-white10 mt-2"
+            >
+              <input
+                autocomplete="off"
+                class="outline-none	py-3.5 px-3.5 w-full text-sm text-custom-black dark:text-custom-white bg-transparent bg-transparent text-h4 "
+                data-aid="label"
+                data-testid="addAddress-label"
+                id="label"
+                name="label"
+                placeholder="Label"
+                value=""
+              />
+            </div>
+            <div
+              class="flex gap-2 mt-3"
+            >
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full h-[44px] border-[1px] border-solid text-primary dark:text-custom-white border-primary dark:border-custom-white40 dark:hover:border-custom-white hover:border-primary-alt hover:text-primary-alt"
+                type="button"
+              >
+                Actions.cancel
+              </button>
+              <button
+                class="flex items-center justify-center rounded-md hover:cursor-pointer font-extrabold text-sm w-full disabled:text-custom-grey40 dark:disabled:text-custom-grey40 h-[44px] text-custom-white dark:text-custom-white bg-custom-grey10"
+                data-testid="add-address-btn"
+                disabled=""
+                type="submit"
+              >
+                Actions.add
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

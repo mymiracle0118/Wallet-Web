@@ -1,0 +1,6 @@
+assets/**/**.svg
+stories/**
+src/reportWebVitals.ts
+build/*
+src/lib
+src/env
