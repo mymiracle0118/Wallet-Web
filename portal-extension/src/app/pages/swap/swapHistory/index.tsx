@@ -15,7 +15,6 @@ const SwapHistory = () => {
           fromImage={<DAI />}
           to="WETH"
           toImage={<WETH />}
-          //   date={moment.unix(transactionTimestamp).format('MMM. DD [at] hh:mm A')}
           date="11/12/2023"
           price="≤ 0.04 WETH"
           status="Swapping"
@@ -27,7 +26,6 @@ const SwapHistory = () => {
           fromImage={<DAI />}
           to="WETH"
           toImage={<WETH />}
-          //   date={moment.unix(transactionTimestamp).format('MMM. DD [at] hh:mm A')}
           date="11/12/2023"
           price="≤ 0.04 WETH"
           status="Swapping"

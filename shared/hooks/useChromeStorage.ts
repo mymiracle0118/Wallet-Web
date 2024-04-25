@@ -36,7 +36,7 @@ export default function useChromeStorage(key, initialValue, storageArea) {
   const [STORAGE_AREA] = useState(storageArea)
   const [state, setState] = useState(INITIAL_VALUE)
   const [isPersistent, setIsPersistent] = useState(true)
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string>('')
 
   useEffect(() => {
     storage

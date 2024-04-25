@@ -3,7 +3,7 @@ export const DEFAULT_LOCK_UP = true
 
 export function setLockUp(enabled: boolean) {
   try {
-    chrome.runtime.sendMessage({ message: enabled ? 'startTimer' : 'stopTimer' }, () => console.info('lockup enabled'))
+    chrome.runtime.sendMessage({ message: enabled ? 'startTimer' : 'stopTimer' }, () => {})
   } catch {}
 }
 

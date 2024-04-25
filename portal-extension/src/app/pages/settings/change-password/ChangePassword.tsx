@@ -1,40 +1,37 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { goBack } from 'lib/woozie'
-
-import { useWallet } from '@portal/shared/hooks/useWallet'
-import { CustomTypography, PasswordInput, Button } from 'app/components'
-import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
-import * as yup from 'yup'
-import { Form } from 'components'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
-import { SpinnerIcon } from '@src/app/components/Icons'
-import { useStore } from '@portal/shared/hooks/useStore'
 import { useSettings } from '@portal/shared/hooks/useSettings'
-import { ethers } from 'ethers'
-import { decryptData } from '@src/utils/constants'
+import { decryptData } from '@portal/shared/services/EncryptionService'
+import { SpinnerIcon } from '@src/app/components/Icons'
+import { Button, CustomTypography, PasswordInput } from 'app/components'
+import { Form } from 'components'
+import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
+import { goBack } from 'lib/woozie'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
+import { passwordRegex } from 'utils/constants'
+import * as yup from 'yup'
 
-const schema = yup.object().shape({
-  currentPassword: yup.string().min(8).max(32).required(),
-  newPassword: yup
-    .string()
-    .min(8)
-    .max(32)
-    .required()
-    .notOneOf([yup.ref('currentPassword')], 'Current password cant be same as new password'),
-  confirmNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], 'passwords must match'),
-})
 const ChangePassword = () => {
   const { t } = useTranslation()
-  const { openWallet, storeWallet, username } = useWallet()
+
+  const schema = yup.object().shape({
+    currentPassword: yup
+      .string()
+      .required()
+      .required(t('Account.curentPasswordRequired') as string),
+    newPassword: yup
+      .string()
+      .required(t('Account.newPasswordRequired') as string)
+      .matches(passwordRegex.password, t('Onboarding.passwordRegexDontMatch') as string)
+      .notOneOf([yup.ref('currentPassword')], t('Account.matchCurrentPassword') as string),
+    confirmNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], t('Onboarding.passwordMustMatch') as string),
+  })
 
   const [loading, setLoading] = useState<boolean>(false)
-  const [currentPasswordErrorText, setCurrentPasswordErrorText] = useState('')
-  const [newPasswordErrorText, setNewPasswordErrorText] = useState('')
-  const { currentAccount } = useSettings()
-
-  const { walletsList } = useStore()
+  const [currentPasswordErrorText, setCurrentPasswordErrorText] = useState<string>('')
+  const [newPasswordErrorText, setNewPasswordErrorText] = useState<string>('')
+  const { accounts, reEncryptAccountsWhenChangedPassword } = useSettings.getState()
 
   const methods = useForm({
     resolver: yupResolver(schema),
@@ -45,11 +42,7 @@ const ChangePassword = () => {
     formState: { errors, isValid, isDirty },
   } = methods
 
-  const handleChangePassword = async (data: {
-    currentPassword: string
-    confirmNewPassword: string
-    newPassword: string
-  }) => {
+  const handleChangePassword = (data: { currentPassword: string; confirmNewPassword: string; newPassword: string }) => {
     try {
       setCurrentPasswordErrorText('')
       setNewPasswordErrorText('')
@@ -57,25 +50,24 @@ const ChangePassword = () => {
       if (data.newPassword === data.confirmNewPassword) {
         try {
           setLoading(true)
-          if (currentAccount) {
-            setLoading(true)
 
-            const accountWallet = walletsList[currentAccount.address][currentAccount.networkName]
-            const networkToken = useWallet.getState().getNetworkTokenWithCurrentEnv(currentAccount.networkName)
-            let checkPassword: any
-            if (networkToken.isEVMNetwork) {
-              checkPassword = await ethers.Wallet.fromEncryptedJson(
-                accountWallet.encryptedWallet as string,
-                data.currentPassword as string
+          const primaryAccount = Object.values(accounts).find((acc) => acc.isPrimary)
+          try {
+            if (primaryAccount) {
+              const { encryptedWallet, encryptedPrivateKey } = primaryAccount
+              const isPasswordValid = decryptData(
+                (encryptedWallet || encryptedPrivateKey) as string,
+                data.currentPassword
               )
-            } else {
-              checkPassword = await decryptData(accountWallet.encryptedWallet as string, data.currentPassword as string)
+              if (!isPasswordValid) {
+                setCurrentPasswordErrorText(t('Actions.invalidCurrentPassword') as string)
+              } else {
+                // Update encrypted fields with new password
+                reEncryptAccountsWhenChangedPassword(data.currentPassword, data.newPassword)
+              }
             }
-            if (checkPassword) {
-              await openWallet(data.currentPassword)
-              await storeWallet(username as string, data.newPassword)
-              goBack()
-            }
+          } catch (error) {
+            setCurrentPasswordErrorText(t('Actions.invalidCurrentPassword') as string)
           }
         } catch (error) {
           let message = 'Unknown Error'
@@ -84,7 +76,7 @@ const ChangePassword = () => {
           setLoading(false)
         }
       } else {
-        setNewPasswordErrorText(t('Security.passwordError'))
+        setNewPasswordErrorText(t('Security.passwordError') as string)
       }
     } catch (error) {
       let message = 'Unknown Error'
@@ -107,16 +99,18 @@ const ChangePassword = () => {
             placeholder={t('Security.currentPassword')}
             className="mt-0"
           />
-          <PasswordInput
-            dataAid="newPassword"
-            mainColor
-            name="newPassword"
-            placeholder={t('Security.newPassword')}
-            error={errors.newPassword?.message}
-          />
-          <CustomTypography variant="body" type="secondary" className="ml-1 mt-2">
-            {t('Onboarding.passwordErrorMsg')}
-          </CustomTypography>
+          <div>
+            <PasswordInput
+              dataAid="newPassword"
+              mainColor
+              name="newPassword"
+              placeholder={t('Security.newPassword')}
+              error={errors.newPassword?.message}
+            />
+            <CustomTypography variant="body" type="secondary" className="ml-1 mt-1">
+              {t('Onboarding.passwordErrorMsg')}
+            </CustomTypography>
+          </div>
           <PasswordInput
             dataAid="confirmPassword"
             name="confirmNewPassword"

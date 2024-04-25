@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { FC } from 'react'
-import { Icon } from 'app/components'
-import Logo from 'assets/logos/logo_64.svg'
 import { useAppEnv } from '@src/env'
+import { Icon } from 'app/components'
+import Logo from 'assets/logos/logo.svg'
+import { FC } from 'react'
 
 interface OnboardingLayoutsProps extends ComponentProps {
   disableLogo?: boolean

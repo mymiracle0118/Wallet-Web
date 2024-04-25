@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import React, { useState, SetStateAction } from 'react'
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
-import { CHANGE_LANGUAGE } from '@src/constants/content'
-import { CustomTypography } from 'components'
-import classnames from 'classnames'
 import { AngleDownIcon, CheckPrimaryIcon, CheckRoundedGreyIcon } from '@src/app/components/Icons'
+import { CHANGE_LANGUAGE } from '@src/constants/content'
+import classnames from 'classnames'
+import { CustomTypography } from 'components'
+import { SetStateAction, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const LangauageChange = () => {
+  const { t } = useTranslation()
   const [isSelectLanguage, setSelectLanguage] = useState<string>('en')
   const selectedIconClass = classnames('absolute left-2 top-[0.65rem]')
 
@@ -17,7 +19,7 @@ const LangauageChange = () => {
 
   return (
     <div className="flex items-center justify-between min-h-[3.5rem] hover:bg-custom-white10 px-4">
-      <CustomTypography variant="subtitle">Language</CustomTypography>
+      <CustomTypography variant="subtitle">{t('Settings.language')}</CustomTypography>
       <Dropdown placement="bottom-end" className="bg-surface-dark-alt min-w-[6.875rem]">
         <DropdownTrigger>
           <Button variant="light" size="sm" className="text-custom-white uppercase font-extrabold text-sm">

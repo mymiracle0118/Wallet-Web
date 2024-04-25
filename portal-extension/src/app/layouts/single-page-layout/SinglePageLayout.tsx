@@ -1,16 +1,15 @@
-import React, { FC } from 'react'
-import classnames from 'classnames'
-import { goBack, useNavigate } from 'lib/woozie'
-import { CustomTypography, Icon } from 'components'
-import { useWallet } from '@portal/shared/hooks/useWallet'
+import { Avatar, Button, Tooltip } from '@nextui-org/react'
 import { useSettings } from '@portal/shared/hooks/useSettings'
 import { useWalletConnect } from '@portal/shared/hooks/useWalletConnect'
+import { PlusIcon } from '@src/app/components/Icons'
 import ArrowLeft from 'assets/icons/arrow-left.svg'
 import ChevronRight from 'assets/icons/chevron-right.svg'
-import { Button, Tooltip } from '@nextui-org/react'
-import DefaultAvatar from 'assets/logos/logo.svg'
+import defaultAvatar from 'assets/images/Avatar.png'
+import classnames from 'classnames'
+import { CustomTypography } from 'components'
+import { goBack, useNavigate } from 'lib/woozie'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PlusIcon } from '@src/app/components/Icons'
 
 interface ISinglePageTitleLayoutProps extends ComponentProps {
   title?: string | React.ReactNode
@@ -24,6 +23,8 @@ interface ISinglePageTitleLayoutProps extends ComponentProps {
   bgOnboarding?: boolean
   BorderBottom?: boolean
   topPanel?: boolean
+  customGoBack?: boolean
+  onClickAction?: () => void
 }
 
 const SinglePageLayout: FC<ISinglePageTitleLayoutProps> = ({
@@ -39,10 +40,11 @@ const SinglePageLayout: FC<ISinglePageTitleLayoutProps> = ({
   paddingClass = true,
   BorderBottom = true,
   topPanel = true,
+  customGoBack = false,
+  onClickAction,
 }) => {
   const { session } = useWalletConnect()
-  const { avatar } = useWallet()
-  const { accounts } = useSettings()
+  const { accounts, currentAccount } = useSettings()
   const { navigate } = useNavigate()
   const { t } = useTranslation()
 
@@ -88,6 +90,17 @@ const SinglePageLayout: FC<ISinglePageTitleLayoutProps> = ({
             <ArrowLeft className="text-lg stroke-custom-black dark:stroke-custom-white" />
           </Button>
         )}
+        {customGoBack && (
+          <Button
+            isIconOnly
+            size="sm"
+            variant="light"
+            onClick={onClickAction}
+            className={classnames(showMenu ? '' : 'absolute')}
+          >
+            <ArrowLeft className="text-lg stroke-custom-black dark:stroke-custom-white" />
+          </Button>
+        )}
 
         {title && (
           <div className="flex-1 text-center">
@@ -103,10 +116,10 @@ const SinglePageLayout: FC<ISinglePageTitleLayoutProps> = ({
             className="profile-btn flex items-center mr-3 text-inherit font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-1 rounded-full"
             onClick={() => navigate('/account')}
           >
-            {avatar ? (
-              <img src={avatar} alt="user-avatar" className=" w-8 h-8 rounded-full" />
+            {currentAccount && currentAccount.avatar ? (
+              <Avatar src={currentAccount.avatar} alt="user-avatar" className=" w-8 h-8 rounded-full overflow-hidden" />
             ) : (
-              <Icon icon={<DefaultAvatar />} size="large" />
+              <Avatar src={defaultAvatar} alt="user-avatar" className=" w-8 h-8 rounded-full overflow-hidden" />
             )}
           </button>
         )}

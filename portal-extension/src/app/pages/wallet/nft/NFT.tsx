@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
+import { Button, CustomTypography, DataCard, Icon, TokenActivity, TokenAddressButton } from 'components'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CustomTypography, DataCard, TokenActivity, Icon, TokenAddressButton, Button } from 'components'
 
 import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
 
-import GasIcon from 'assets/icons/gas.svg'
-import ExternalLinkIcon from 'assets/icons/external-link.svg'
-import ChevronDown from 'assets/icons/chevron-down.svg'
-import ArrowUpRightIcon from 'assets/icons/arrow-up-right.svg'
-import ArrowDownLeftIcon from 'assets/icons/arrow-down-left.svg'
-import NetworkETH from 'assets/nft-networks/network-eth.svg'
 import { Listbox } from '@headlessui/react'
-import { useNavigate, createLocationState } from 'lib/woozie'
 import { Divider } from '@nextui-org/react'
 import { BoughtIcon, ListedIcon, MintedIcon } from '@src/app/components/Icons'
 import { DEMO_TRANSCATION } from '@src/constants/content'
+import ArrowDownLeftIcon from 'assets/icons/arrow-down-left.svg'
+import ArrowUpRightIcon from 'assets/icons/arrow-up-right.svg'
+import ChevronDown from 'assets/icons/chevron-down.svg'
+import ExternalLinkIcon from 'assets/icons/external-link.svg'
+import GasIcon from 'assets/icons/gas.svg'
+import NetworkETH from 'assets/nft-networks/network-eth.svg'
+import { createLocationState, useNavigate } from 'lib/woozie'
 
 const NFT = () => {
   const { t } = useTranslation()
@@ -157,6 +157,7 @@ const NFT = () => {
           date={v.date}
           price={v.price}
           status={v.status}
+          tokenName="ETH"
         />
       ))}
     </SinglePageTitleLayout>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { IIconProps } from '@portal/shared/utils/types'
 
 const KeyIcon = ({ className }: IIconProps) => (

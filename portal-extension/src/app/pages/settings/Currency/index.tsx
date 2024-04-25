@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import React, { SetStateAction, useState } from 'react'
-import { Dropdown, DropdownTrigger, Button, DropdownMenu, DropdownItem } from '@nextui-org/react'
-import USDIcon from 'assets/currencies/USD.svg'
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
+import { ICurrencyDataProps } from '@portal/shared/utils/types'
+import { AngleDownIcon, CheckPrimaryIcon } from '@src/app/components/Icons'
 import AUDIcon from 'assets/currencies/AUD.svg'
 import CADIcon from 'assets/currencies/CAD.svg'
 import EURIcon from 'assets/currencies/EUR.svg'
 import GBPIcon from 'assets/currencies/GBP.svg'
 import JPYIcon from 'assets/currencies/JPY.svg'
-import { Icon } from 'components'
-import { CheckPrimaryIcon, AngleDownIcon } from '@src/app/components/Icons'
+import USDIcon from 'assets/currencies/USD.svg'
 import classnames from 'classnames'
-import { ICurrencyDataProps } from '@portal/shared/utils/types'
+import { Icon } from 'components'
+import { SetStateAction, useState } from 'react'
 
 const currenciesData: Array<ICurrencyDataProps> = [
   { currency: 'USD', icon: <USDIcon /> },

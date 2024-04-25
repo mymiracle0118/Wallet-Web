@@ -1,11 +1,13 @@
-import React from 'react'
-import classnames from 'classnames'
-import { Icon, TokenAddressButton } from 'app/components'
-import CheckIcon from 'assets/icons/check.svg'
 import { Button, ListboxItem } from '@nextui-org/react'
 import { INetworkItemProps } from '@portal/shared/utils/types'
+import { Icon, TokenAddressButton } from 'app/components'
+import CheckIcon from 'assets/icons/check.svg'
+import classnames from 'classnames'
+import { useTranslation } from 'react-i18next'
 
 const NetworkItem = ({ image, name, coin, address, active, link, networkId, onClick }: INetworkItemProps) => {
+  const { t } = useTranslation()
+
   const handleOnClick = () => {
     if (onClick && networkId) {
       onClick(networkId)
@@ -44,7 +46,7 @@ const NetworkItem = ({ image, name, coin, address, active, link, networkId, onCl
           <TokenAddressButton address={address} enableCopy link={NetworkPath} />
         ) : (
           <Button variant="bordered" size="sm" className="rounded-xl">
-            Create
+            {t('Create.create')}
           </Button>
         )
       }

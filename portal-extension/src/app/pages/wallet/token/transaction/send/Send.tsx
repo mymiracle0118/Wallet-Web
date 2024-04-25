@@ -5,58 +5,48 @@ import { usePricing } from '@portal/shared/hooks/usePricing'
 import { useWallet } from '@portal/shared/hooks/useWallet'
 import { ethers } from 'ethers'
 import { createLocationState, useNavigate } from 'lib/woozie'
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button, CustomTypography, DatePicker, Form, Input, ModalComponent } from 'components'
 import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
 
-// import { tokenImage } from 'utils/tokenImage'
 import { AddressBookUser, useSettings } from '@portal/shared/hooks/useSettings'
-import { SAFETY_MEASURE, getWalletAddressRegex } from 'utils/constants'
-import { AdjustGasAmountModal, ReceiveTokenModal, SendWithEstimateModal } from './SendModals'
+import { SAFETY_MEASURE, getMinimumBalance, getWalletAddressRegex } from 'utils/constants'
+import { AdjustGasAmountModal, ReceiveTokenModal, SendSameAddressModal, SendWithEstimateModal } from './SendModals'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Slider } from '@nextui-org/react'
+import { useStore } from '@portal/shared/hooks/useStore'
 import { GasOption, NetworkToken } from '@portal/shared/utils/types'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import SearchAddress from './search-address'
-// import { NetworkFactory } from '@portal/shared/factory/network.factory'
-import { useStore } from '@portal/shared/hooks/useStore'
 
 const Send = () => {
   const { t } = useTranslation()
   const { navigate } = useNavigate()
-  const { getNetworkToken } = useStore()
+  const { getNetworkToken, getAccountNetworkAddresses } = useStore()
   const { pathname } = createLocationState()
   const paths = pathname.split('/')
   const network: string = paths[paths.length - 2]
   const assetId: string = paths[paths.length - 1]
 
   const { setTransaction } = useWallet() //getAsset,
-  // const networkFactory = useMemo(() => NetworkFactory.selectByNetworkId(network))
   const asset: NetworkToken = getNetworkToken(assetId)
+  const accountAddresses = getAccountNetworkAddresses(asset)
+  const walletNetworkName = asset.isEVMNetwork ? 'ETH' : asset?.isSupraNetwork ? 'SUPRA' : network
 
-  const { addToAddressBook, addressBook } = useSettings()
-  // const asset = useMemo(() => getAsset(network, assetId), [assetId, getAsset, network])
+  const { addToAddressBook, addressBook, getRecentIntractAddress } = useSettings()
+  const recentAddresses = getRecentIntractAddress(walletNetworkName)
   const { balanceFormatted } = useBalance(asset)
   const assetBalance = useMemo(
     () => Math.round((Number(balanceFormatted) + Number.EPSILON) * 100000) / 100000,
     [balanceFormatted]
   )
 
-  const { getAssetValueFormatted } = usePricing()
-  // const { getMarketPrice, getMarket24HourChange, getAssetValueFormatted } = usePricing()
-  // const assetValue = useMemo(() => getAssetValue(asset.coingeckoTokenId, assetBalance), [assetBalance, getAssetValue])
-  const {
-    gasOption,
-    setGasOption,
-    maxFeePerGas,
-    maxPriorityFeePerGas,
-    estimatedTransactionCost,
-    estimatedTransactionTime,
-  } = useGas(asset)
+  const { getAssetValueFormatted, getGasValueFormatted } = usePricing()
+  const { gasOption, setGasOption, maxFeePerGas, estimatedTransactionCost, estimatedTransactionTime } = useGas(asset)
 
   const [selectedUser, setSelectedUser] = useState<null | AddressBookUser>(null)
   const [modalState, setModalState] = useState<boolean>(false)
@@ -64,17 +54,22 @@ const Send = () => {
   const [calendarState, setCalendarState] = useState<boolean>(false)
   const [maxWarning, setMaxWarning] = useState<boolean>(false)
   const [isAddressBookChecked, setIsAddressBookChecked] = useState<boolean>(false)
-  const [isShowContactAccordion, setShowContactAccordion] = useState<boolean>(false)
+  const [isShowContactAccordion, setShowContactAccordion] = useState<boolean>(true)
+  const [isShowAddressBook, setShowAddressBook] = useState<boolean>(false)
+  const [isShowSameAddressModal, setShowSameAddressModal] = useState<boolean>(false)
+  const [isShowAmountStep, setShowAmountStep] = useState<boolean>(false)
 
   const [estimatedEtherFees, setEstimatedEthersFees] = useState<number>(0)
-  const addressBookByNetwork = addressBook.filter((address) => address.network.toLowerCase() === network.toLowerCase())
+  const addressBookByNetwork = addressBook.filter((address) => address?.network === walletNetworkName)
+
+  const [showSlider, setShowSlider] = useState<boolean>(true)
 
   const addUserToAddressBook = (name: string) => {
     if (isAddressBookChecked && selectedUser) {
       addToAddressBook({
         avatar: '',
-        username: name ? name : `@TestAccount #${addressBookByNetwork?.length + 1}`,
-        network: network,
+        username: name ? name : `Account #${addressBookByNetwork?.length + 1}`,
+        network: walletNetworkName,
         address: selectedUser.address,
         safety: SAFETY_MEASURE.LOW,
       })
@@ -99,23 +94,32 @@ const Send = () => {
   const schema = yup.object().shape({
     amount: yup
       .number()
-      .typeError('you must specify an amount')
-      .moreThan(0, 'invalid amount')
-      .max(assetBalance - estimatedEtherFees, 'low balance')
+      .test('maxDecimalPlaces', t('Wallet.must6DecimalOrLess') as string, (number) =>
+        /^\d+(\.\d{1,6})?$/.test(String(number))
+      )
+      .typeError(t('Wallet.mustHaveAmount') as string)
+      .moreThan(0, t('Wallet.enterValidAmount') as string)
+      .max(assetBalance - estimatedEtherFees, t('Wallet.insufficientBalance') as string)
       .required(),
-    address: yup.string().required().matches(getWalletAddressRegex(network)),
+    address: yup.string().required().matches(getWalletAddressRegex(walletNetworkName)),
+    label: yup.string(),
   })
 
-  const handleReviewTransaction = (data: { name: string; amount: string }) => {
+  const handleReviewTransaction = (data: { label: string; amount: string }) => {
     if (selectedUser) {
-      addUserToAddressBook(data.name)
+      addUserToAddressBook(data.label)
       setTransaction({
         asset,
         to: selectedUser.address,
         amount: data.amount.toString(),
         gasOption,
+        symbol: asset.title,
       })
-      navigate('/transaction/send-review')
+      if (asset.address === selectedUser?.address) {
+        setShowSameAddressModal(true)
+      } else {
+        navigate('/transaction/send-review')
+      }
     }
   }
 
@@ -128,20 +132,51 @@ const Send = () => {
     handleSubmit,
     setValue,
     getValues,
+    watch,
+    setError,
     formState: { isDirty, isValid, errors },
   } = methods
 
   const setMaxAmount = () => {
-    setValue('amount', assetBalance - estimatedEtherFees, {
-      shouldValidate: true,
-      shouldDirty: true,
-      shouldTouch: true,
-    })
-    setMaxWarning(false)
+    setShowSlider(false)
+    const maxGas = estimatedEtherFees + (estimatedEtherFees * 10) / 100
+    const calculatedAmount =
+      Math.floor((assetBalance - maxGas - (0.1 * maxGas + getMinimumBalance(asset.shortName))) * 1000000) / 1000000
+    if (calculatedAmount > 0) {
+      if (asset.tokenType === 'Native') {
+        setValue('amount', calculatedAmount, {
+          shouldValidate: true,
+          shouldDirty: true,
+          shouldTouch: true,
+        })
+      } else {
+        setValue('amount', assetBalance, {
+          shouldValidate: true,
+          shouldDirty: true,
+          shouldTouch: true,
+        })
+      }
+      setMaxWarning(false)
+    } else {
+      setError('amount', { type: 'custom', message: t('Wallet.insufficientBalance') as string })
+      setMaxWarning(false)
+    }
   }
 
+  const enteredAmountDollarValue = Number(
+    getAssetValueFormatted(
+      asset.coingeckoTokenId,
+      getValues('amount') ? parseFloat(getValues('amount') as string) : 0
+    ).replace('$', '')
+  )
+  const estimatedGasFeeDollarValue = getGasValueFormatted(asset.coingeckoTokenId, estimatedEtherFees)
+
+  const showAddAddress =
+    !!selectedUser?.address.length &&
+    !addressBookByNetwork.filter((user: AddressBookUser) => user.address === selectedUser?.address).length
+
   return (
-    <SinglePageTitleLayout showMenu>
+    <SinglePageTitleLayout showMenu title={t('Actions.send')}>
       <div>
         <Form methods={methods} onSubmit={handleSubmit(handleReviewTransaction)}>
           <CustomTypography variant="subtitle" type="secondary" className="mb-1">
@@ -151,6 +186,8 @@ const Send = () => {
             setValue={setValue}
             network={network}
             register={register}
+            watch={watch}
+            errorMsg={errors.label?.message}
             selectedUser={selectedUser}
             isShowContactAccordion={isShowContactAccordion}
             setShowContactAccordion={setShowContactAccordion}
@@ -158,9 +195,18 @@ const Send = () => {
             addressBookByNetwork={addressBookByNetwork}
             isAddressBookChecked={isAddressBookChecked}
             setIsAddressBookChecked={setIsAddressBookChecked}
+            recentInteractAddresses={recentAddresses}
+            accountAddresses={accountAddresses}
+            isShowAddressBook={isShowAddressBook}
+            setShowAddressBook={setShowAddressBook}
+            setShowAmountStep={setShowAmountStep}
+            isShowAmountStep={isShowAmountStep}
+            isDirty={isDirty}
+            isAddressserror={errors.address}
+            showAddAddress={showAddAddress}
           />
-          {!isShowContactAccordion && (
-            <Fragment>
+          {(isShowAmountStep || (selectedUser?.address && !errors.address && !showAddAddress)) && (
+            <div>
               <div className="space-y-1 mt-8">
                 <CustomTypography variant="subtitle" type="secondary">
                   {t('Labels.amount')}
@@ -180,10 +226,12 @@ const Send = () => {
                   endAdornment={
                     <button
                       type="button"
-                      className={`p-2 rounded-md text-custom-white hover:bg-custom-white10 ${
-                        assetBalance <= 0 ? 'pointer-events-none opacity-30' : ''
+                      className={`px-2 py-1.5 rounded-md text-custom-white hover:bg-custom-grey transition-all duration-300 ease-in-out ${
+                        assetBalance <= 0 ? 'pointer-events-none opacity-30 bg-transparent' : 'bg-custom-white10'
                       }`}
-                      onClick={() => setMaxWarning(true)}
+                      onClick={() => {
+                        setMaxWarning(true)
+                      }}
                     >
                       {t('Labels.max')}
                     </button>
@@ -191,10 +239,7 @@ const Send = () => {
                 />
                 <div className="flex items-center justify-between">
                   <CustomTypography variant="body" type="secondary">
-                    {getAssetValueFormatted(
-                      asset.coingeckoTokenId,
-                      getValues('amount') ? parseFloat(getValues('amount') as string) : 0
-                    )}
+                    {Number(enteredAmountDollarValue) > 0 ? `$${enteredAmountDollarValue}` : ''}
                   </CustomTypography>
                   <CustomTypography variant="small">
                     {`Balance: ${assetBalance}`}
@@ -204,32 +249,16 @@ const Send = () => {
               </div>
 
               <div className="p-4 rounded-lg border border-custom-white10 mt-8 space-y-3">
-                {asset.isEVMNetwork ? (
+                {asset?.isEVMNetwork && showSlider ? (
                   <>
                     <div className="flex justify-between">
+                      <CustomTypography variant="body" type="secondary">
+                        {t('Labels.maxFee')}
+                      </CustomTypography>
                       <div>
-                        <CustomTypography variant="body" type="secondary">
-                          {t('Labels.maxFee')}:
-                        </CustomTypography>
                         <CustomTypography variant="body">
                           {`${parseFloat(
-                            ethers.utils.formatUnits(
-                              maxFeePerGas as ethers.BigNumberish,
-                              asset.tokenGasFeeUnitToDisplay
-                            )
-                          ).toFixed(5)} ${asset.tokenGasFeeUnitToDisplay}`}
-                        </CustomTypography>
-                      </div>
-                      <div className="text-right">
-                        <CustomTypography variant="body" type="secondary" className="flex-1">
-                          {t('Labels.maxPriorityFee')}:
-                        </CustomTypography>
-                        <CustomTypography variant="body" className="ml-1 min-w-[4.5em]">
-                          {`${parseFloat(
-                            ethers.utils.formatUnits(
-                              maxPriorityFeePerGas as ethers.BigNumberish,
-                              asset.tokenGasFeeUnitToDisplay
-                            )
+                            ethers.formatUnits(maxFeePerGas as ethers.BigNumberish, asset.tokenGasFeeUnitToDisplay)
                           ).toFixed(5)} ${asset.tokenGasFeeUnitToDisplay}`}
                         </CustomTypography>
                       </div>
@@ -269,7 +298,7 @@ const Send = () => {
                       {estimatedEtherFees} {asset.title}
                     </CustomTypography>
                     <CustomTypography variant="body" className="text-right dark:text-custom-white40">
-                      {getAssetValueFormatted(asset.coingeckoTokenId, estimatedEtherFees)}
+                      {estimatedGasFeeDollarValue > 0 ? `$${estimatedGasFeeDollarValue}` : ''}
                     </CustomTypography>
                   </div>
                 </div>
@@ -288,26 +317,36 @@ const Send = () => {
                 <Button
                   data-test-id="button-review"
                   type="submit"
-                  color={`${!isDirty || !isValid ? 'disabled' : 'primary'}`}
-                  isDisabled={!isDirty || !isValid}
+                  color={`${
+                    !isDirty ||
+                    !isValid ||
+                    watch('label')?.length > 15 ||
+                    (isAddressBookChecked && watch('label')?.length < 1)
+                      ? 'disabled'
+                      : 'primary'
+                  }`}
+                  isDisabled={
+                    !isDirty ||
+                    !isValid ||
+                    watch('label')?.length > 15 ||
+                    (isAddressBookChecked && watch('label')?.length < 1)
+                  }
                 >
                   {t('Token.reviewTransaction')}
                 </Button>
-                <Button
+                {/* <Button
                   variant="bordered"
                   color="outlined"
-                  // disabled={!ethers.utils.isAddress(addressValue) || !amount.length}
                   isDisabled
                   className="mt-1 mb-2"
                   onClick={() => {
-                    // addUserToAddressBook()
                     setModalState(true)
                   }}
                 >
                   {t('Token.sendWithLowGas')}
-                </Button>
+                </Button> */}
               </div>
-            </Fragment>
+            </div>
           )}
         </Form>
       </div>
@@ -336,10 +375,17 @@ const Send = () => {
           setReceivedTokenModal(false)
           navigate(-1)
         }}
-        coin={asset}
+        image={asset.image}
+        title={asset.title}
       />
 
-      <ModalComponent modalState={calendarState} closeModal={() => setCalendarState(false)}>
+      <SendSameAddressModal
+        onContinue={() => navigate('/transaction/send-review')}
+        isShowSameAddressModal={isShowSameAddressModal}
+        setShowSameAddressModal={() => setShowSameAddressModal(false)}
+      />
+
+      <ModalComponent modalState={calendarState} closeModal={() => setCalendarState(false)} imgAlt="ETH">
         <DatePicker />
       </ModalComponent>
     </SinglePageTitleLayout>

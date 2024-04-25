@@ -27,7 +27,7 @@ export const SeedPhrase = ({ phrase, showSeedPhrase, setShowSeedPhrase }: ISeedP
         type: 'text/plain',
       })
       element.href = URL.createObjectURL(file)
-      element.download = 'mnemonic.txt'
+      element.download = 'secret_recovery_phrase.txt'
       document.body.appendChild(element)
       element.click()
     }

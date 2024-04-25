@@ -1,29 +1,28 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'lib/woozie'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useWallet } from '@portal/shared/hooks/useWallet'
+import { SpinnerIcon } from '@src/app/components/Icons'
+import { Button, CustomTypography, Form, PasswordInput } from 'app/components'
 import OnboardingLayout from 'app/layouts/onboarding-layout/OnboardingLayout'
-import { CustomTypography, PasswordInput, Form, Button } from 'app/components'
 import { useAppEnv } from 'env'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { SpinnerIcon } from '@src/app/components/Icons'
-
-// form schema
-const schema = yup.object().shape({
-  password: yup.string().min(8).max(32).required(),
-})
 
 const Login = () => {
-  const { t } = useTranslation()
-  const [loading, setLoading] = useState<boolean>(false)
   const { openWallet } = useWallet()
+
+  const { t } = useTranslation()
+  const schema = yup.object().shape({
+    password: yup.string().required(t('Account.enterPassword') as string),
+  })
+  const [loading, setLoading] = useState<boolean>(false)
+
   const { navigate } = useNavigate()
   const { popup, fullPage } = useAppEnv()
 
-  // init form
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange',
@@ -36,12 +35,18 @@ const Login = () => {
 
   const handleLoginClick = (data: { password: string }) => {
     setLoading(true)
-    openWallet(data.password)
-      .then(() => navigate('/home'))
-      .catch((error: Error) => {
-        setError('password', { type: 'custom', message: error.message })
-        setLoading(false)
-      })
+    try {
+      setLoading(true)
+      openWallet(data.password)
+        .then(() => navigate('/home'))
+        .catch((error: Error) => {
+          setError('password', { type: 'custom', message: error.message })
+          setLoading(false)
+        })
+    } catch (error) {
+      setError('password', { type: 'custom', message: error.message })
+      setLoading(false)
+    }
   }
   return (
     <OnboardingLayout disableLogo={fullPage} className={popup ? 'mt-32' : ''}>
@@ -57,7 +62,7 @@ const Login = () => {
               mainColor
               placeholder="Password"
               name="password"
-              fullWidth
+              className="w-full"
             />
           </div>
 
@@ -73,7 +78,7 @@ const Login = () => {
           </Button>
 
           <div className="flex items-center absolute bottom-6 -left-4 translate-y-1/2 translate-x-1/2">
-            <Link to="/onboarding/forgot-password-recovery-qr" className="no-underline hover:underline">
+            <Link to="/onboarding/choose-import-method" className="no-underline hover:underline">
               <CustomTypography variant="subtitle" className="cursor-pointer">
                 {t('Login.forgotPassword')}
               </CustomTypography>

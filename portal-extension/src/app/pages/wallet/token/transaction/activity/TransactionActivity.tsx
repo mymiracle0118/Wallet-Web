@@ -1,20 +1,20 @@
 import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
-// import { useWallet } from '@portal/shared/hooks/useWallet'
-// import { usePricing } from '@portal/shared/hooks/usePricing'
 
 import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
 
 import { Divider } from '@nextui-org/react'
+import { HyperlinkIcon, SpinnerIcon } from '@portal/portal-extension/src/app/components/Icons'
 import { NetworkFactory } from '@portal/shared/factory/network.factory'
-import { useWallet } from '@portal/shared/hooks/useWallet'
+import { useSettings } from '@portal/shared/hooks/useSettings'
+import { useStore } from '@portal/shared/hooks/useStore'
 import { ContractTransaction } from '@portal/shared/services/etherscan'
-import { ITransactionActivityProps } from '@portal/shared/utils/types'
+import { ITransactionActivityProps, NetworkToken } from '@portal/shared/utils/types'
 import DAI from 'assets/coins/DAI.svg'
 import WETH from 'assets/coins/WETH.svg'
 import { Button, CustomTypography, TokenActivity, TokenAddressButton, TokenSwapActivity } from 'components'
+import { useNavigate } from 'lib/woozie'
 import BlockDetails from './BlockDetails'
 
 const TransactionActivity = ({
@@ -24,66 +24,141 @@ const TransactionActivity = ({
   swapTokens = false,
   openModal,
   network,
-  // assetId,
   transactionHash,
+  assetId,
+  blockNumber,
+  matchedTransaction, // used to show failed transaction
 }: ITransactionActivityProps) => {
   const { t } = useTranslation()
-
-  // const { getAsset } = useWallet()
-  // const { getAssetValueFormatted } = usePricing()
-
+  const { navigate } = useNavigate()
   const [transaction, setTransaction] = useState<ContractTransaction>()
-  // const [receipt, setReceipt] = useState<string>()
-
-  const networkFactory = NetworkFactory.selectByNetworkId(network)
-  // const asset: NetworkToken = getNetworkToken(assetId)
-  const { tokensList } = useWallet()
-
+  const networkFactory = NetworkFactory.selectByNetworkId(assetId as string)
+  const { enableHideBalance, currentAccount, addressBook } = useSettings()
+  const { getNetworkToken, getAccountNetworkAddresses, walletsList } = useStore()
+  const [isLoading, setLoading] = useState<boolean>(true)
+  const asset: NetworkToken = getNetworkToken(assetId as string)
   const address = networkFactory.getAddress()
-  useEffect(() => {
-    if (transactionHash) {
-      networkFactory
-        .getTransaction(transactionHash)
-        .then((tx: any) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          setTransaction(tx)
-        })
-        .catch((e: any) => {
-          console.error('Error in getTransaction :: ', e)
-        })
-    }
-  }, [transactionHash, network])
+  const explorerURL = networkFactory?.getBlockExplorerURL(transactionHash as string)
 
-  // useEffect(() => {
-  //   if (transaction) {
-  //     //const [, query] = window.location.href.split('#')[1].split('?')
-  //     //const params = Object.fromEntries(new URLSearchParams(query))
-  //     //tokenDecimal = params.tokenDecimal
-  //   }
-  // }, [transaction])
+  const accountAddresses = getAccountNetworkAddresses(asset) as any
+  useEffect(() => {
+    if (matchedTransaction && !transaction) {
+      setTransaction(matchedTransaction as ContractTransaction)
+      setLoading(false)
+    }
+  }, [matchedTransaction])
+
+  useEffect(() => {
+    if (txStatus && transactionHash && blockNumber) {
+      if (txStatus !== 'Failed') {
+        networkFactory
+          .getTransaction(transactionHash)
+          .then((tx: any) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            if (tx) {
+              setTransaction(tx)
+              setLoading(false)
+            }
+          })
+          .catch((e: any) => {
+            console.error('Error in getTransaction :: ', e)
+          })
+      } else {
+        setLoading(false)
+      }
+    }
+  }, [transactionHash, blockNumber, network, txStatus])
 
   const handleViewTransactionExplorer = () => {
-    const url = networkFactory?.getBlockExplorerURL(transactionHash)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const newWindow = window.open(url, '_blank')
+    const newWindow = window.open(explorerURL, '_blank')
     if (newWindow) {
       newWindow.focus()
     }
   }
 
+  const transactionAmount = useMemo(() => {
+    if (txStatus === 'Cancelled') {
+      return '0'
+    }
+    return transaction ? transaction?.value || matchedTransaction?.value || '0' : matchedTransaction?.value || '0'
+  }, [txStatus, transaction])
+
+  const fromAddress = useMemo(
+    () => (transaction ? transaction?.from || '' : matchedTransaction?.address || ''),
+    [transaction, matchedTransaction]
+  )
+  const toAddress = useMemo(
+    () => (transaction ? transaction?.to || '' : matchedTransaction?.to || ''),
+    [transaction, matchedTransaction]
+  )
+
+  const getAddressUsername = (address: string): string => {
+    const shortName = asset?.isEVMNetwork ? 'ETH' : assetId
+    if (
+      currentAccount &&
+      shortName &&
+      walletsList[currentAccount.id]?.[shortName]?.address.toLowerCase() === address.toLowerCase()
+    ) {
+      return `@${currentAccount.username}`
+    }
+    const account = accountAddresses.find((account: any) => account.address.toLowerCase() === address.toLowerCase())
+    if (account && account.username) {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      return `@${account?.username}`
+    }
+
+    const addressMatches = addressBook.find((user) => user.address.toLowerCase() === address.toLowerCase())
+    if (addressMatches) {
+      return `@${addressMatches?.username}`
+    }
+    return ''
+  }
+
   return (
-    <SinglePageTitleLayout title="Activity" paddingClass={false} className="py-4">
-      {txStatus && (
+    <SinglePageTitleLayout
+      title="Activity"
+      paddingClass={false}
+      customGoBack
+      onClickAction={() => navigate(`/token/${network}/${assetId as string}`)}
+      className="py-4 relative"
+    >
+      {isLoading && (
+        <div className="absolute left-0 right-0 top-[12%] flex justify-center h-full w-full z-20 text-center">
+          <div className="text-center flex flex-col items-center mx-auto">
+            <SpinnerIcon className="w-8 h-7 block" />
+            <CustomTypography variant="small" className="mt-1">
+              {t('Actions.pleaseWait')}
+            </CustomTypography>
+          </div>
+        </div>
+      )}
+
+      {!isLoading && txStatus && (
         <div className="flex flex-col h-full">
           <div>
             {!swapTokens ? (
               <TokenActivity
                 page={page}
-                type={transaction?.from.toLowerCase() === address.toLowerCase() ? 'Send' : 'Received'}
-                date={moment.unix(transaction?.time as unknown as number).format('MMM. DD [at] hh:mm A')}
-                price={transaction?.value || '0'}
+                type={
+                  transaction
+                    ? transaction?.from?.toLowerCase() === address.toLowerCase()
+                      ? 'Send'
+                      : 'Received'
+                    : matchedTransaction?.from?.toLowerCase() === address.toLowerCase()
+                    ? 'Send'
+                    : 'Received'
+                }
+                date={
+                  transaction?.time
+                    ? moment.unix(transaction?.time as unknown as number).format('MMM. DD [at] hh:mm A')
+                    : ''
+                }
+                price={transactionAmount}
                 status={txStatus}
                 disableClick={disableClick}
+                hideBalance={enableHideBalance}
+                tokenName={asset.title}
               />
             ) : (
               <TokenSwapActivity
@@ -108,10 +183,15 @@ const TransactionActivity = ({
 
           <Divider />
 
-          {network !== 'SUPRA' && (
+          {explorerURL && (
             <div className="p-4">
-              <Button variant="bordered" color="outlined" onClick={handleViewTransactionExplorer}>
-                {t('Token.viewTransactionExplorer')}
+              <Button
+                variant="bordered"
+                color="outlined"
+                onClick={handleViewTransactionExplorer}
+                className="flex items-center gap-2"
+              >
+                {t('Token.viewTransactionExplorer')} <HyperlinkIcon className="w-5 h-5" />
               </Button>
             </div>
           )}
@@ -119,51 +199,31 @@ const TransactionActivity = ({
           <div className="flex-1 divide-y divide-solid divide-custom-white10 [&>div]:min-h-[3.5rem]">
             <div className="flex items-center justify-between px-4">
               <CustomTypography variant="subtitle">{t('Labels.from')}</CustomTypography>
-              <TokenAddressButton enableCopy address={transaction?.from || ''} className="text-xs" />
+              <div className="flex items-center gap-2">
+                <TokenAddressButton enableCopy address={fromAddress} className="text-xs" />
+                <CustomTypography variant="subtitle">{fromAddress && getAddressUsername(fromAddress)}</CustomTypography>
+              </div>
             </div>
             <div className="flex items-center justify-between px-4">
               <CustomTypography variant="subtitle">{t('Labels.to')}</CustomTypography>
-              <TokenAddressButton enableCopy address={transaction?.to || ''} className="text-xs" />
+              <div className="flex items-center gap-2">
+                <TokenAddressButton enableCopy address={toAddress} className="text-xs" />
+                <CustomTypography variant="subtitle">{toAddress && getAddressUsername(toAddress)}</CustomTypography>
+              </div>
             </div>
-            {
-              !swapTokens && transaction?.from === address ? (
-                <div className="flex items-center justify-between px-4">
-                  <CustomTypography variant="subtitle">{t('Network.networkFee')}</CustomTypography>
-                  <div className="text-right">
-                    <CustomTypography variant="subtitle">
-                      {transaction?.networkFees} {tokensList[network]?.title}
-                    </CustomTypography>
-                    {/* <CustomTypography variant="body" className="dark:text-custom-white40">
-                      {getAssetValueFormatted('ethereum', Number(transaction?.networkFees))}
-                    </CustomTypography> */}
-                  </div>
+            {!swapTokens &&
+            transaction?.from === address &&
+            transaction?.networkFees &&
+            Number(transaction.networkFees) > 0 ? (
+              <div className="flex items-center justify-between px-4">
+                <CustomTypography variant="subtitle">{t('Network.networkFee')}</CustomTypography>
+                <div className="text-right">
+                  <CustomTypography variant="subtitle">
+                    {!enableHideBalance ? `${transaction?.networkFees || ''} ${asset.title || ''}` : '**'}
+                  </CustomTypography>
                 </div>
-              ) : null
-              // TODO :: Swap Functionality code update when use swap
-              // (
-              //   <>
-              //     <DetailsWrapper>
-              //       <CustomTypography variant="h4">{t('Labels.rate')}</CustomTypography>
-              //       <div style={{ textAlign: 'right' }}>
-              //         <CustomTypography variant="h4">1 DAI ≥ 0.0004 WETH</CustomTypography>
-              //       </div>
-              //     </DetailsWrapper>
-              //     <DetailsWrapper>
-              //       <CustomTypography variant="h4">{t('Token.gasFee')}</CustomTypography>
-              //       <div style={{ textAlign: 'right' }}>
-              //         <CustomTypography variant="h4">{t('Token.reatTimePrice')}</CustomTypography>
-              //       </div>
-              //     </DetailsWrapper>
-              //     <DetailsWrapper>
-              //       <CustomTypography variant="h4">{t('Token.dueTime')}</CustomTypography>
-              //       <div style={{ textAlign: 'right' }}>
-              //         <CustomTypography variant="h4">Oct. 5 at 9:36 PM</CustomTypography>
-              //         <CustomTypography variant="body1">6 hours from now</CustomTypography>
-              //       </div>
-              //     </DetailsWrapper>
-              //   </>
-              // )
-            }
+              </div>
+            ) : null}
 
             {page === 'Settings' && (
               <div className="p-3">
@@ -185,9 +245,9 @@ const TransactionActivity = ({
             )}
           </div>
 
-          {txStatus !== 'Completed' && (
+          {asset?.isEVMNetwork && transaction && txStatus === 'Pending' && (
             <div className="px-4">
-              <Button onClick={openModal} color="primary">
+              <Button onClick={openModal} color="outlined" className="hover:bg-custom-grey10">
                 {t('Token.cancelTransaction')}
               </Button>
             </div>

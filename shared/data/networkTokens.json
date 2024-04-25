@@ -12,7 +12,8 @@
     "tokenType": "Native",
     "coingeckoTokenId": "ethereum",
     "isFavorite": false,
-    "isEVMNetwork": true
+    "isEVMNetwork": true,
+    "decimal": "18"
   },
   "USDT_ETH": {
     "id": "3",
@@ -28,7 +29,8 @@
     "tokenContractAddress": "0xD139245Ed0e23D2f0b9323c9e086F06C652EcD7a",
     "coingeckoTokenId": "tether",
     "isFavorite": false,
-    "isEVMNetwork": true
+    "isEVMNetwork": true,
+    "decimal": 6
   },
   "USDC_ETH": {
     "id": "4",
@@ -44,7 +46,8 @@
     "tokenContractAddress": "0x2E162941225Ae0cF35586EAF10c73f0e5404d156",
     "coingeckoTokenId": "usd-coin",
     "isFavorite": false,
-    "isEVMNetwork": true
+    "isEVMNetwork": true,
+    "decimal": 6
   },
   "APT": {
     "id": "9",
@@ -58,7 +61,8 @@
     "networkName": "APT",
     "tokenType": "Native",
     "coingeckoTokenId": "aptos",
-    "isFavorite": false
+    "isFavorite": false,
+    "decimal": 8
   },
   "SUI": {
     "id": "7",
@@ -72,7 +76,8 @@
     "networkName": "SUI",
     "tokenType": "Native",
     "coingeckoTokenId": "sui",
-    "isFavorite": false
+    "isFavorite": false,
+    "decimal": 9
   },
   "SOL": {
     "id": "8",
@@ -86,7 +91,8 @@
     "networkName": "SOL",
     "tokenType": "Native",
     "coingeckoTokenId": "solana",
-    "isFavorite": false
+    "isFavorite": false,
+    "decimal": 9
   },
   "USDC_SOL": {
     "id": "14",
@@ -101,7 +107,8 @@
     "tokenType": "ERC20",
     "tokenContractAddress": "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
     "coingeckoTokenId": "usd-coin",
-    "isFavorite": false
+    "isFavorite": false,
+    "decimal": 6
   },
   "SUPRA": {
     "id": "1",
@@ -116,6 +123,8 @@
     "tokenType": "Native",
     "tokenContractAddress": "",
     "coingeckoTokenId": "SUPRA",
-    "isFavorite": false
+    "isFavorite": false,
+    "decimal": 6,
+    "isSupraNetwork": true
   }
 }

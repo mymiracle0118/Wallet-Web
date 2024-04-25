@@ -1,17 +1,17 @@
-import { Ed25519Keypair } from '@mysten/sui.js/keypairs/ed25519'
-import { getFullnodeUrl, SuiClient } from '@mysten/sui.js/client'
-import { Asset, IResponse } from '../utils/types'
-import { ethers } from 'ethers'
 import { fromB64 } from '@mysten/bcs'
-import { fromUTF8Array } from '../utils/utf8'
+import { getFullnodeUrl, SuiClient } from '@mysten/sui.js/client'
+import { Ed25519Keypair } from '@mysten/sui.js/keypairs/ed25519'
 import { remove0xStartOfString } from '@portal/portal-extension/src/utils/constants'
+import { ethers } from 'ethers'
+import { IResponse, NetworkToken } from '../utils/types'
+import { fromUTF8Array } from '../utils/utf8'
 
 export const suiProvider = new SuiClient({ url: getFullnodeUrl('testnet') })
 export const getSuiProvider = (networkType) => new SuiClient({ url: getFullnodeUrl(networkType || 'testnet') })
-export const getSuiWalletUsingSeed = async (mnemonic: string, deriveIndex?: number) => {
+export const getSuiWalletUsingSeed = async (mnemonic: string, derivationPathIndex?: number) => {
   try {
     // Derive keypair using the provided mnemonic
-    const keypair = Ed25519Keypair.deriveKeypair(mnemonic, `m/44'/784'/0'/0'/${deriveIndex || 0}'`)
+    const keypair = Ed25519Keypair.deriveKeypair(mnemonic, `m/44'/784'/0'/0'/${derivationPathIndex || 0}'`)
 
     // Get the SUI address and private key in both base64 and hex formats
     const suiAddress = keypair.getPublicKey().toSuiAddress()
@@ -35,10 +35,13 @@ export const getSuiWalletUsingEncryptedPrivateKey = async (encryptedPrivateKey) 
   return keypair
 }
 
-export const getSuiBalance = async (address: string, asset: Asset): Promise<number> => {
+export const getSuiBalance = async (address: string, asset: NetworkToken): Promise<number> => {
   try {
+    const coinType = asset.tokenContractAddress ? asset.tokenContractAddress : '0x2::sui::SUI'
+
     let { totalBalance } = await suiProvider.getBalance({
       owner: address,
+      coinType: coinType,
     })
     return Number(totalBalance)
   } catch (error: any) {
@@ -48,13 +51,11 @@ export const getSuiBalance = async (address: string, asset: Asset): Promise<numb
 
 export const getSUITransactions = async (network: string, address: string, contractAddress?: string) => {
   let transactions = []
-  // const gasFees = await suiProvider.getReferenceGasPrice()
   try {
     const paginationCount = 20
     const fromTransactionBlocks = await suiProvider.queryTransactionBlocks({
       filter: {
         FromAddress: address,
-        // FromOrToAddress: { addr: address },
       },
       options: {
         showBalanceChanges: true,
@@ -94,9 +95,9 @@ export const getSUITransactions = async (network: string, address: string, contr
           if (balanceChange?.owner?.AddressOwner !== obj?.transaction?.data?.sender) {
             toAddress = balanceChange?.owner?.AddressOwner ?? ''
             value = balanceChange?.amount ?? '0'
-            // if (!balanceChange.coinType?.includes('sui::SUI')) {
-            functionName = balanceChange?.coinType ?? ''
-            // }
+            if (!balanceChange.coinType?.includes('sui::SUI')) {
+              functionName = balanceChange?.coinType ?? ''
+            }
           }
         }
 
@@ -104,17 +105,18 @@ export const getSUITransactions = async (network: string, address: string, contr
           if (value) {
             transactions.push({
               blockNumber: '',
-              time: (Number(obj?.timestampMs ?? 0) / 1000).toString(),
+              time: obj?.timestampMs ? (Number(obj?.timestampMs ?? 0) / 1000).toString() : '',
               hash: digest,
               nonce: '',
               from: obj?.transaction?.data?.sender ?? '',
               to: toAddress,
-              value: ethers.utils.formatUnits(value, 9),
+              value: ethers.formatUnits(value, 9),
               gas: '',
               gasPrice: obj?.transaction?.data?.gasData?.price ?? '0',
               gasUsed: '',
-              cumulativeGasUsed: '',
+              cumulativeGasUsed: functionName,
               tokenDecimal: 9,
+              functionName: functionName,
             })
           }
         }
@@ -125,9 +127,15 @@ export const getSUITransactions = async (network: string, address: string, contr
     transactions = transactions.sort(function (x, y) {
       return y.time - x.time
     })
-  } catch (error: any) {}
 
-  return transactions
+    const filteredTransactions = contractAddress
+      ? transactions.filter((transaction) => transaction.functionName === contractAddress)
+      : transactions.filter((transaction) => transaction.functionName === '')
+
+    return filteredTransactions
+  } catch (error: any) {
+    console.log('SOL trnasaction ERR ', error)
+  }
 }
 export const getSuiTransaction = async (transactionHash: string) => {
   try {
@@ -157,19 +165,19 @@ export const getSuiTransaction = async (transactionHash: string) => {
 
       return {
         blockNumber: transactionBlock.checkpoint,
-        time: (Number(transactionBlock?.timestampMs ?? 0) / 1000).toString(),
+        time: transactionBlock?.timestampMs ? (Number(transactionBlock?.timestampMs ?? 0) / 1000).toString() : '',
         hash: digest,
         nonce: '',
         from: transactionBlock?.transaction?.data?.sender ?? '',
         to: toAddress,
-        value: ethers.utils.formatUnits(value, 9),
+        value: ethers.formatUnits(value, 9),
         gas: '',
         gasPrice: transactionBlock?.transaction?.data?.gasData?.price ?? '0',
         gasUsed: '',
         cumulativeGasUsed: '',
         tokenDecimal: 9,
         networkFees: transactionBlock?.transaction?.data?.gasData?.price
-          ? ethers.utils.formatUnits(transactionBlock?.transaction?.data?.gasData?.price, 9)
+          ? ethers.formatUnits(transactionBlock?.transaction?.data?.gasData?.price, 9)
           : '0',
       }
     }
@@ -193,8 +201,54 @@ const successResponse = (args: IResponse) => {
   return args
 }
 
-export const formatErc20TokenConvertNormal = (value: number, decimal = 6) => {
-  return value * Math.pow(10, decimal)
+export const formatErc20TokenConvertNormal = (value: string, decimal = 6) => {
+  const amount = Number(value)
+  return Math.round(amount * Math.pow(10, decimal)).toString()
+}
+
+export const selectCoins = async (addr: string, amount: number, coinType: string = '0x2::SUI::SUI', suiProvider) => {
+  const selectedCoins: {
+    objectId: string
+    digest: string
+    version: string
+  }[] = []
+  let totalAmount = 0
+  let hasNext = true,
+    nextCursor: string | null | undefined = null
+
+  while (hasNext && totalAmount < amount) {
+    const coins = await suiProvider.getCoins({
+      owner: addr,
+      coinType: coinType,
+      cursor: nextCursor,
+    })
+
+    // Sort the coins by balance in descending order
+    // eslint-disable-next-line radix
+    coins.data.sort((a, b) => parseInt(b.balance) - parseInt(a.balance))
+
+    for (const coinData of coins.data) {
+      selectedCoins.push({
+        objectId: coinData.coinObjectId,
+        digest: coinData.digest,
+        version: coinData.version,
+      })
+      // eslint-disable-next-line radix
+      totalAmount = totalAmount + parseInt(coinData.balance)
+      if (totalAmount >= amount) {
+        break
+      }
+    }
+
+    nextCursor = coins.nextCursor
+    hasNext = coins.hasNextPage
+  }
+
+  if (!selectedCoins.length) {
+    throw new Error('No valid coins found for the transaction.')
+  }
+
+  return selectedCoins
 }
 
 export const sendSuiTransaction = async (txb, encryptedPrivateKey: (string | number)[]) => {
@@ -219,7 +273,7 @@ export const sendSuiTransaction = async (txb, encryptedPrivateKey: (string | num
         },
       })
       if (transactionBlock) {
-        const gasAmount = ethers.BigNumber.from(transactionBlock.effects.gasUsed.computationCost)
+        const gasAmount = ethers.formatUnits(transactionBlock.effects.gasUsed.computationCost)
         return successResponse({
           gasPrice: gasAmount,
           hash: transactionBlock?.digest,
@@ -228,12 +282,12 @@ export const sendSuiTransaction = async (txb, encryptedPrivateKey: (string | num
           gasUsed: gasAmount,
         })
       } else {
-        throw new SyntaxError('Sui Transaction failed')
+        throw new SyntaxError('Transaction failed')
       }
     } else {
-      throw Error('Failed to sui transaction')
+      throw Error('Transaction failed')
     }
   } catch (error: any) {
-    throw Error('Failed to sui transaction :' + error.message)
+    throw Error('Failed transaction : ' + error.message)
   }
 }

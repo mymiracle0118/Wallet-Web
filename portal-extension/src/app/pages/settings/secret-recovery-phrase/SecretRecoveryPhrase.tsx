@@ -2,25 +2,23 @@ import { goBack } from 'lib/woozie'
 import { FC, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useWallet } from '@portal/shared/hooks/useWallet'
-
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useSettings } from '@portal/shared/hooks/useSettings'
+import { decryptData } from '@portal/shared/services/EncryptionService'
 import { SpinnerIcon } from '@src/app/components/Icons'
 import SinglePageTitleLayout from 'app/layouts/single-page-layout/SinglePageLayout'
 import { Button, CustomTypography, Form, PasswordInput, SeedPhrase } from 'components'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-const schema = yup.object().shape({
-  password: yup.string().min(8).max(32).required(),
-})
 const SecretRecoveryPhrase: FC = () => {
   const { t } = useTranslation()
-  const { wallet, openWallet } = useWallet()
   const [showSeedPhrase, setShowSeedPhrase] = useState<boolean>(false)
+
+  const { accounts } = useSettings()
   const [loading, setLoading] = useState<boolean>(false)
   const [reveal, setReveal] = useState<boolean>(false)
-  const [errorText, setErrorText] = useState<string | null>(null)
+  const [currentPhrase, setCurrentPhrase] = useState<string>('')
 
   useEffect(() => {
     return () => {
@@ -28,26 +26,41 @@ const SecretRecoveryPhrase: FC = () => {
     }
   }, [])
 
+  const schema = yup.object().shape({
+    password: yup.string().required(t('Account.enterPassword') as string),
+  })
+
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange',
   })
   const {
     handleSubmit,
+    setError,
     formState: { errors, isValid, isDirty },
   } = methods
-  const handleRevealPhrase = async (data: { password: string }) => {
+
+  const handleRevealPhrase = (data: { password: string }) => {
     try {
       setLoading(true)
-      // eslint-disable-next-line
-      await openWallet(data.password)
-      setReveal(true)
+      const primaryAccount = Object.values(accounts).find((acc) => acc.isPrimary)
+      if (primaryAccount) {
+        const phrase = decryptData(primaryAccount.encryptedWallet as string, data.password as string)
+        if (phrase) {
+          setCurrentPhrase(phrase)
+          setReveal(true)
+        } else {
+          const message = t('Actions.invalidPassword')
+          setError('password', { type: 'custom', message })
+          setLoading(false)
+        }
+      }
     } catch (error) {
       let message = 'Unknown Error'
       if (error instanceof Error) message = error.message
-      setErrorText(message)
-    } finally {
+      setError('password', { type: 'custom', message })
       setLoading(false)
+      setCurrentPhrase('')
     }
   }
 
@@ -68,13 +81,13 @@ const SecretRecoveryPhrase: FC = () => {
             </CustomTypography>
           </div>
 
-          {wallet && reveal ? (
+          {currentPhrase && reveal ? (
             <div className="mt-4">
               <CustomTypography className="my-2" variant="subtitle" type="secondary">
                 {t('Security.secretRecoveryPhrase')}
               </CustomTypography>
               <SeedPhrase
-                phrase={wallet.mnemonic.phrase}
+                phrase={currentPhrase}
                 showSeedPhrase={showSeedPhrase}
                 setShowSeedPhrase={setShowSeedPhrase}
               />
@@ -91,7 +104,7 @@ const SecretRecoveryPhrase: FC = () => {
                   placeholder="Password"
                   name="password"
                   className="w-full"
-                  error={errorText || errors?.password?.message}
+                  error={errors?.password?.message}
                 />
               </div>
               <div className="flex justify-between mt-8 gap-2">

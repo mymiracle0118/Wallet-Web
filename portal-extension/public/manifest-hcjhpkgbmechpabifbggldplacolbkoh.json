@@ -1,7 +1,8 @@
 {
-  "name": "Shuttle Wallet - QA TEST",
-  "description": "Shuttle Wallet - QA TEST build\nNon-custodial wallet for holding Ethereum and tokens.",
+  "name": "Star Key Wallet - QA TEST",
+  "description": "Star Key Wallet - QA TEST build\nNon-custodial wallet for holding Ethereum and tokens.",
   "version": "1.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjin9MIeKYPReb3d8BU3F4sw5QtH4P69rTwGe4Hs19ilketWbfJcyhmqtE231COZe1343tHvPOPal1tcycOBeGVdQqdXH5EMyPzpP+6VeSLrx9NJCGUPXUkzx2lgv5bZCjv8n6YUfRhhWHEgQyntf07kSwelTUteKuG0zthe+nFo8tqaCDgBTV92iHbDtf4pBG6/s63efLpgg5dtoxj6sxup+sPvs01FGq1Y99ymhj21Qi7Y3CbSPWknOZg2KTtDZqFGOHtj4bqospu3yOQwYVkn7CiXTZH3TezSoy4sdrj6f1p/RE22ilnDky33iJUzvWn28RkRqFvnzqUs57jUMdwIDAQAB",
   "manifest_version": 3,
   "action": {
     "default_popup": "popup.html",
@@ -10,13 +11,13 @@
       "48": "./images/logo_48.png",
       "128": "./images/logo_128.png"
     },
-    "default_title": "Shuttle - Supra Wallet"
+    "default_title": "Star Key Wallet"
   },
   "background": {
     "service_worker": "scripts/background.js"
   },
 
-  "short_name": "Shuttle Wallet - QA TEST",
+  "short_name": "Star Key Wallet - QA TEST",
   "icons": {
     "16": "./images/logo_16.png",
     "48": "./images/logo_48.png",
@@ -30,5 +31,20 @@
       "all_frames": true
     }
   ],
-  "permissions": ["storage", "unlimitedStorage", "clipboardWrite", "activeTab", "https://*.vercel.app/*"]
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "clipboardWrite",
+    "notifications",
+    "alarms",
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "116531681819-mci7pt2ekvpfjo9h5em3v0503rsemkpn.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive.appdata",
+      "https://www.googleapis.com/auth/drive.appfolder",
+      "https://www.googleapis.com/auth/drive.file"
+    ]
+  }
 }

@@ -1,5 +1,4 @@
-import { useSettings } from '@portal/shared/hooks/useSettings'
-import { useWallet } from '@portal/shared/hooks/useWallet'
+import { IAccountUpdateProps, useSettings } from '@portal/shared/hooks/useSettings'
 import ChangeProfileAvatar from '@src/app/components/ChangeProfileAvatar'
 import defaultAvatar from 'assets/images/Avatar.png'
 import { Button, CustomTypography, Input } from 'components'
@@ -11,46 +10,57 @@ import { useTranslation } from 'react-i18next'
 const EditAccount = () => {
   const { navigate } = useNavigate()
   const { t } = useTranslation()
-  const { username: oldUsername, avatar, changeAvatar } = useWallet()
-  const [username, setUsername] = useState<string>(oldUsername || '')
-  const { saveAccount, accounts, updateUsername } = useSettings()
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true)
+  const [username, setUsername] = useState<string>('')
+  const { accounts, updateAccountInfo } = useSettings()
   const [isShowAvatarModal, setShowAvatarModal] = useState<boolean>(false)
-  const [selectedAvatar, setSelectedAvatar] = useState<null | string>(null)
-  const [address, setAddress] = useState('')
+  const [selectedAvatar, setSelectedAvatar] = useState<string>('')
+  const [errorMsg, setErrorMsg] = useState<string>('')
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const updatedValue = event.target.value
-    if (updatedValue.length <= 15 && !/\s/.test(updatedValue)) {
-      setIsButtonDisabled(false)
-      setUsername(updatedValue)
+    setErrorMsg('')
+    // setIsButtonDisabled(true)
+    setUsername(updatedValue)
+    if (updatedValue.length < 3) {
+      setErrorMsg(t('Account.usernameMinimum') as string)
+    }
+    if (/\s/.test(updatedValue)) {
+      setErrorMsg(t('Account.usernameNoSpace') as string)
     }
   }
 
+  const parts = window.location.href.split('/')
+  const accountId: any = parts.pop()
   useEffect(() => {
-    const parts = window.location.href.split('/')
-    const addressUrl = parts.pop()
-    const entry = Object.values(accounts).find((entry) => entry.address === addressUrl)
-    if (entry && addressUrl) {
-      setUsername(entry.username)
-      setAddress(addressUrl)
+    const account = Object.values(accounts).find((entry) => entry.id === accountId)
+    if (account && accountId) {
+      setUsername(account.username)
+      // setAddress(accountId)
+      if (account.avatar) {
+        setSelectedAvatar(account.avatar)
+      }
     }
-  }, [])
+  }, [accounts])
 
   const saveUsername = () => {
-    updateUsername(username, address)
-    saveAccount()
-    if (selectedAvatar) {
-      changeAvatar(selectedAvatar)
+    const hasUsername = Object.values(accounts).some(
+      (account) => account.username === username && account.id !== accountId
+    )
+    if (hasUsername) {
+      setErrorMsg('Duplicated label')
+    } else {
+      const accountInfo: IAccountUpdateProps = { username, avatar: selectedAvatar as string }
+      updateAccountInfo(accountId, accountInfo)
+
+      navigate('/account')
     }
-    navigate('/account')
   }
 
   return (
     <SinglePageLayout title="Edit account">
       <div className="space-y-4 flex flex-col items-center">
         <img
-          src={selectedAvatar ? selectedAvatar : avatar || defaultAvatar}
+          src={selectedAvatar ? selectedAvatar : defaultAvatar}
           alt="default-avatar"
           className="rounded-full h-20 w-20 overflow-hidden"
         />
@@ -59,42 +69,34 @@ const EditAccount = () => {
         </Button>
       </div>
 
-      <div className="my-4 space-y-1">
+      <div className="my-4 space-y-1 h-20">
         <CustomTypography variant="subtitle" type="secondary">
           {t('Onboarding.accountName')}
         </CustomTypography>
         <Input
           mainColor
           id="username"
-          placeholder={t('Onboarding.accountName')}
+          placeholder={t('Onboarding.accountName') as string}
           value={username}
           onChange={handleUsernameChange}
-          endAdornment={`${username.length}/15`}
+          endAdornment={
+            <div className={`text-xs ${username.length > 15 ? 'text-feedback-negative' : 'text-custom-white'}`}>
+              {username.length}/15
+            </div>
+          }
+          className={username.length > 15 ? '!text-feedback-negative !border !border-feedback-negative' : ''}
           fullWidth
+          error={errorMsg}
         />
       </div>
-      {/* <div className="flex items-baseline">
-        <Checkbox
-          size="lg"
-          radius="sm"
-          icon={<CheckboxIcon />}
-          isSelected={isTermsConditionsChecked}
-          onValueChange={() => {
-            setIsTermsConditionsChecked(!isTermsConditionsChecked)
-            setIsButtonDisabled(!isButtonDisabled)
-          }}
-        >
-          <CustomTypography variant="subtitle">{t('Account.editAccoutNotify')}</CustomTypography>
-        </Checkbox>
-      </div> */}
 
       <div className="flex justify-between gap-x-2 mt-8">
         <Button color="outlined" variant="bordered" onClick={goBack}>
-          {t('Actions.notNow')}
+          {t('Actions.cancel')}
         </Button>
         <Button
-          color={`${isButtonDisabled ? 'disabled' : 'primary'}`}
-          isDisabled={isButtonDisabled}
+          color={`${errorMsg || username.length > 15 ? 'disabled' : 'primary'}`}
+          isDisabled={errorMsg || username.length > 15}
           onClick={saveUsername}
         >
           {t('Actions.save')}
@@ -105,12 +107,10 @@ const EditAccount = () => {
         openModal={isShowAvatarModal}
         closeModal={() => {
           setShowAvatarModal(false)
-          setSelectedAvatar(null)
         }}
         selectedAvatar={selectedAvatar}
         setSelectedAvatar={setSelectedAvatar}
         handleAvatarChange={() => {
-          setIsButtonDisabled(false)
           setShowAvatarModal(false)
         }}
       />

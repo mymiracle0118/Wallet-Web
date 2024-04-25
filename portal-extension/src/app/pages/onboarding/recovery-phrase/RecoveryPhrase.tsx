@@ -1,16 +1,17 @@
-import React, { FC, useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'lib/woozie'
-import shuffle from 'lodash/shuffle'
-import { useWallet } from '@portal/shared/hooks/useWallet'
-import OnboardingLayout from 'app/layouts/onboarding-layout/OnboardingLayout'
-import { Button, CustomTypography } from 'app/components'
 import { Chip, Input } from '@nextui-org/react'
+import { useWallet } from '@portal/shared/hooks/useWallet'
+import { ArrowLeftIcon } from '@src/app/components/Icons'
+import { Button, CustomTypography } from 'app/components'
+import OnboardingLayout from 'app/layouts/onboarding-layout/OnboardingLayout'
+import { goBack, useNavigate } from 'lib/woozie'
+import shuffle from 'lodash/shuffle'
+import { FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const RecoveryPhrase: FC = () => {
   const { t } = useTranslation()
   const { navigate } = useNavigate()
-  const { wallet } = useWallet()
+  const { wallet, setCreateWalletProcessCompleted } = useWallet()
   const [chips, setChips] = useState<Array<{ id: number; name: string }>>([])
   const [chipsArray, setChipsArray] = useState<string[]>([])
   const [uniqueRandomIndexes, setUniqueRandomIndexes] = useState<number[]>([])
@@ -85,7 +86,10 @@ const RecoveryPhrase: FC = () => {
 
   return (
     <OnboardingLayout disableLogo className="text-left">
-      <CustomTypography dataAid="recoveryQuestion" variant="h1">
+      <Button isIconOnly size="sm" variant="light" onClick={goBack} className="w-5 h-5 -ml-1">
+        <ArrowLeftIcon className="text-lg dark:stroke-white-40" />
+      </Button>
+      <CustomTypography dataAid="recoveryQuestion" variant="h1" className="pt-6">
         {t('Onboarding.verifySecretRecoveryPhrase')}
       </CustomTypography>
       <CustomTypography variant="body" className="mt-6 text-custom-white80">
@@ -160,20 +164,16 @@ const RecoveryPhrase: FC = () => {
       </div>
       <div className="pt-8 flex gap-2">
         <Button
-          data-aid="backNavigation"
-          color="outlined"
-          variant="bordered"
-          onClick={() => navigate('/onboarding/generate-seed')}
-        >
-          {t('Actions.back')}
-        </Button>
-        <Button
           data-aid="nextNavigation"
           color={`${!enableNextBtn ? 'disabled' : 'primary'}`}
           isDisabled={!enableNextBtn}
-          onClick={() => navigate('/onboarding/pro-account-video')}
+          // onClick={() => navigate('/onboarding/pro-account-video')}
+          onClick={() => {
+            setCreateWalletProcessCompleted(true)
+            navigate('/onboarding/wallet-is-secured')
+          }}
         >
-          {t('Actions.next')}
+          {t('Actions.verify')}
         </Button>
       </div>
     </OnboardingLayout>

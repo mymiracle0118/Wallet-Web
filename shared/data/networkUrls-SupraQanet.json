@@ -1,0 +1,24 @@
+{
+  "SUPRA": {
+    "testNet": {
+      "subTitle": "Supra Qanet",
+      "providerNetworkRPC_URL": "https://rpc-qanet.supra.com",
+      "explorerURL": "",
+      "explorerAccountURL": "",
+      "providerNetworkRPC_Network_Name": "3",
+      "networkId": "3",
+      "tokenGasFeeUnitToDisplay": "gwei",
+      "indexerClient": "https://indexer-testnet.staging.gcp.aptosdev.com/v1/graphql"
+    },
+    "mainNet": {
+      "subTitle": "Supra",
+      "providerNetworkRPC_URL": "https://rpc-qanet.supra.com",
+      "explorerURL": "",
+      "explorerAccountURL": "",
+      "providerNetworkRPC_Network_Name": "3",
+      "networkId": "3",
+      "tokenGasFeeUnitToDisplay": "gwei",
+      "indexerClient": "https://indexer-testnet.staging.gcp.aptosdev.com/v1/graphql"
+    }
+  }
+}

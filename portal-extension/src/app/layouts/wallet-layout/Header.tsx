@@ -1,13 +1,13 @@
-import React from 'react'
-import classnames from 'classnames'
-import { useWallet } from '@portal/shared/hooks/useWallet'
-import { Icon, CustomTypography } from 'components'
-import { createLocationState, useNavigate } from 'lib/woozie'
-import DefaultAvatar from 'assets/logos/logo.svg'
+import { Avatar } from '@nextui-org/react'
+import { useSettings } from '@portal/shared/hooks/useSettings'
 import { IHeaderProps } from '@portal/shared/utils/types'
+import defaultAvatar from 'assets/images/Avatar.png'
+import classnames from 'classnames'
+import { CustomTypography } from 'components'
+import { createLocationState, useNavigate } from 'lib/woozie'
 
 const Header = ({ title, isConnected, showAccounts = true }: IHeaderProps) => {
-  const { avatar } = useWallet()
+  const { currentAccount } = useSettings()
   const { navigate } = useNavigate()
   const { pathname } = createLocationState()
   const textColor =
@@ -22,14 +22,15 @@ const Header = ({ title, isConnected, showAccounts = true }: IHeaderProps) => {
         justifyContent: title || !isConnected ? 'space-between' : 'flex-end',
       }}
     >
-      {!isConnected && (
+      {/* TODO :: when connected with website */}
+      {/* {!isConnected && (
         <button type="button" className="flex items-center gap-2" onClick={() => navigate('/account/list')}>
           <div className="w-1 h-1 rounded-full bg-[#30D158] p-1" />
           <CustomTypography variant="subtitle" color={textColor}>
             Connected
           </CustomTypography>
         </button>
-      )}
+      )} */}
 
       {title && (
         <CustomTypography variant="h3" color={textColor}>
@@ -41,15 +42,15 @@ const Header = ({ title, isConnected, showAccounts = true }: IHeaderProps) => {
         <button
           type="button"
           className={classnames(
-            'profile-btn flex items-center dark:text-custom-white font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-1 pr-0 rounded-full',
+            'profile-btn flex items-center dark:text-custom-white font-bold hover:bg-custom-grey10 dark:hover:bg-custom-white10 p-1 pr-1 rounded-full justify-end ml-auto',
             pathname.includes('settings') ? 'text-custom-black' : 'text-custom-white'
           )}
           onClick={() => navigate('/account')}
         >
-          {avatar ? (
-            <img src={avatar} alt="user-avatar" className=" w-8 h-8 rounded-full" />
+          {currentAccount && currentAccount.avatar ? (
+            <Avatar src={currentAccount.avatar} alt="user-avatar" className=" w-8 h-8 rounded-full overflow-hidden" />
           ) : (
-            <Icon icon={<DefaultAvatar />} size="large" />
+            <Avatar src={defaultAvatar} alt="user-avatar" className=" w-8 h-8 rounded-full overflow-hidden" />
           )}
         </button>
       )}

@@ -10,6 +10,7 @@ const ChooseImportMethod: FC = () => {
       <ChooseWalletImportMethod
         importWallet={() => navigate('/onboarding/import-wallet')}
         importByPrivateKey={() => navigate('/onboarding/import-by-private-key')}
+        importByRecoveryFiles={() => navigate('/onboarding/import-by-recovery-files')}
       />
     </OnboardingLayout>
   )

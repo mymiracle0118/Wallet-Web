@@ -43,10 +43,7 @@ export function mnemonicToSeed(mnemonic, password) {
  */
 export async function getKeypairFromMnemonics(mnemonics: string): Ed25519KeypairData {
   const seed = await mnemonicToSeed(normalizeMnemonics(mnemonics))
-  return nacl.sign.keyPair.fromSeed(
-    // keyPair.fromSeed only takes a 32-byte array where `seed` is a 64-byte array
-    new Uint8Array(seed.toJSON().data.slice(0, 32))
-  )
+  return nacl.sign.keyPair.fromSeed(new Uint8Array(seed.toJSON().data.slice(0, 32)))
 }
 
 /**

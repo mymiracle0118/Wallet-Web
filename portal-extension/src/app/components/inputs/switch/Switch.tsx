@@ -1,19 +1,10 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React from 'react'
 import { Switch as HeadlessSwitch } from '@headlessui/react'
-import { CustomTypography } from 'components'
+import { ISwitchProps } from '@portal/shared/utils/types'
 import classNames from 'classnames'
+import { CustomTypography } from 'components'
 
-type Props = {
-  labels?: [string, string]
-  disabled?: boolean
-  checked: boolean
-  onChange: (value: boolean) => void
-  id?: string
-  dataAid?: string
-}
-
-export const Switch = ({ labels, disabled = false, checked, onChange, id, dataAid }: Props) =>
+export const Switch = ({ labels, disabled = false, checked, onChange, id, dataAid }: ISwitchProps) =>
   !labels ? (
     <HeadlessSwitch
       data-aid={dataAid}

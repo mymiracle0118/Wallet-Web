@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React from 'react'
 import { IIconProps } from '@portal/shared/utils/types'
 
 const SettingsIcon = ({ className, hover }: IIconProps) => (

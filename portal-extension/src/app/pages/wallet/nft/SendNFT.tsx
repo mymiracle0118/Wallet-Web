@@ -1,21 +1,21 @@
-import React, { useState, useMemo, useEffect } from 'react'
-import { useNavigate, createLocationState } from 'lib/woozie'
-import { useTranslation } from 'react-i18next'
 import { ethers } from 'ethers'
+import { createLocationState, useNavigate } from 'lib/woozie'
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { useWallet } from '@portal/shared/hooks/useWallet'
-import { usePricing } from '@portal/shared/hooks/usePricing'
 import { useGas } from '@portal/shared/hooks/useGas'
-import { useSettings } from '@portal/shared/hooks/useSettings'
+import { usePricing } from '@portal/shared/hooks/usePricing'
 import type { AddressBookUser } from '@portal/shared/hooks/useSettings'
+import { useSettings } from '@portal/shared/hooks/useSettings'
+import { useWallet } from '@portal/shared/hooks/useWallet'
 import { SAFETY_MEASURE } from 'utils/constants'
 
+import { AddressDropdown, Button, CustomTypography, Icon } from 'components'
 import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
-import { CustomTypography, Icon, AddressDropdown, Button } from 'components'
 
-import { tokenImage } from 'utils/tokenImage'
-import { GasOption } from '@portal/shared/utils/types'
 import { Checkbox, Divider, Slider } from '@nextui-org/react'
+import { GasOption } from '@portal/shared/utils/types'
+import { tokenImage } from 'utils/tokenImage'
 
 const SendNFT = () => {
   const { t } = useTranslation()
@@ -46,7 +46,6 @@ const SendNFT = () => {
 
   const [selectedUser, setSelectedUser] = useState<null | AddressBookUser>(null)
 
-  // handle address book
   const { addToAddressBook, addressBook } = useSettings()
   const [isAddressBookChecked, setIsAddressBookChecked] = useState<boolean>(false)
   useEffect(() => {
@@ -56,14 +55,14 @@ const SendNFT = () => {
     if (isAddressBookChecked && selectedUser) {
       addToAddressBook({
         avatar: '',
-        username: `@TestAccount #${addressBook?.length + 1}`,
+        username: `Account #${addressBook?.length + 1}`,
         address: selectedUser.address,
         safety: SAFETY_MEASURE.LOW,
       })
     }
   }
 
-  const estimatedEtherFees = Number(ethers.utils.formatEther(estimatedTransactionCost as ethers.BigNumberish))
+  const estimatedEtherFees = Number(ethers.formatEther(estimatedTransactionCost as ethers.BigNumberish))
 
   const handleReviewTransaction = () => {
     if (selectedUser) {
@@ -113,6 +112,7 @@ const SendNFT = () => {
           data={addressBook}
           onChange={onChangeAddress}
           onBookmarkClick={() => navigate('/transaction/address-book')}
+          network="ETH"
         />
         {showAdd && (
           <>
@@ -128,7 +128,7 @@ const SendNFT = () => {
               {t('Labels.maxFee')}
             </CustomTypography>
             <CustomTypography variant="subtitle" className="ml-1">
-              {parseFloat(ethers.utils.formatUnits(maxFeePerGas as ethers.BigNumberish, 'gwei')).toFixed(2)} Gwei
+              {parseFloat(ethers.formatUnits(maxFeePerGas as ethers.BigNumberish, 'gwei')).toFixed(2)} Gwei
             </CustomTypography>
           </div>
           <div className="flex flex-1">
@@ -136,22 +136,10 @@ const SendNFT = () => {
               {t('Labels.maxPriorityFee')}
             </CustomTypography>
             <CustomTypography variant="subtitle" className="ml-1 min-w-[4.5em]">
-              {parseFloat(ethers.utils.formatUnits(maxPriorityFeePerGas as ethers.BigNumberish, 'gwei'))} Gwei
+              {parseFloat(ethers.formatUnits(maxPriorityFeePerGas as ethers.BigNumberish, 'gwei'))} Gwei
             </CustomTypography>
           </div>
         </div>
-        {/* <Slider
-          marks
-          aria-label="Volume"
-          value={gasOption}
-          onChange={(_, v: GasOption) => {
-            setGasOption(v)
-          }}
-          color="secondary"
-          size="small"
-          min={1}
-          max={3}
-        /> */}
         <Slider
           size="sm"
           minValue={3}
@@ -191,8 +179,8 @@ const SendNFT = () => {
           <Button
             data-test-id="button-review"
             onClick={handleReviewTransaction}
-            color={`${!ethers.utils.isAddress(selectedUser?.address as string) ? 'disabled' : 'primary'}`}
-            isDisabled={!ethers.utils.isAddress(selectedUser?.address as string)}
+            color={`${!ethers.isAddress(selectedUser?.address as string) ? 'disabled' : 'primary'}`}
+            isDisabled={!ethers.isAddress(selectedUser?.address as string)}
           >
             {t('Token.reviewTransaction')}
           </Button>

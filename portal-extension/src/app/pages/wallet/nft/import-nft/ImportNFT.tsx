@@ -15,7 +15,6 @@ import { SpinnerIcon } from '@src/app/components/Icons'
 
 const schema = yup.object().shape({
   contractAddress: yup.string().required('Please enter a valid address'),
-  // .matches(/^0x[a-fA-F0-9]{40}$/, 'Invalid address'),
   tokenId: yup.string().min(1).max(10).required('Please enter your token Id'),
 })
 

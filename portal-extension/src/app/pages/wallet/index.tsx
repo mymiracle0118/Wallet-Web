@@ -1,43 +1,71 @@
-import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { usePricing } from '@portal/shared/hooks/usePricing'
+import { useSettings } from '@portal/shared/hooks/useSettings'
 import { useWallet } from '@portal/shared/hooks/useWallet'
-// import { getBlockExplorerURL } from '@portal/shared/utils/getBlockExplorerURL'
 
 import { CustomTypography, TokenAddressButton } from 'app/components'
 import WalletLayout from 'layouts/wallet-layout/WalletLayout'
 
-import { Button } from '@nextui-org/react'
+import { Button, Image } from '@nextui-org/react'
 import { useStore } from '@portal/shared/hooks/useStore'
 import { NetworkToken } from '@portal/shared/utils/types'
 import { CaretDownIcon } from '@src/app/components/Icons'
+import { ethersCommify } from '@src/utils/ethersCommify'
 import NetworkIcon from 'assets/icons/network.svg'
 import { useNavigate } from 'lib/woozie'
+import HideBalanceIcon from '../../../../public/images/backgrounds/hide-balance.png'
 import TokensTab from './token/add-token/TokensTab'
 
 const Home = () => {
   const { t } = useTranslation()
   const { navigate } = useNavigate()
-  const { selectedNetwork } = useWallet()
-  const { currentTokenArrayWithBalance } = useStore()
+  const {
+    selectedNetwork,
+    isCreateWalletProcessCompleted,
+    getNetworksTokenList,
+    pendingTransactions,
+    setPendingTransactions,
+  } = useWallet()
+  const { enableHideBalance, enableHideLawBalance, currentAccount } = useSettings()
+  const { currentTokenArrayWithBalance, walletsList } = useStore()
+  const networkTokenList = getNetworksTokenList()
   const { getAssetValue } = usePricing()
   const [totalBalance, setTotalBalance] = useState<number>(0)
   const [selectedNetworkObject, setSelectedNetworkObject] = useState<NetworkToken | undefined>(undefined)
-  // const website = `${getBlockExplorerURL('mainnet')}/address/${walletAddress}`
+  if (!isCreateWalletProcessCompleted) {
+    navigate('/')
+  }
 
   useEffect(() => {
-    const selectedNetworkObj = currentTokenArrayWithBalance[selectedNetwork as string] as NetworkToken
-    setSelectedNetworkObject(selectedNetworkObj)
-  }, [selectedNetwork, currentTokenArrayWithBalance])
+    // REMOVE FAILED AND CUSTOM TOKEN'S CANCELLED TRANSACTIONS FROM PENDING TRANSACTION LIST
+    const filteredTransactions = pendingTransactions.filter(
+      (transaction: any) => transaction.status !== 'Failed' && transaction.status !== 'Cancelled'
+    )
+    setPendingTransactions(filteredTransactions)
+  }, [])
+  useEffect(() => {
+    let nativeNetwork = Object.values(networkTokenList).find(
+      (t: NetworkToken) => t.networkName === selectedNetwork && t.tokenType === 'Native'
+    ) as NetworkToken
+    if (nativeNetwork && currentAccount) {
+      const walletNetworkName = nativeNetwork.isEVMNetwork ? 'ETH' : nativeNetwork.networkName
+      const accountWallet = walletsList[currentAccount.id][walletNetworkName]
+      if (accountWallet) {
+        nativeNetwork = {
+          ...nativeNetwork,
+          address: accountWallet.address,
+        }
+      }
+    }
+    setSelectedNetworkObject(nativeNetwork)
+  }, [selectedNetwork, currentAccount])
 
   useEffect(() => {
     let total = 0
     Object.values(currentTokenArrayWithBalance).forEach((asset) => {
       const assetBalance = Number(asset.formattedBalance || 0)
-      // const assetBalance = asset.balance ? Number(ethers.utils.formatUnits(asset.balance)) : 0
-      // const assetBalance = asset.balance ? Number(ethers.utils.formatUnits(asset.balance, asset.decimal)) : 0
       const assetValue = getAssetValue(asset.coingeckoTokenId, assetBalance)
       if (asset.networkName === selectedNetwork || selectedNetwork === '' || selectedNetwork === undefined) {
         total += assetValue
@@ -52,7 +80,18 @@ const Home = () => {
       <div className="text-center mb-2 absolute right-0 left-0 border border-solid border-custom-white10 rounded-lg mx-4">
         <div className="flex flex-col justify-center text-left p-4">
           <CustomTypography dataAid="totalValueVol" variant="h2">
-            {`$${ethers.utils.commify(totalBalance.toFixed(2))}`}
+            {!enableHideBalance ? (
+              `$${ethersCommify(totalBalance.toFixed(2))}`
+            ) : (
+              <Image
+                width={32}
+                height={32}
+                src={HideBalanceIcon}
+                fallbackSrc={HideBalanceIcon}
+                alt="Alert"
+                className="z-0"
+              />
+            )}
           </CustomTypography>
 
           <CustomTypography data-test-id="total-value" dataAid="totalValueHead" type="secondary" variant="subtitle">
@@ -89,7 +128,7 @@ const Home = () => {
       </div>
 
       <div className="relative mt-[164px] body-wrapper bg-surface-dark rounded-t-xl">
-        <TokensTab totalBalance={totalBalance} />
+        <TokensTab totalBalance={totalBalance} hideBalance={enableHideBalance} hideLawBalance={enableHideLawBalance} />
       </div>
     </WalletLayout>
   )

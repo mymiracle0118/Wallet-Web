@@ -9,7 +9,6 @@ import typeDefs from '../../utils/graphql/typeDefs'
 
 const getClient = () => {
   const accessKey = process.env.API_KEY
-  // Check if accessKey is defined before using it
   if (!accessKey) {
     throw new Error('API_KEY is not defined in the environment variables.')
   }
@@ -22,7 +21,6 @@ const getClient = () => {
     },
   })
 
-  // TODO: Add Datadog Error logging
   const errorLink = onError((error) => {
     const { graphQLErrors = [], networkError } = error
     if (graphQLErrors.length > 0) {
@@ -32,8 +30,6 @@ const getClient = () => {
       toast.clearWaitingQueue()
     }
     if (networkError) {
-      // if (networkError.statusCode === 403) {
-      // toast.error('Unauthenticated, Please login again!', ToastConfigs)
       toast.error('Apollo network error, Please check again!', ToastConfigs)
       toast.clearWaitingQueue()
       // eslint-disable-next-line no-console
@@ -42,13 +38,8 @@ const getClient = () => {
         localStorage.clear()
         window.location.href = PATHS.API.AUTH.LOGOUT
       }, 1500)
-      // }
     }
   })
-
-  // TODO: Disabled because apollo router doesnt support batching requests
-  // if first param true, use second param, else use third param
-  // const chooseHttpLink = split((operation) => ['User'].includes(operation.operationName), httpLink, batchHttpLink)
 
   const mergedLink = from([new RetryLink(), errorLink, httpLink]) //authLink,
 
@@ -59,7 +50,6 @@ const getClient = () => {
     version: appVersion,
     typeDefs,
     cache: new InMemoryCache({
-      // TODO: Update caching
       typePolicies: {
         LocalState: {
           fields: {},

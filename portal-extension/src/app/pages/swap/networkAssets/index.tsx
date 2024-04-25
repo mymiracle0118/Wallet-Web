@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Listbox, ListboxItem, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
-import { AngelRightIcon, CheckPrimaryIcon, CloseRoundedIcon, SearchIcon } from '@src/app/components/Icons'
-import { Button, CustomTypography, Input } from 'components'
-import classnames from 'classnames'
 import { INetworkAssetsProps } from '@portal/shared/utils/types'
+import { AngelRightIcon, CheckPrimaryIcon, CloseRoundedIcon, SearchIcon } from '@src/app/components/Icons'
+import classnames from 'classnames'
+import { Button, CustomTypography, Input } from 'components'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import NoTokenfound from '../../../../assets/images/no-activity.png'
 
 const NetworkAssets = ({
   isSelectedAssets,
@@ -61,11 +62,11 @@ const NetworkAssets = ({
         <ModalContent className="rounded-[1.75rem] dark:bg-surface-dark bg-custom-white">
           <ModalHeader className="flex-col gap-y-3 pb-0">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <CustomTypography variant="h4">Swap From</CustomTypography>
+              <CustomTypography variant="h4">{t('Swap.swapFrom')}</CustomTypography>
             </div>
             <Input
               dataAid="networkSearch"
-              placeholder={t('Network.networkName')}
+              placeholder={t('Network.networkName') as string}
               mainColor
               fullWidth
               value={searchInput}
@@ -131,9 +132,12 @@ const NetworkAssets = ({
                 )}
               </Listbox>
             ) : (
-              <CustomTypography type="secondary" className="text-center pt-6" variant="subtitle">
-                No Network Found
-              </CustomTypography>
+              <div className="mx-auto flex flex-col items-center space-y-2 pt-4">
+                <img src={NoTokenfound} alt="no token found" />
+                <CustomTypography variant="body" type="secondary">
+                  {t('Network.noNetworkFound')}
+                </CustomTypography>
+              </div>
             )}
           </ModalBody>
           <ModalFooter className="flex gap-2 justify-between items-center">

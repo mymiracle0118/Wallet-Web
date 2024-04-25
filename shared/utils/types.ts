@@ -32,8 +32,8 @@ export interface TransferPayload {
   nonce?: number
   data?: string
   gasLimit?: number
-  fee?: number // defaults to 10000
-  subtractFee?: boolean // defaults to false
+  fee?: number
+  subtractFee?: boolean
 }
 
 export interface BalancePayload {
@@ -161,13 +161,19 @@ export type Asset = {
 }
 
 export interface IAccountItemProps {
-  avatar: string
+  accountId: string
+  avatar?: string
   active?: boolean
   address: string
-  userName: string
-  balance: number | string
-  onClick?: (userName: string) => void
+  username: string
+  balance?: number | string
+  onClick?: (username: string) => void
   isAccountImported?: boolean
+  selected?: boolean
+  onSelect?: (username: string) => void
+  onDelete?: (username: string) => void
+  allowHideAccount?: boolean
+  onClickHideAccount?: (accountId: string) => void
 }
 
 export interface AccountOptionProps {
@@ -177,6 +183,7 @@ export interface AccountOptionProps {
   onAction: () => void
   accountImported?: boolean
   address?: string
+  isVisible?: boolean
 }
 
 export interface IActivityFilterProps {
@@ -187,6 +194,7 @@ export interface IActivityFilterProps {
 
 export interface INetworkItemProps {
   id: number
+  name: string
   networkId?: string
   image: SVGRectElement | ReactElement | string
   coin: string
@@ -204,6 +212,7 @@ export interface INetworkItemProps {
 export interface IChooseImportMethodProps {
   importWallet: () => void
   importByPrivateKey: () => void
+  importByRecoveryFiles?: () => void
 }
 
 export interface ImportWalletProps {
@@ -230,15 +239,17 @@ export interface IAddSuccessModalProps {
   openModal: boolean
   closeModal: () => void
   tokenImage?: string
-  name: string
+  name: string | undefined
   tokenAssets?: Asset[]
+  alreadyAdded?: boolean
+  hasMultipleTokens: boolean
 }
 
 export interface IAvatarModalProps {
   openModal: boolean
   closeModal: () => void
   selectedAvatar: null | string
-  setSelectedAvatar: null | string
+  setSelectedAvatar: Dispatch<SetStateAction<string>>
   handleAvatarChange: () => void
 }
 
@@ -257,11 +268,13 @@ export interface IChangeLanguageProps {
 }
 
 export interface IAddressItemProps {
-  key: React.Key
-  userName: string
+  key?: React.Key
+  username?: string
   address: string
   image?: SVGRectElement | ReactElement
+  avatar?: string
   editMode?: boolean
+  network: string
 }
 
 export interface IModalComponentProps {
@@ -272,12 +285,14 @@ export interface IModalComponentProps {
   modalIconImage?: string
   tokenImage?: string
   nftImage?: string
-  ModalIcon?: ReactNode
+  ModalIcon?: string
   modalState: boolean
   closeModal: () => void
   small?: boolean
   transparent?: boolean
   dataAid?: string
+  imgAlt: string
+  thubmTitle?: string
 }
 
 export interface IPasswordPromptModalProps {
@@ -315,14 +330,6 @@ export interface IIconProps {
   currentColor?: string
 }
 
-export interface IAccountItemProps {
-  selected: boolean
-  onSelect?: (username: string) => void
-  onDelete: (username: string) => void
-  address: string
-  username: string
-}
-
 export interface ITokenBalanceProps {
   id?: string | undefined
   network?: string | undefined
@@ -338,6 +345,11 @@ export interface ITokenBalanceProps {
   isTestnet?: boolean
   isFavIcon?: boolean
   isFavorite?: boolean
+  hideBalance?: boolean
+  percentage?: number
+  hideAmount?: boolean
+  className?: string
+  checkboxClass?: string
 }
 
 export interface ITokenAddressButtonProps {
@@ -345,7 +357,7 @@ export interface ITokenAddressButtonProps {
   iconClassname?: string
   address: string | undefined
   enableCopy?: boolean
-  link?: string
+  link?: any
   compact?: boolean
   fullWidth?: boolean
   placement?: 'top' | 'right' | 'left' | 'bottom' | undefined
@@ -375,13 +387,14 @@ export interface ISendWithEstimateModalProps {
 export interface IAdjustGasAmountModalProps {
   setMaxWarning: Dispatch<SetStateAction<boolean>>
   maxWarning: boolean
-  coin: Asset
+  coin?: Asset
   closeReceiveTokenModal: () => void
   setMaxAmount: () => void
 }
 
 export interface IReceiveTokenModalProps {
-  coin: Asset
+  image: ReactElement | string
+  title: string
   receivedTokenModal: boolean
   closeReceiveTokenModal: () => void
 }
@@ -392,6 +405,12 @@ export interface ICustomTabProps {
   loading: boolean
   setContractAddress: (address: string) => void
   errorMsg?: string
+  handleChangeNetwork?: (val: string) => void
+  activeNetwork?: NetworkToken
+  networkTokens?: NetworkToken[]
+  setErrorMsg: (val: string) => void
+  symbolError: string
+  setSymbolError: (val: string) => void
 }
 
 export interface IAppProps {
@@ -433,8 +452,10 @@ export interface ITransactionActivityProps {
   swapTokens?: boolean
   openModal?: () => void
   network: string
-  assetId: string
-  transactionHash: string
+  assetId?: string
+  transactionHash?: string
+  blockNumber?: string
+  matchedTransaction?: any
 }
 
 export interface ITokenAssetCardProps {
@@ -448,12 +469,8 @@ export interface ITokenAssetCardProps {
   symbol?: string
   id?: string
   isFavorite: boolean
-}
-
-export interface IAccountItemProps {
-  accountName: string
-  selected: boolean
-  onSelected: (check: boolean) => void
+  hideBalance?: boolean
+  gasPriceInCurrency?: string
 }
 
 export interface INetworkAsset {
@@ -513,13 +530,40 @@ export interface ISearchAddressProps {
   setValue: (field: string, value: any, options?: any) => void
   network: string
   register: any
+  errorMsg?: any
+  watch?: any
   isAddressBookChecked: boolean
   setIsAddressBookChecked: (value: boolean) => void
   selectedUser: AddressBookUser | null
   setSelectedUser: (user: AddressBookUser) => void
   isShowContactAccordion: boolean
   setShowContactAccordion: (value: boolean) => void
+  accountAddresses: AddressBookUser
+  addressBookByNetwork?: AddressBookUser
+  recentInteractAddresses?: string[]
+  setShowAddressBook?: (flag: boolean) => void
+  isShowAddressBook?: boolean
+  isShowAmountStep: boolean
+  setShowAmountStep: (flag: boolean) => void
+  isDirty: boolean
+  isAddressserror: any
+  showAddAddress: AddressBookUser
+}
+
+export interface IAddressAccordian {
+  recentInteractAddresses?: string[]
   addressBookByNetwork: AddressBookUser
+  accountAddresses: AddressBookUser
+  network: string
+  onChangeAddress: (val: AddressBookUser) => void
+}
+
+export interface IAddtoAddressBook {
+  register: any
+  errorMsg: string
+  watch: any
+  isAddressBookChecked: boolean
+  setIsAddressBookChecked: (value: boolean) => void
 }
 
 export type ISwitchProps = {
@@ -590,7 +634,6 @@ export interface IFavouriteProps {
 export type EnvironmentType = 'testNet' | 'mainNet'
 
 export interface NetworkToken {
-  // [x: string]: string
   address: string
   id: string
   image: string
@@ -613,16 +656,210 @@ export interface NetworkToken {
   oneDayUSDPriceChangePercentage?: number
   isFavorite: boolean
   isEVMNetwork?: boolean
+  isSupraNetwork?: boolean
   tokenGasFeeUnitToDisplay?: string
   indexerClient?: string
   isCustom?: boolean // when we add new network or custom token then we pass true
   envType: EnvironmentType
   explorerAccountURL: string
-  decimal?: ethers.BigNumberish | number
-  balance?: ethers.BigNumberish | number
-  formattedBalance?: ethers.BigNumberish | number
+  decimal?: number
+  balance?: number | any
+  formattedBalance?: number | any
 }
 
 export interface NetworkTokensList {
   [key: string]: NetworkToken
+}
+
+export interface IAutoLockTimerProps {
+  id: number
+  value: number
+}
+
+export interface ICreatePasswordProps {
+  handleNextStep: Dispatch<SetStateAction<string>>
+}
+
+export interface IChooseFilesProps {
+  recoveryPassword: string
+  recoveryOptions: string[]
+  handleNextStep: Dispatch<SetStateAction<string>>
+  handleBackStep: Dispatch<SetStateAction<string>>
+}
+export interface IRecoveryFilesProps {
+  fileName: string
+  content: string
+  isValid: boolean
+  errorMessage?: string
+}
+
+export interface IChooseOptionsProps {
+  handleNextStep: Dispatch<SetStateAction<string[]>>
+  handleBackStep: Dispatch<SetStateAction<string>>
+  defaultRecoveryOptions: string[]
+}
+
+export interface IFileRecoveryOptions {
+  id: number
+  optionType: string
+}
+
+export interface ISeedLessProps {
+  phrase: string
+  username: string
+  onSuccessSaveRecoveryFile: () => void
+}
+
+export interface ISaveToDeviceProps {
+  defaultFileName: string
+  handleNextStep: (fileName: string, fileIndex: number, nextStep: string) => void
+  handleBackStep: Dispatch<SetStateAction<string>>
+}
+
+export interface ISaveToDriveProps {
+  defaultFileName: string
+  handleNextStep: (fileName: string) => void
+  handleBackStep: Dispatch<SetStateAction<string>>
+}
+
+export interface ITabPanelProps {
+  children?: React.ReactNode
+  index: number
+  value: number
+  dataTestId?: string
+}
+
+export interface ITabProps {
+  value: number
+  onChange?: (newValue: number) => void
+  tabs: string[]
+}
+
+export type IDropdownItemProps = {
+  text: string
+  active?: boolean
+  icon?: ReactElement | string
+  onSelect?: (text: string) => void
+  isImg?: boolean | false // if icon is image then true else false
+}
+export interface IPasswordInputProps {
+  placeholder: string
+  id?: string
+  value?: string
+  onChange?: (value: string) => void
+  onSubmit?: () => void
+  subTitle?: string
+  color?: 'primary' | 'secondary' | string
+  mainColor?: boolean
+  disabled?: boolean
+  dataAid?: string
+  name: string
+  className?: string
+  error?: unknown
+  dataTestId?: string
+}
+
+export interface IAddressBookComponentProps {
+  onClickAddAddress?: (user: AddressBookUser) => void
+}
+
+export type ITokenActivityProps = {
+  type: 'Send' | 'Sent' | 'Received' | 'Bought' | 'Listed' | 'Minted'
+  title?: string
+  date: string
+  price: string | number
+  status: 'Scheduled' | 'Pending' | 'Completed' | 'Saved' | 'Failed' | string
+  page: 'Settings' | 'Settings-Token' | 'Token'
+  disableClick?: boolean
+  transactionHash?: string
+  onClick?: () => void
+  network?: string
+  tokenDecimal?: string | number
+  assetId?: string
+  hideBalance?: boolean
+  tokenName: string
+}
+
+export interface ICustomThumbnail {
+  thumbName: string | undefined
+  className?: string
+}
+
+export interface ISendSameAddressModal {
+  isShowSameAddressModal: boolean
+  setShowSameAddressModal: () => void
+  onContinue: () => void
+}
+
+export interface IFilterAddress {
+  id: number
+  checkId: string
+  name: string
+}
+
+export interface IGroupedAddresses {
+  [network: string]: IAddressItemProps[]
+}
+
+export type ISearchTabProps = {
+  selectedTokens?: Array<NetworkToken>
+  setSelectedToken: (token: NetworkToken) => void
+}
+
+export type ITotatBalanceProps = {
+  totalBalance: number
+  hideBalance?: boolean
+  hideLawBalance?: boolean
+}
+
+export interface ITokenSortFilter {
+  icon: ReactElement
+  name: string
+  label: string
+}
+
+export interface ITokenBalanceRow {
+  assetId: string
+  token: NetworkToken
+  hideBalance?: boolean
+  hideLawBalance?: boolean
+}
+
+export interface IRecoveryFileVideoProps {
+  handleNextStep: () => void
+}
+
+export type INFTCardProps = {
+  title: string
+  image: string
+  price: string
+  color?: string
+  currency: string
+  liked?: boolean
+  onClick?: () => void
+}
+
+export type ILoaderProps = {
+  className?: string
+  size?: number
+  variant?: 'rectangle' | 'text' | 'rounded'
+}
+
+export type ICreateAccountProps = {
+  importWallet?: boolean
+}
+
+export type IScheduledActivityProps = {
+  swapTokens?: boolean
+}
+
+export type ISendNFTProps = {
+  title?: string
+}
+
+export type INftScheduledModalProps = {
+  modalState: boolean
+  nftImage: string
+  nftTitle: string
+  closeModal: () => void
 }

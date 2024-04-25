@@ -1,5 +1,7 @@
+import { Avatar } from '@nextui-org/react'
 import { useStore } from '@portal/shared/hooks/useStore'
 import { NetworkToken } from '@portal/shared/utils/types'
+import CustomThumbnail from '@src/app/components/CustomThumbnail'
 import { CustomTypography, TokenAddressButton } from 'app/components'
 import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
 import { createLocationState } from 'lib/woozie'
@@ -13,9 +15,8 @@ const ReceiveToken = () => {
   const { getNetworkToken } = useStore()
 
   const { pathname } = createLocationState()
-  const [symbol, setSymbol] = useState('')
+  const [symbol, setSymbol] = useState<string>('')
   const paths = pathname.split('/')
-  // const network = paths[paths.length - 1]
 
   const assetId: string = paths[paths.length - 3]
 
@@ -38,8 +39,21 @@ const ReceiveToken = () => {
           backgroundSize: 'cover',
         }}
       >
-        <div className="flex justify-center">
-          <CustomTypography variant="h2">{t('Token.receiveToken', { token: symbol })}</CustomTypography>
+        <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center mx-auto rounded-full">
+            {!asset.image ? (
+              <CustomThumbnail thumbName={asset.title} className="w-10 h-10 mr-2" />
+            ) : (
+              <Avatar
+                src={asset.image}
+                alt={asset.title}
+                className="rounded-full w-10 h-10 mr-2 overflow-hidden bg-custom-white"
+              />
+            )}
+          </div>
+          <CustomTypography variant="h2" className="pl-2 text-left break-all">
+            {t('Token.receiveToken', { token: symbol })}
+          </CustomTypography>
         </div>
 
         <div className="flex w-full flex-col items-center space-y-4">
@@ -48,11 +62,11 @@ const ReceiveToken = () => {
               <div className="rounded-[2rem] p-[0.7rem] h-[13rem] w-[13rem] bg-custom-white">
                 <QRCode
                   size={165}
-                  value={website}
+                  value={walletAddress}
                   logoImage={hrLogo}
                   qrStyle="dots"
                   eyeRadius={8}
-                  logoPadding={10}
+                  logoPadding={5}
                   removeQrCodeBehindLogo={true}
                   viewBox={`0 0 160 160`}
                 />

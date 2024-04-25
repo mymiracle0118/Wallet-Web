@@ -1,13 +1,7 @@
-import React from 'react'
+import { ILoaderProps } from '@portal/shared/utils/types'
 import classnames from 'classnames'
 
-type LoaderProps = {
-  className?: string
-  size?: number
-  variant?: 'rectangle' | 'text' | 'rounded'
-}
-
-export const Loader = ({ className, size, variant }: LoaderProps) => {
+export const Loader = ({ className, size, variant }: ILoaderProps) => {
   return variant ? (
     <div
       className={classnames(
@@ -20,7 +14,10 @@ export const Loader = ({ className, size, variant }: LoaderProps) => {
     />
   ) : (
     <svg
-      className={classnames('animate-spin -ml-1 mr-3 h-5 w-5 text-white', size ? `h-[${size}px] w-[${size}px]` : '')}
+      className={classnames(
+        'animate-spin -ml-1 mr-3 h-5 w-5 text-white',
+        size ? `h-[${size as number}px] w-[${size as number}px]` : ''
+      )}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

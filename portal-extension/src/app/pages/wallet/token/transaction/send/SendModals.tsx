@@ -1,16 +1,16 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { CustomTypography, Input, ModalComponent, Button, COLORS, Icon } from 'components'
-import CalendarIcon from 'assets/icons/calendar.svg'
-import { tokenImage } from 'utils/tokenImage'
-import mascot from 'assets/images/mascot.png'
-import LightBulb from 'assets/icons/lightbulb.svg'
-import { Chip, Modal, ModalBody, ModalContent } from '@nextui-org/react'
+import { Avatar, Chip, Modal, ModalBody, ModalContent } from '@nextui-org/react'
 import {
   IAdjustGasAmountModalProps,
   IReceiveTokenModalProps,
+  ISendSameAddressModal,
   ISendWithEstimateModalProps,
 } from '@portal/shared/utils/types'
+import CustomThumbnail from '@src/app/components/CustomThumbnail'
+import { CalendarIcon } from '@src/app/components/Icons'
+import LightBulb from 'assets/icons/lightbulb.svg'
+import Warning from 'assets/icons/warning.svg'
+import { Button, CustomTypography, Icon, Input, ModalComponent } from 'components'
+import { useTranslation } from 'react-i18next'
 
 export const SendWithEstimateModal = ({
   modalState,
@@ -23,8 +23,9 @@ export const SendWithEstimateModal = ({
     <ModalComponent
       modalState={modalState}
       closeModal={closeModal}
-      title={t('Token.sendTokenWithLowGasFee', { token: 'ETH' })}
-      subtitle={t('Token.cancelGasFeeWithNoMatch')}
+      title={t('Token.sendTokenWithLowGasFee', { token: 'ETH' }) as string}
+      subtitle={t('Token.cancelGasFeeWithNoMatch') as string}
+      imgAlt="ETH"
     >
       <div className="flex justify-between mb-2">
         <div className="flex flex-col">
@@ -67,9 +68,8 @@ export const SendWithEstimateModal = ({
         </div>
         <Input
           fullWidth
-          placeholder={t('Token.customTime')}
+          placeholder={t('Token.customTime') as string}
           onClick={openCalendar}
-          iconSize="1.5em"
           icon={<CalendarIcon />}
           mainColor
         />
@@ -89,7 +89,6 @@ export const SendWithEstimateModal = ({
 export const AdjustGasAmountModal = ({
   setMaxWarning,
   maxWarning,
-
   closeReceiveTokenModal,
   setMaxAmount,
 }: IAdjustGasAmountModalProps) => {
@@ -101,21 +100,20 @@ export const AdjustGasAmountModal = ({
       onClose={() => setMaxWarning(false)}
       hideCloseButton={true}
       placement="center"
-      className="max-w-[18.625rem]"
+      className="max-w-[19.625rem]"
+      isKeyboardDismissDisabled={true}
+      isDismissable={false}
     >
       <ModalContent className="py-3 rounded-[1.75rem] dark:bg-surface-dark bg-custom-white">
         <ModalBody>
           <div className="flex flex-col items-center justify-center space-y-4">
-            <CustomTypography variant="h1" className="text-center">
-              {t('Token.leaveGasFee')}
-            </CustomTypography>
-            <div
-              className="cursor-pointer rounded-full mx-auto mb-4 text-[2.5rem] h-16 w-16 flex items-center justify-center"
-              style={{ background: COLORS.background.gradientLogoBg }}
-            >
+            <div className="cursor-pointer rounded-full mx-auto text-[4rem] flex items-center justify-center">
               <Icon icon={<LightBulb />} size="inherit" />
             </div>
-            <CustomTypography variant="body" className="text-center" type="secondary">
+            <CustomTypography variant="h1" className="text-center my-4">
+              {t('Token.leaveGasFee')}
+            </CustomTypography>
+            <CustomTypography variant="body" className="text-center !font-extrabold" type="secondary">
               {t('Token.adjustMaxGasFee')}
             </CustomTypography>
           </div>
@@ -133,26 +131,93 @@ export const AdjustGasAmountModal = ({
   )
 }
 
-export const ReceiveTokenModal = ({ coin, receivedTokenModal, closeReceiveTokenModal }: IReceiveTokenModalProps) => {
+export const ReceiveTokenModal = ({
+  image,
+  title,
+  receivedTokenModal,
+  closeReceiveTokenModal,
+}: IReceiveTokenModalProps) => {
   const { t } = useTranslation()
   return (
-    <ModalComponent
-      modalState={receivedTokenModal}
-      closeModal={closeReceiveTokenModal}
-      title={t('Token.receivedModalTitle', {
-        amount: '1,300.00',
-        token: 'ETH',
-      })}
-      image={mascot}
-      ModalIcon={tokenImage(coin.symbol)}
-      small
+    <Modal
+      backdrop="opaque"
+      isOpen={receivedTokenModal}
+      onClose={closeReceiveTokenModal}
+      hideCloseButton={true}
+      placement="center"
+      className="max-w-[19.625rem]"
+      isKeyboardDismissDisabled={true}
+      isDismissable={false}
     >
-      <div className="flex gap-2 mt-3">
-        <Button variant="bordered" color="outlined" onClick={closeReceiveTokenModal}>
-          {t('Actions.ok')}
-        </Button>
-        <Button color="primary">{t('Token.viewBalance')}</Button>
-      </div>
-    </ModalComponent>
+      <ModalContent className="py-3 rounded-[1.75rem] dark:bg-surface-dark bg-custom-white">
+        <ModalBody>
+          <div className="flex flex-col items-center justify-center space-y-4">
+            {image && image !== '' ? (
+              <div className="mx-auto mb-6 rounded-full">
+                <Avatar src={image} alt={title} className="mx-auto rounded-full w-14 h-14 bg-custom-white10" />
+              </div>
+            ) : (
+              <CustomThumbnail thumbName={title} className="w-14 h-14 text-lg" />
+            )}
+            <CustomTypography variant="h1" className="text-center">
+              {t('Wallet.sendOnSameAddreess')}
+            </CustomTypography>
+            <CustomTypography variant="body" className="text-center" type="secondary">
+              {t('Wallet.wishToContinue')}
+            </CustomTypography>
+          </div>
+          <div className="flex gap-2 mt-3">
+            <Button variant="bordered" color="outlined" onClick={closeReceiveTokenModal}>
+              {t('Actions.ok')}
+            </Button>
+            <Button color="primary">{t('Token.viewBalance')}</Button>
+          </div>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  )
+}
+
+export const SendSameAddressModal = ({
+  isShowSameAddressModal,
+  setShowSameAddressModal,
+  onContinue,
+}: ISendSameAddressModal) => {
+  const { t } = useTranslation()
+  return (
+    <Modal
+      backdrop="opaque"
+      isOpen={isShowSameAddressModal}
+      onClose={setShowSameAddressModal}
+      hideCloseButton={true}
+      placement="center"
+      className="max-w-[19.625rem]"
+      isKeyboardDismissDisabled={true}
+      isDismissable={false}
+    >
+      <ModalContent className="py-3 rounded-[1.75rem] dark:bg-surface-dark bg-custom-white">
+        <ModalBody>
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <div className="cursor-pointer rounded-full mx-auto text-[4rem] flex items-center justify-center">
+              <Icon icon={<Warning />} size="inherit" />
+            </div>
+            <CustomTypography variant="h1" className="text-center my-4">
+              {t('Wallet.sendOnSameAddreess')}
+            </CustomTypography>
+            <CustomTypography variant="body" className="text-center" type="secondary">
+              {t('Wallet.wishToContinue')}
+            </CustomTypography>
+          </div>
+          <div className="flex gap-2 mt-6">
+            <Button variant="bordered" color="outlined" onClick={setShowSameAddressModal}>
+              {t('Actions.cancel')}
+            </Button>
+            <Button color="primary" onClick={onContinue}>
+              {t('Actions.continue')}
+            </Button>
+          </div>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   )
 }

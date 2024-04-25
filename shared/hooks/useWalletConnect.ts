@@ -45,10 +45,10 @@ const initialState = {
 }
 
 const clientMeta = {
-  description: 'Shuttle Wallet Developer App',
+  description: 'Star Key Wallet Developer App',
   url: 'https://walletconnect.org',
   icons: ['https://walletconnect.org/walletconnect-logo.png'],
-  name: 'Shuttle Wallet',
+  name: 'Star Key Wallet',
 }
 
 export const useWalletConnect = create<WalletConnectState>()(
@@ -129,7 +129,7 @@ export const useWalletConnect = create<WalletConnectState>()(
               }
             }
 
-            let transaction: ethers.providers.TransactionRequest
+            let transaction: ethers.TransactionRequest
             let dataToSign: string
             let result: string
 
@@ -139,7 +139,7 @@ export const useWalletConnect = create<WalletConnectState>()(
                 verifyAddressMatch(callRequest.params[1] as string)
 
                 result = await walletSigner.signMessage(
-                  ethers.utils.isHexString(dataToSign) ? ethers.utils.arrayify(dataToSign) : dataToSign
+                  ethers.isHexString(dataToSign) ? ethers.getBytes(dataToSign) : dataToSign
                 )
                 break
               }
@@ -149,13 +149,13 @@ export const useWalletConnect = create<WalletConnectState>()(
                 verifyAddressMatch(callRequest.params[0] as string)
 
                 result = await walletSigner.signMessage(
-                  ethers.utils.isHexString(dataToSign) ? ethers.utils.arrayify(dataToSign) : dataToSign
+                  ethersisHexString(dataToSign) ? ethers.getBytes(dataToSign) : dataToSign
                 )
                 break
               }
 
               case 'eth_signTransaction': {
-                transaction = callRequest.params[0] as ethers.providers.TransactionRequest
+                transaction = callRequest.params[0] as ethers.TransactionRequest
                 verifyAddressMatch(transaction.from as string)
 
                 if ('gas' in transaction) {
@@ -170,7 +170,7 @@ export const useWalletConnect = create<WalletConnectState>()(
               }
 
               case 'eth_sendTransaction': {
-                transaction = callRequest.params[0] as ethers.providers.TransactionRequest
+                transaction = callRequest.params[0] as ethers.TransactionRequest
                 verifyAddressMatch(transaction.from as string)
 
                 if ('gas' in transaction) {
@@ -255,7 +255,7 @@ export const useWalletConnect = create<WalletConnectState>()(
         getStorage: () => chromeSyncStorage,
       }
     ),
-    { name: 'Shuttle - Wallet' }
+    { name: 'Star Key - Wallet' }
   )
 )
 

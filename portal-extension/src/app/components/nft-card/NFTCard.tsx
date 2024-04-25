@@ -1,18 +1,9 @@
-import React, { useState } from 'react'
-import classnames from 'classnames'
+import { INFTCardProps } from '@portal/shared/utils/types'
 import { COLORS, CustomTypography, Icon } from 'app/components'
 import HeartIcon from 'assets/icons/heart.svg'
 import SolidHeartIcon from 'assets/icons/heart_solid.svg'
-
-type INFTCardProps = {
-  title: string
-  image: string
-  price: string
-  color?: string
-  currency: string
-  liked?: boolean
-  onClick?: () => void
-}
+import classnames from 'classnames'
+import { useState } from 'react'
 
 export const NFTCard = ({
   title,

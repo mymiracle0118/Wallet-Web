@@ -71,10 +71,11 @@ const ConnectRequest = () => {
         <div className="my-4">
           {Object.values(accounts).map((account) => (
             <AccountItem
-              key={account.address}
-              selected={account.address === selectedAccount}
+              key={account.id}
+              accountId={account.id}
+              selected={account.id === selectedAccount}
               accountName={account.username}
-              onSelected={() => setSelectedAccount(account.address)}
+              onSelected={() => setSelectedAccount(account.id)}
             />
           ))}
         </div>

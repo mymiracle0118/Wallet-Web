@@ -1,5 +1,6 @@
+import { USDollar } from '@portal/portal-extension/src/utils/constants'
+import { ethersCommify } from '@portal/portal-extension/src/utils/ethersCommify'
 import { useQuery } from '@tanstack/react-query'
-import { utils } from 'ethers'
 import React from 'react'
 
 import { getSimplePrice } from '@portal/shared/services/coingecko'
@@ -24,7 +25,7 @@ export const usePricing = (asset?: NetworkToken) => {
     (assetId: string) => {
       if (data && data[assetId]) {
         const total = Math.round((data[assetId].usd + Number.EPSILON) * 100) / 100
-        return utils.commify(total)
+        return ethersCommify(total)
       }
 
       return '0'
@@ -72,5 +73,37 @@ export const usePricing = (asset?: NetworkToken) => {
     [data]
   )
 
-  return { getMarketPrice, getMarket24HourChange, getAssetValue, getAssetValueFormatted, getAssetGasValueFormatted }
+  const getGasValue = React.useCallback(
+    (assetId: string, units: number) => {
+      if (data && data[assetId]) {
+        const convertGasToCoinValueAndCurrency = USDollar(15).format(
+          Number(units) * Math.pow(10, asset?.shortName === 'APT' ? -8 : -9) * data[assetId].usd
+        )
+        return convertGasToCoinValueAndCurrency
+      }
+      return 0
+    },
+    [data]
+  )
+
+  const getGasValueFormatted = React.useCallback(
+    (assetId: string, units: number) => {
+      if (data && data[assetId] && assetId !== '') {
+        const value = Number((data[assetId].usd * units + Number.EPSILON).toFixed(8))
+        return value
+      }
+      return 0
+    },
+    [data]
+  )
+
+  return {
+    getMarketPrice,
+    getMarket24HourChange,
+    getAssetValue,
+    getAssetValueFormatted,
+    getAssetGasValueFormatted,
+    getGasValue,
+    getGasValueFormatted,
+  }
 }

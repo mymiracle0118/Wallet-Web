@@ -1,10 +1,10 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { Avatar, Listbox, ListboxItem, Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react'
-import { CheckPrimaryIcon, CloseRoundedIcon, SearchIcon } from '@src/app/components/Icons'
-import { Button, CustomTypography, Input } from 'components'
-import classnames from 'classnames'
 import { ISwapSelectNetworksInputProps } from '@portal/shared/utils/types'
+import { CheckPrimaryIcon, CloseRoundedIcon, SearchIcon } from '@src/app/components/Icons'
+import classnames from 'classnames'
+import { Button, CustomTypography, Input } from 'components'
+import { useTranslation } from 'react-i18next'
+import NoTokenfound from '../../../../../assets/images/no-activity.png'
 
 const SwapSelectNetworksInput = ({
   isSelectedNetworks,
@@ -40,11 +40,11 @@ const SwapSelectNetworksInput = ({
       <ModalContent className="py-3 rounded-[1.75rem] dark:bg-surface-dark bg-custom-white">
         <ModalHeader className="flex-col gap-y-3 pb-0">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <CustomTypography variant="h4">Swap From</CustomTypography>
+            <CustomTypography variant="h4">{t('Swap.swapFrom')}</CustomTypography>
           </div>
           <Input
             dataAid="networkSearch"
-            placeholder={t('Network.networkName')}
+            placeholder={t('Network.networkName') as string}
             mainColor
             fullWidth
             value={searchInput}
@@ -104,9 +104,12 @@ const SwapSelectNetworksInput = ({
               )}
             </Listbox>
           ) : (
-            <CustomTypography type="secondary" className="text-center pt-6" variant="subtitle">
-              No Network Found
-            </CustomTypography>
+            <div className="mx-auto flex flex-col items-center space-y-2 pt-4">
+              <img src={NoTokenfound} alt="no token found" />
+              <CustomTypography variant="body" type="secondary">
+                {t('Network.noNetworkFound')}
+              </CustomTypography>
+            </div>
           )}
         </ModalBody>
       </ModalContent>

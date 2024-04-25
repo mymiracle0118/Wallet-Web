@@ -1,5 +1,6 @@
+import { Button } from '@nextui-org/react'
 import { ITokenAddressButtonProps } from '@portal/shared/utils/types'
-import { Button, CustomTypography, ToolTip } from 'app/components'
+import { CustomTypography, ToolTip } from 'app/components'
 import classnames from 'classnames'
 import { formatAddress } from 'helpers/addressFormatter'
 import { useState } from 'react'
@@ -16,11 +17,12 @@ export const TokenAddressButton = ({
   const [isCopied, setIsCopied] = useState<boolean>(false)
 
   const handleClickCopy = () => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    void navigator.clipboard.writeText(address).then(() => {
-      setIsCopied(true)
-      setTimeout(() => setIsCopied(false), 2000)
-    })
+    if (address) {
+      void navigator.clipboard.writeText(address).then(() => {
+        setIsCopied(true)
+        setTimeout(() => setIsCopied(false), 2000)
+      })
+    }
   }
 
   return (
@@ -41,7 +43,7 @@ export const TokenAddressButton = ({
             size="sm"
             radius="none"
             variant="light"
-            className="bg-transparent"
+            className="bg-transparent -mr-2"
             onClick={handleClickCopy}
           >
             <p>

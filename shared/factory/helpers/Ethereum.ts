@@ -1,20 +1,17 @@
+import { getErrorMessage } from '@portal/portal-extension/src/utils/errorConstants'
 import erc20Abi from '@portal/shared/data/ERC20.json'
+import { getTransactionDetail } from '@portal/shared/services/etherscan'
+import { getContractInterface } from '@portal/shared/utils/getContractInterface'
+import { fromUTF8Array } from '@portal/shared/utils/utf8'
 import { ethers } from 'ethers'
 import {
-  BalancePayload,
   GetEncryptedJsonFromPrivateKey,
-  GetTransactionPayload,
   GetWalletFromEncryptedjsonPayload,
   IGetTokenInfoPayload,
   IResponse,
-  ISmartContractCallPayload,
   ITokenInfo,
   Transaction,
-  TransferPayload,
 } from '../../utils/types'
-import { fromUTF8Array } from '@portal/shared/utils/utf8'
-import { getContractInterface } from '@portal/shared/utils/getContractInterface'
-import { getTransactionDetail } from '@portal/shared/services/etherscan'
 
 interface GetContract {
   rpcUrl?: string
@@ -30,7 +27,8 @@ const successResponse = (args: IResponse) => {
 
 const getContract = async ({ contractAddress, privateKey, abi, providerInstance }: GetContract) => {
   const gasPrice = await providerInstance.getGasPrice()
-  const gas = ethers.BigNumber.from(21000)
+  // const gas = ethers.BigNumber.from(21000)
+  const gas = 21000
 
   let nonce
   let contract
@@ -58,85 +56,41 @@ const getContract = async ({ contractAddress, privateKey, abi, providerInstance 
   }
 }
 
-const getBalance = async ({ rpcUrl, tokenAddress, address }: BalancePayload) => {
-  const { contract, providerInstance } = await getContract({
-    rpcUrl,
-    contractAddress: tokenAddress,
-  })
-
-  try {
-    let balance
-
-    if (contract) {
-      const decimals = await contract.decimals()
-
-      balance = await contract.balanceOf(address)
-
-      return successResponse({
-        balance: parseFloat(ethers.utils.formatUnits(balance, decimals)),
-      })
-    }
-
-    balance = await providerInstance.getBalance(address)
-
-    return successResponse({
-      balance: parseFloat(ethers.utils.formatEther(balance)),
-    })
-  } catch (error) {
-    throw new SyntaxError(error)
-  }
-}
-
 const createWallet = () => {
   const wallet = ethers.Wallet.createRandom()
   return successResponse(wallet)
 }
 
-const getEstimatedTransactionCost = ({ maxFeePerGas, maxPriorityFeePerGas, gasLimit }: any): ethers.BigNumber => {
-  const baseFee = parseFloat(ethers.utils.formatUnits(maxFeePerGas, 'gwei'))
-  const tip = parseFloat(ethers.utils.formatUnits(maxPriorityFeePerGas, 'gwei'))
+const getEstimatedTransactionCost = ({ maxFeePerGas, maxPriorityFeePerGas, gasLimit }: any): BigInt => {
+  const baseFee = parseFloat(ethers.formatUnits(maxFeePerGas, 'gwei'))
+  const tip = parseFloat(ethers.formatUnits(maxPriorityFeePerGas, 'gwei'))
   const total = (gasLimit * (baseFee + tip)).toFixed(4)
-  return ethers.utils.parseUnits(total, 'gwei')
+  return ethers.parseUnits(total, 'gwei')
 }
 const sendTransaction = async (
-  maxPriorityFeePerGas: ethers.BigNumber,
-  maxFeePerGas: ethers.BigNumber,
+  maxPriorityFeePerGas: number,
+  maxFeePerGas: number,
   gasLimit: number,
   encryptedPrivateKey: (string | number)[],
   transaction: Transaction,
-  fromAddress: string
+  fromAddress: string,
+  shouldCancelTransaction: boolean,
+  cancelTransactionObject: any
 ) => {
-  if (!encryptedPrivateKey) throw new Error('No private key')
-  if (!transaction) throw new Error('No transaction')
-  let transactionRequest
-  const wallet = new ethers.Wallet(fromUTF8Array(encryptedPrivateKey))
-  const provider = new ethers.providers.JsonRpcProvider(transaction.asset.providerNetworkRPC_URL)
-  const walletSigner = wallet.connect(provider)
-  if (transaction.asset.tokenType === 'ERC20') {
-    if (!transaction.asset.tokenContractAddress) {
-      throw new Error(`No asset contract address found`)
-    }
-
-    const contract = new ethers.Contract(
-      transaction.asset.tokenContractAddress,
-      getContractInterface(transaction.asset.tokenType),
-      walletSigner
-    )
-    transactionRequest = await contract['safeTransferFrom(address,address,uint256)'](
-      fromAddress,
-      transaction.to,
-      transaction.asset.id,
-      {
-        maxPriorityFeePerGas,
-        maxFeePerGas,
-        gasLimit,
-      }
-    )
-  } else {
+  try {
+    if (!encryptedPrivateKey) throw new Error('No private key')
+    if (!transaction) throw new Error('No transaction')
     if (!transaction.amount) {
       throw new Error('No transaction amount specified')
     }
-
+    let transactionRequest
+    const wallet = new ethers.Wallet(fromUTF8Array(encryptedPrivateKey))
+    const provider = new ethers.JsonRpcProvider(
+      transaction.asset.providerNetworkRPC_URL,
+      Number(transaction.asset.providerNetworkRPC_Network_Name)
+    )
+    const walletSigner = wallet.connect(provider)
+    const feeData = await provider?.getFeeData()
     if (transaction.asset.tokenContractAddress) {
       const contractAddress = transaction.asset.tokenContractAddress
       const contract = new ethers.Contract(
@@ -144,101 +98,47 @@ const sendTransaction = async (
         getContractInterface(transaction.asset.tokenType),
         walletSigner
       )
-      const numberOfTokens = ethers.utils.parseUnits(transaction.amount, transaction.asset.decimal)
-      transactionRequest = await contract.transfer(transaction.to, numberOfTokens, {
-        maxPriorityFeePerGas,
-        maxFeePerGas,
-        gasLimit,
-      })
-    } else {
-      const tx = {
-        to: transaction.to,
-        value: ethers.utils.parseEther(transaction.amount),
-        maxPriorityFeePerGas,
-        maxFeePerGas,
-        gasLimit,
+      const numberOfTokens = ethers.parseUnits(transaction.amount, transaction.asset.decimal)
+      if (shouldCancelTransaction) {
+        transactionRequest = await walletSigner.sendTransaction(cancelTransactionObject)
+      } else {
+        const txContract = {
+          nonce: await provider?.getTransactionCount(transaction.asset.address, 'latest'),
+          gasPrice: maxFeePerGas,
+          gasLimit,
+        }
+        transactionRequest = await contract.transfer(transaction.to, numberOfTokens, txContract)
       }
-
-      transactionRequest = await walletSigner.sendTransaction(tx)
-    }
-  }
-
-  const nonce = await walletSigner.getTransactionCount()
-  const txHash = transactionRequest.hash
-  const txDetails = await getTransactionDetail(transaction.asset.apiUrl, transaction.asset.networkName, txHash)
-
-  return successResponse({ nonce, txHash, txDetails })
-}
-const getAddressFromPrivateKey = async (privateKey: string) => {
-  const wallet = new ethers.Wallet(privateKey)
-
-  return successResponse({
-    address: wallet.address,
-  })
-}
-
-const generateWalletFromMnemonic = async (mnemonic: string, derivationPath?: string) => {
-  const path = derivationPath || "m/44'/60'/0'/0/0"
-  const wallet = ethers.Wallet.fromMnemonic(mnemonic, path)
-
-  return successResponse({
-    address: wallet.address,
-    privateKey: wallet.privateKey,
-    mnemonic: wallet.mnemonic.phrase,
-  })
-}
-const transfer = async ({ privateKey, tokenAddress, rpcUrl, ...args }: TransferPayload) => {
-  const { contract, providerInstance, gasPrice, nonce } = await getContract({
-    rpcUrl,
-    privateKey,
-    contractAddress: tokenAddress,
-  })
-
-  let wallet = new ethers.Wallet(privateKey, providerInstance)
-
-  try {
-    let tx
-
-    if (contract) {
-      const decimals = await contract.decimals()
-      const estimatedGas = await contract.estimateGas.transfer(
-        args.recipientAddress,
-        ethers.utils.parseUnits(args.amount.toString(), decimals)
-      )
-
-      tx = await contract.transfer(args.recipientAddress, ethers.utils.parseUnits(args.amount.toString(), decimals), {
-        gasPrice: args.gasPrice ? ethers.utils.parseUnits(args.gasPrice.toString(), 'gwei') : gasPrice,
-        nonce: args.nonce || nonce,
-        gasLimit: args.gasLimit || estimatedGas,
-      })
     } else {
-      tx = await wallet.sendTransaction({
-        to: args.recipientAddress,
-        value: ethers.utils.parseEther(args.amount.toString()),
-        gasPrice: args.gasPrice ? ethers.utils.parseUnits(args.gasPrice.toString(), 'gwei') : gasPrice,
-        nonce: args.nonce || nonce,
-        data: args.data ? ethers.utils.hexlify(ethers.utils.toUtf8Bytes(args.data)) : '0x',
-      })
+      if (shouldCancelTransaction) {
+        transactionRequest = await walletSigner.sendTransaction(cancelTransactionObject)
+      } else {
+        const tx = {
+          from: transaction.asset.address,
+          to: transaction.to,
+          value: ethers.parseEther(transaction.amount),
+          gasPrice: maxFeePerGas ? maxFeePerGas : Number(feeData?.gasPrice),
+          gasLimit: gasLimit || (transaction.asset.title !== 'BNB' ? 21000 : undefined),
+          nonce: await provider?.getTransactionCount(transaction.asset.address, 'latest'),
+        }
+        transactionRequest = await walletSigner.sendTransaction(tx)
+      }
     }
-
-    return successResponse({
-      ...tx,
-    })
+    const nonce = await provider?.getTransactionCount(transaction.asset.address, 'latest')
+    const txHash = transactionRequest.hash
+    const txDetails = await getTransactionDetail(transaction.asset.apiUrl, transaction.asset.networkName, txHash)
+    return successResponse({ nonce, txHash, txDetails })
   } catch (error) {
-    throw new SyntaxError(error)
-  }
-}
+    const validationCodeMatch = error.toString()
 
-const getTransaction = async ({ hash, rpcUrl }: GetTransactionPayload) => {
-  const { providerInstance } = await getContract({ rpcUrl })
+    const regex = /code=([A-Z_]+),/ // Regular expression to match the error code
+    const match = validationCodeMatch.match(regex)
 
-  try {
-    const tx = await providerInstance.getTransaction(hash)
-    return successResponse({
-      ...tx,
-    })
-  } catch (error) {
-    throw new SyntaxError(error)
+    let validationCode: string = ''
+    if (match) {
+      validationCode = match[1]
+    }
+    throw new Error(getErrorMessage(validationCode))
   }
 }
 
@@ -274,63 +174,17 @@ const getTokenInfo = async ({ address, rpcUrl }: IGetTokenInfoPayload) => {
       symbol,
       decimals,
       address: contract.address,
-      totalSupply: parseInt(ethers.utils.formatUnits(totalSupply, decimals)),
+      totalSupply: parseInt(ethers.formatUnits(totalSupply, decimals)),
     }
     return successResponse({ ...data })
   }
 }
 
-const smartContractCall = async (args: ISmartContractCallPayload) => {
-  const { contract, gasPrice, nonce } = await getContract({
-    rpcUrl: args.rpcUrl,
-    contractAddress: args.contractAddress,
-    abi: args.contractAbi,
-    privateKey: args.privateKey,
-  })
-
-  try {
-    let tx
-    let overrides = {} as any
-
-    if (args.methodType === 'read') {
-      overrides = {}
-    } else if (args.methodType === 'write') {
-      overrides = {
-        gasPrice: args.gasPrice ? ethers.utils.parseUnits(args.gasPrice, 'gwei') : gasPrice,
-        nonce: args.nonce || nonce,
-        value: args.value ? ethers.utils.parseEther(args.value.toString()) : 0,
-      }
-
-      if (args.gasLimit) {
-        overrides.gasLimit = args.gasLimit
-      }
-    }
-
-    if (args.params.length > 0) {
-      tx = await contract?.[args.method](...args.params, overrides)
-    } else {
-      tx = await contract?.[args.method](overrides)
-    }
-
-    return successResponse({
-      data: tx,
-    })
-  } catch (error) {
-    throw new SyntaxError(error)
-  }
-}
-
 export default {
   getEstimatedTransactionCost,
-  getBalance,
   createWallet,
-  getAddressFromPrivateKey,
-  generateWalletFromMnemonic,
-  transfer,
-  getTransaction,
   getEncryptedJsonFromPrivateKey,
   getWalletFromEncryptedJson,
   getTokenInfo,
-  smartContractCall,
   sendTransaction,
 }

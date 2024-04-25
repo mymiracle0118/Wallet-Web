@@ -1,19 +1,17 @@
-import React, { useState } from 'react'
-import moment from 'moment'
-import { useWallet } from '@portal/shared/hooks/useWallet'
+import { useSessionStore } from '@portal/shared/hooks/useSessionStore'
 import { useSettings } from '@portal/shared/hooks/useSettings'
+import { useStore } from '@portal/shared/hooks/useStore'
+import { useWallet } from '@portal/shared/hooks/useWallet'
+import { setLockUp } from '@src/../../shared/hooks/useLockUp'
 import { ColorModeContext } from 'app/App'
 import { useModalContext } from 'components'
-import DAI from 'assets/coins/DAI.svg'
-import ETH from 'assets/coins/ETH.svg'
-import WETH from 'assets/coins/WETH.svg'
 import { useNavigate } from 'lib/woozie'
-import { setLockUp } from '@src/../../shared/hooks/useLockUp'
-import { useStore } from '@portal/shared/hooks/useStore'
+import moment from 'moment'
+import React, { useState } from 'react'
 
 const DevPanel = () => {
   const colorMode = React.useContext(ColorModeContext) // eslint-disable-line
-  const { clearWallet, encryptedWallet, setTokenProfitLoss, tokenProfitLossCollection } = useWallet()
+  const { clearWallet, encryptedWallet, lockWallet, setTokenProfitLoss, tokenProfitLossCollection } = useWallet()
 
   const { clearAccounts, darkMode } = useSettings()
   const [expended, setExpended] = useState<boolean>(false)
@@ -33,16 +31,9 @@ const DevPanel = () => {
     newCollection.forEach((data) => setTokenProfitLoss(data, true))
   }
 
-  const handleClick = () => {
-    clearWallet()
+  const handleClick = async () => {
+    await clearWallet()
     clearAccounts()
-    // if (encryptedWallet) {
-    //   clearWallet()
-    //   clearAccounts()
-    // } else {
-    //   clearAccounts()
-    //   ConnectTestWallet()
-    // }
     navigate('/')
   }
 
@@ -56,6 +47,7 @@ const DevPanel = () => {
     console.log('All state data')
     console.log('useWallet :: ' + getStoreSize(useWallet.getState()), useWallet.getState())
     console.log('useStore :: ' + getStoreSize(useStore.getState()), useStore.getState())
+    console.log('useSessionStore :: ' + getStoreSize(useSessionStore.getState()), useSessionStore.getState())
   }
 
   const showUseSettingStateData = () => {
@@ -67,7 +59,7 @@ const DevPanel = () => {
       className={`w-${expended ? 'full' : 'w-8'} h-auto bg-custom-white40 top-0 flex flex-wrap gap-3 z-10 absolute`}
     >
       <button type="button" onClick={toggleBar} className="text-custom-black mt-1 ml-4 cursor-pointer">
-        {networkEnvironment} {expended ? `<` : `>`}
+        {lockWallet ? 'Locked' : 'Open'} {networkEnvironment} {expended ? `<` : `>`}
       </button>
       {expended && (
         <>
@@ -85,7 +77,7 @@ const DevPanel = () => {
                 type: 'swap-cancel',
                 amount: 100,
                 token: 'DAI',
-                tokenImage: <DAI />,
+                tokenImage: '',
               })
             }
           >
@@ -99,7 +91,7 @@ const DevPanel = () => {
                 type: 'swap-schedule',
                 amount: 100,
                 token: 'DAI',
-                tokenImage: <DAI />,
+                tokenImage: '',
               })
             }
           >
@@ -113,7 +105,7 @@ const DevPanel = () => {
                 type: 'received',
                 amount: 0.04,
                 token: 'WETH',
-                tokenImage: <WETH />,
+                tokenImage: '',
               })
             }
           >
@@ -127,7 +119,7 @@ const DevPanel = () => {
                 type: 'send-cancel',
                 amount: 1,
                 token: 'ETH',
-                tokenImage: <ETH />,
+                tokenImage: '',
               })
             }
           >

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { INetworkAsset, INetworkAssetsInputProps } from '@portal/shared/utils/types'
+import { Input } from 'components'
 import React, { useEffect, useState } from 'react'
 import NetworkAssets from '../networkAssets'
-import { Input } from 'components'
-import { INetworkAsset, INetworkAssetsInputProps } from '@portal/shared/utils/types'
 
 const NetworkAssetsInput = ({ initialAsset, objectdata, isSwapAssets }: INetworkAssetsInputProps) => {
-  const [searchInput, setSearchInput] = useState('')
+  const [searchInput, setSearchInput] = useState<string>('')
   const [isSelectedAssets, setSelectedAssets] = useState([])
   const [filteredNetworksAssets, setFilteredNetworksAssets] = useState(objectdata)
 
@@ -41,12 +41,6 @@ const NetworkAssetsInput = ({ initialAsset, objectdata, isSwapAssets }: INetwork
       mainColor
       fullWidth
       value=""
-      //   onChange={}
-      // {...register('amount', {
-      //   valueAsNumber: true,
-
-      //   validate: (value) => value > 0,
-      // })}
       className="h-14"
       endAdornment={
         <NetworkAssets

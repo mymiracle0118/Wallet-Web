@@ -25,3 +25,15 @@ export const chromeLocalStorage: StateStorage = {
     await chrome.storage.local.remove(name)
   },
 }
+export const chromeSessionStorage: StateStorage = {
+  getItem: async (name: string): Promise<string | null> => {
+    const value = await chrome.storage.session.get(name)
+    return value[name]
+  },
+  setItem: async (name: string, value: string): Promise<void> => {
+    await chrome.storage.session.set({ [name]: value })
+  },
+  removeItem: async (name: string): Promise<void> => {
+    await chrome.storage.session.remove(name)
+  },
+}

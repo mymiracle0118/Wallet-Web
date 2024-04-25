@@ -58,3 +58,45 @@ export const add0xStartOfString = (str: string) => {
   }
   return str
 }
+
+export const passwordRegex = {
+  password: /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])(?!.*\s).{9,24}$/, // do not allow spaces
+}
+
+// Format the price to USD using the locale, style, and currency.
+export const USDollar = (digit = 2) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: digit,
+    minimumFractionDigits: 0,
+  })
+
+export const findValueByKey = (obj: any, key: string): any => {
+  // Base case: if the current object has the key, return its value
+  if (obj[key]) {
+    return obj[key]
+  }
+  // Recursive case: iterate through all keys and recursively call the function if a nested object is found
+  for (const k in obj) {
+    if (typeof obj[k] === 'object' && obj[k] !== null) {
+      const foundValue = findValueByKey(obj[k], key)
+      if (foundValue) {
+        return foundValue
+      }
+    }
+  }
+  // If the key is not found, return null or handle it as required
+  return null
+}
+
+export const getMinimumBalance = (networkType: string) => {
+  switch (networkType) {
+    case 'SOL':
+      return 0.00089
+    case 'SUI':
+      return 0.01
+    default:
+      return 0
+  }
+}

@@ -1,7 +1,7 @@
 {
   "ETH": {
     "testNet": {
-      "providerNetworkRPC_URL": "https://eth-sepolia.g.alchemy.com/v2/barNHxwKcvdxJuDoKlbor5qx6mhT2C_O",
+      "providerNetworkRPC_URL": "https://eth-sepolia.g.alchemy.com/v2/oziEpWzcvSRA6HeWIZU-arSoTG73XDE_",
       "explorerURL": "https://sepolia.etherscan.io/tx/$tx",
       "explorerAccountURL": "https://sepolia.etherscan.io/address/$tx",
       "providerNetworkRPC_Network_Name": "sepolia",
@@ -10,10 +10,10 @@
       "apiUrl": "https://api-sepolia.etherscan.io/api"
     },
     "mainNet": {
-      "providerNetworkRPC_URL": "wss://eth-sepolia.g.alchemy.com/v2/barNHxwKcvdxJuDoKlbor5qx6mhT2C_O",
-      "explorerURL": "https://sepolia.etherscan.io/tx/$tx",
-      "explorerAccountURL": "https://sepolia.etherscan.io/address/$tx",
-      "providerNetworkRPC_Network_Name": "sepolia",
+      "providerNetworkRPC_URL": "https://ethereum.publicnode.com",
+      "explorerURL": "https://etherscan.io/tx/$tx",
+      "explorerAccountURL": "https://etherscan.io/address/$tx",
+      "providerNetworkRPC_Network_Name": "mainnet",
       "networkId": "1",
       "tokenGasFeeUnitToDisplay": "gwei",
       "apiUrl": "https://api.etherscan.io/api"
@@ -21,17 +21,17 @@
   },
   "SUI": {
     "testNet": {
-      "providerNetworkRPC_URL": "https://sui-testnet-rpc.allthatnode.com",
-      "explorerURL": "https://suiexplorer.com/txblock/$tx?network=testnet",
-      "explorerAccountURL": "https://suiexplorer.com/address/$tx?network=testnet",
+      "providerNetworkRPC_URL": "https://fullnode.testnet.sui.io:443",
+      "explorerURL": "https://suiscan.xyz/testnet/tx/$tx",
+      "explorerAccountURL": "https://suiscan.xyz/testnet/account/$tx",
       "providerNetworkRPC_Network_Name": 97,
       "networkId": "2",
       "tokenGasFeeUnitToDisplay": "MIST"
     },
     "mainNet": {
       "providerNetworkRPC_URL": "https://fullnode.devnet.sui.io:443",
-      "explorerURL": "https://suiexplorer.com/txblock/$tx?network=devnet",
-      "explorerAccountURL": "https://suiexplorer.com/address/$tx?network=devnet",
+      "explorerURL": "https://suiscan.xyz/devnet/tx/$tx",
+      "explorerAccountURL": "https://suiscan.xyz/devnet/account/$tx",
       "providerNetworkRPC_Network_Name": 97,
       "networkId": "2",
       "tokenGasFeeUnitToDisplay": "MIST"
@@ -40,8 +40,8 @@
   "SOL": {
     "testNet": {
       "providerNetworkRPC_URL": "https://api.testnet.solana.com",
-      "explorerURL": "https://explorer.solana.com/tx/$tx?cluster=devnet",
-      "explorerAccountURL": "https://explorer.solana.com/address/$tx?cluster=devnet",
+      "explorerURL": "https://explorer.solana.com/tx/$tx?cluster=testnet",
+      "explorerAccountURL": "https://explorer.solana.com/address/$tx?cluster=testnet",
       "providerNetworkRPC_Network_Name": 103,
       "networkId": "3",
       "tokenGasFeeUnitToDisplay": "Lamports"
@@ -77,22 +77,22 @@
   },
   "SUPRA": {
     "testNet": {
-      "providerNetworkRPC_URL": "https://fullnode.testnet.aptoslabs.com/v1",
-      "explorerURL": "https://explorer.aptoslabs.com/txn/$tx?network=testnet",
-      "explorerAccountURL": "https://explorer.aptoslabs.com/account/$tx?network=testnet",
+      "providerNetworkRPC_URL": "https://rpc-wallet.supra.com",
+      "explorerURL": "",
+      "explorerAccountURL": "",
       "providerNetworkRPC_Network_Name": 2022,
-      "networkId": "4",
+      "networkId": "3",
       "tokenGasFeeUnitToDisplay": "gwei",
       "indexerClient": "https://indexer-testnet.staging.gcp.aptosdev.com/v1/graphql"
     },
     "mainNet": {
-      "providerNetworkRPC_URL": "https://fullnode.devnet.aptoslabs.com/v1",
-      "explorerURL": "https://explorer.aptoslabs.com/txn/$tx?network=devnet",
-      "explorerAccountURL": "https://explorer.aptoslabs.com/account/$tx?network=devnet",
+      "providerNetworkRPC_URL": "https://rpc-qanet.supra.com",
+      "explorerURL": "",
+      "explorerAccountURL": "",
       "providerNetworkRPC_Network_Name": 2022,
-      "networkId": "4",
+      "networkId": "3",
       "tokenGasFeeUnitToDisplay": "gwei",
-      "indexerClient": "https://indexer-devnet.staging.gcp.aptosdev.com/v1/graphql"
+      "indexerClient": "https://indexer-testnet.staging.gcp.aptosdev.com/v1/graphql"
     }
   }
 }

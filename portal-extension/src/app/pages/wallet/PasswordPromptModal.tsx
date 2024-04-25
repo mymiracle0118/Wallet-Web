@@ -1,18 +1,14 @@
-// import { yupResolver } from '@hookform/resolvers/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Modal, ModalBody, ModalContent } from '@nextui-org/react'
 import { useWallet } from '@portal/shared/hooks/useWallet'
 import { IPasswordPromptModalProps } from '@portal/shared/utils/types'
 import { SpinnerIcon } from '@src/app/components/Icons'
 import IconShield from 'assets/icons/shield.svg'
-import { Button, COLORS, CustomTypography, Icon, PasswordInput } from 'components'
+import { Button, CustomTypography, Icon, PasswordInput } from 'components'
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-// import * as yup from 'yup'
-
-// const schema = yup.object().shape({
-//   password: yup.string().min(8).max(32).required(),
-// })
+import * as yup from 'yup'
 
 const PasswordPromptModal = ({
   modalState,
@@ -28,8 +24,12 @@ const PasswordPromptModal = ({
   const { openWallet } = useWallet()
   const { t } = useTranslation()
 
+  const schema = yup.object().shape({
+    password: yup.string().required(t('Account.enterPassword') as string),
+  })
+
   const methods = useForm({
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
     mode: 'onChange',
   })
 
@@ -37,7 +37,7 @@ const PasswordPromptModal = ({
     handleSubmit,
     reset,
     setError,
-    formState: { errors },
+    formState: { errors, isValid, isDirty },
   } = methods
 
   const [loading, setLoading] = useState<boolean>(false)
@@ -48,9 +48,10 @@ const PasswordPromptModal = ({
       try {
         onPromptPassword(data.password)
       } catch (error) {
-        // setError('password', { type: 'custom',  })
+        setError('password', { type: 'custom' })
         onFail && onFail(error as Error)
       }
+      setLoading(false)
     } else {
       setLoading(true)
       try {
@@ -58,18 +59,20 @@ const PasswordPromptModal = ({
         getPassword?.(data.password)
         onSuccess && onSuccess()
         reset()
+        setLoading(false)
       } catch (error) {
         let message = 'Unknown Error'
         if (error instanceof Error) message = error.message
         setError('password', { type: 'custom', message })
         onFail && onFail(error as Error)
+        setLoading(false)
       }
     }
   }
 
   useEffect(() => {
     if (responseData && responseData.status === false) {
-      let message = 'Invalid Password'
+      let message = t('Actions.invalidPassword')
       if (responseData.data.message instanceof Error) message = responseData.data.message
       setLoading(false)
       setError('password', { type: 'custom', message })
@@ -93,10 +96,7 @@ const PasswordPromptModal = ({
       <ModalContent className="py-3 rounded-[1.75rem] dark:bg-surface-dark bg-custom-white">
         <ModalBody>
           <div className="flex flex-col items-center justify-center">
-            <div
-              className="cursor-pointer rounded-full mx-auto mb-4 text-[2.5rem] h-16 w-16 flex items-center justify-center"
-              style={{ background: COLORS.background.gradientLogoBg }}
-            >
+            <div className="cursor-pointer rounded-full mx-auto mb-4 text-[4rem] flex items-center justify-center">
               <Icon icon={<IconShield />} size="inherit" />
             </div>
             <CustomTypography variant="h1" className="text-center">
@@ -108,7 +108,7 @@ const PasswordPromptModal = ({
               <PasswordInput
                 mainColor
                 id="enter-password"
-                placeholder={t('Account.enterPassword')}
+                placeholder={t('Onboarding.password')}
                 disabled={loading}
                 className="w-full"
                 name="password"
@@ -132,8 +132,8 @@ const PasswordPromptModal = ({
                 </Button>
                 <Button
                   data-test-id="button-confirm"
-                  color={`${loading ? 'disabled' : 'primary'}`}
-                  isDisabled={loading}
+                  color={`${!isDirty || !isValid || loading ? 'disabled' : 'primary'}`}
+                  isDisabled={!isDirty || !isValid || loading}
                   type="submit"
                   isLoading={loading}
                   spinner={<SpinnerIcon />}

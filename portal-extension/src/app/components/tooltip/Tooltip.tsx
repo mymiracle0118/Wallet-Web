@@ -8,7 +8,7 @@ export const ToolTip = forwardRef(
     { children, title, placement = 'top', containerClass = '', className = '' }: IToolTipProps,
     ref: ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
-    const classContainer = `w-max max-w-[18rem] absolute z-10 opacity-0 group-hover:opacity-100 shadow-tooltip bg-custom-white text-custom-grey100 
+    const classContainer = `w-max max-w-[18rem] absolute z-10 opacity-0 group-hover/tooltip:opacity-100 shadow-tooltip bg-custom-white text-custom-grey100 
     text-sm px-3 py-[0.3rem] rounded-[0.75rem]  flex items-center transition-all duration-150 pointer-events-none ${classnames(
       {
         'top-0 left-full ml-2': placement === 'right',
@@ -20,7 +20,7 @@ export const ToolTip = forwardRef(
     )}`
 
     return (
-      <div className={`group relative flex items-center ${className}`} ref={ref}>
+      <div className={`group/tooltip relative flex items-center ${className}`} ref={ref}>
         <div className={classContainer}>{title}</div>
         {children}
       </div>

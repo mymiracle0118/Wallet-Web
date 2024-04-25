@@ -1,22 +1,7 @@
-import React from 'react'
-import { useNavigate } from 'lib/woozie'
+import { ITokenActivityProps } from '@portal/shared/utils/types'
 import { CustomTypography } from 'app/components'
+import { useNavigate } from 'lib/woozie'
 import { BoughtIcon, ListedIcon, MintedIcon, ReceiveIcon, SendIcon } from '../Icons'
-
-export type TokenActivityProps = {
-  type: 'Send' | 'Sent' | 'Received' | 'Bought' | 'Listed' | 'Minted'
-  title?: string
-  date: string
-  price: string | number
-  status: 'Scheduled' | 'Pending' | 'Completed' | 'Saved' | string
-  page: 'Settings' | 'Settings-Token' | 'Token'
-  disableClick?: boolean
-  transactionHash?: string
-  onClick?: () => void
-  network?: string
-  tokenDecimal?: string | number
-  assetId?: string
-}
 
 export const TokenActivity = ({
   type,
@@ -29,9 +14,10 @@ export const TokenActivity = ({
   transactionHash,
   onClick,
   network,
-  // tokenDecimal,
   assetId,
-}: TokenActivityProps) => {
+  hideBalance,
+  tokenName,
+}: ITokenActivityProps) => {
   const { navigate } = useNavigate()
 
   const statusColor =
@@ -41,37 +27,35 @@ export const TokenActivity = ({
       ? 'dark:text-secondary'
       : status === 'Saved'
       ? 'dark:text-feedback-positive'
-      : status === 'Failed'
+      : status === 'Failed' || status === 'Cancelled'
       ? 'dark:text-feedback-negative'
       : 'text-secondary text-primary-alt'
 
-  // '/settings/activity/:fromToken/:toToken' for Swap page
   const settingsPage = page === 'Settings-Token' ? '/settings/activity/DAI' : '/settings/activity/DAI/WETH'
 
   let url = settingsPage
   if (transactionHash) {
     if (network && assetId) {
-      url = `/token/${network}/${assetId}/activity/${transactionHash}`
+      url = `/token/${network as string}/${assetId as string}/activity/${transactionHash as string}`
     }
   }
   const handleClick = () => {
     if (!disableClick) navigate(url)
     if (onClick) onClick()
   }
-
   return (
     <div
       onClick={handleClick}
-      className="h-14 flex items-center px-3 hover:bg-custom-white10 rounded-lg cursor-pointer"
+      className="min-h-14 flex items-center pl-1 pr-3 hover:bg-custom-white10 rounded-lg cursor-pointer"
     >
       <div>
         {['Send', 'Sent'].includes(type) && <SendIcon />}
-        {type === 'Received' && <ReceiveIcon />}
+        {['Receive', 'Received'].includes(type) && <ReceiveIcon />}
         {type === 'Bought' && <BoughtIcon />}
         {type === 'Listed' && <ListedIcon />}
         {type === 'Minted' && <MintedIcon />}
       </div>
-      <div className="pl-6 flex-1">
+      <div className="pl-3 flex-1">
         <CustomTypography variant="subtitle">{title || type}</CustomTypography>
         <CustomTypography variant="body" type="secondary">
           {date}
@@ -79,7 +63,9 @@ export const TokenActivity = ({
       </div>
 
       <div className="text-right">
-        <CustomTypography variant="subtitle">{price}</CustomTypography>
+        <CustomTypography variant="subtitle" className="text-right w-32 break-words line-clamp-2">
+          {!hideBalance ? `${price as number | string} ${tokenName as string}` : '**'}
+        </CustomTypography>
         <CustomTypography className={`text-subtitle1 ${statusColor}`}>{status}</CustomTypography>
       </div>
     </div>

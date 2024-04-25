@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-// FIXME:
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { toUTF8Array } from '@portal/shared/utils/utf8'
@@ -21,17 +20,20 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
 chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
   switch (req.message) {
     case 'startTimer':
-      chrome.storage.sync.get(['wallet-storage'], (wallet) => {
-        chrome.alarms.create('lock_timer', {
-          periodInMinutes: JSON.parse(wallet['wallet-storage'] as string).state.lockTime,
-        })
+      chrome.storage.local.get(['wallet-storage'], (wallet) => {
+        const walletState = JSON.parse(wallet['wallet-storage'] as string).state
+        if (!walletState.lockWallet) {
+          chrome.alarms.create('lock_timer', {
+            periodInMinutes: walletState.lockTime,
+          })
+        }
       })
       break
     case 'stopTimer':
       chrome.alarms.clear('lock_timer')
       break
     case 'login':
-      chrome.storage.sync.get(['wallet-storage'], async (storage) => {
+      chrome.storage.local.get(['wallet-storage'], async (storage) => {
         try {
           if (req.isAccountCreatedByPrivateKey || req.address) {
             const checkPassword: string = await decryptData(req.encryptedWallet as string, req.password as string)
@@ -45,7 +47,7 @@ chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
             newWallet.state.wallet = wallet
             newWallet.state.encryptedPrivateKey = encryptedPrivateKey
             newWallet.state.lockWallet = false
-            chrome.storage.sync.set({ 'wallet-storage': JSON.stringify(newWallet) })
+            chrome.storage.local.set({ 'wallet-storage': JSON.stringify(newWallet) })
             if (wallet.mnemonic && wallet.mnemonic.phrase) {
               sendResponse({ success: true, mnemonic: wallet.mnemonic.phrase })
             } else if (wallet.privateKey) {
@@ -64,10 +66,14 @@ chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
 chrome.alarms.onAlarm.addListener((alarm) => {
   switch (alarm.name) {
     case 'lock_timer':
-      chrome.storage.sync.get(['wallet-storage'], (wallet) => {
+      chrome.storage.local.get(['wallet-storage'], (wallet) => {
         const newWallet = JSON.parse(wallet['wallet-storage'] as string)
         newWallet.state.lockWallet = true
-        chrome.storage.sync.set({ 'wallet-storage': JSON.stringify(newWallet) })
+        chrome.storage.local.set({ 'wallet-storage': JSON.stringify(newWallet) })
+        /* Lock wallet and trigger to extension side auto redirect to log out screen and stop lock_timer*/
+        chrome.runtime.sendMessage({ lockWalletUpdated: true }, () => {
+          chrome.alarms.clear('lock_timer')
+        })
       })
       break
   }
@@ -84,32 +90,9 @@ export const getFFPredicate = (port: any) => {
 
 chrome.alarms.create({ periodInMinutes: 0.5, delayInMinutes: 0.5 })
 
-// chrome.alarms.onAlarm.addListener(() => {
-//   chrome.storage.sync.get(['GAS_FEE_ALERT'], ({ GAS_FEE_ALERT }) => {
-//     if (GAS_FEE_ALERT?.length) {
-//       const gasList = GAS_FEE_ALERT.sort((a1, a2) => a2.value - a1.value)
-//       fetch(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=CW67MTNJE76PWJBDY8VXNVVT85UF2DHEJJ`)
-//         .then((response) => response.json())
-//         .then((data) => {
-//           if (gasList[0].value >= data.result.SafeGasPrice) {
-//             chrome.notifications.create({
-//               type: 'basic',
-//               title: `Gas fee alert!`,
-//               message: `the current gas fee is ${data.result.SafeGasPrice} Gwei! 💰\nYour alert was set to ${gasList[0].value} Gwei`,
-//               priority: 1,
-//               eventTime: Date.now(),
-//               iconUrl: '../images/logo_48.png',
-//             })
-//             gasList.shift()
-//             chrome.storage.sync.set({ GAS_FEE_ALERT: gasList })
-//           }
-//         })
-//     }
-//   })
-// })
 chrome.runtime.onConnect.addListener((externalPort) => {
   if (getChromePredicate(externalPort) || getFFPredicate(externalPort)) {
-    chrome.storage.sync.get(['wallet-storage'], (wallet) => {
+    chrome.storage.local.get(['wallet-storage'], (wallet) => {
       const walletState = JSON.parse(wallet['wallet-storage'] as string).state
 
       chrome.alarms.get('lock_timer', (res) => {

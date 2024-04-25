@@ -1,11 +1,7 @@
-import React from 'react'
+import { IScheduledActivityProps } from '@portal/shared/utils/types'
 import TransactionActivity from 'pages/wallet/token/transaction/activity/TransactionActivity'
 
-type ScheduledActivityProps = {
-  swapTokens?: boolean
-}
-
-const ScheduledActivity = ({ swapTokens = false }: ScheduledActivityProps) => {
+const ScheduledActivity = ({ swapTokens = false }: IScheduledActivityProps) => {
   return <TransactionActivity swapTokens={swapTokens} txStatus="Completed" page="Settings" network="mainnet" />
 }
 

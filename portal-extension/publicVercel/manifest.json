@@ -1,6 +1,6 @@
 {
-  "name": "Shuttle Wallet Chrome",
-  "description": "Shuttle Wallet in your browser",
+  "name": "Star Key Wallet Chrome",
+  "description": "Star Key Wallet in your browser",
   "version": "1.0",
   "manifest_version": 3,
   "action": {

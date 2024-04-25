@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
 import { Icon } from 'app/components'
-import Logo from 'assets/logos/logo.svg'
+import LogoMain from 'assets/logos/logo-main.svg'
+import { FC } from 'react'
 
 const ExtendedLayout: FC<ComponentProps> = ({ children }) => {
   const { href } = window.location
@@ -15,10 +15,9 @@ const ExtendedLayout: FC<ComponentProps> = ({ children }) => {
     >
       <div className="flex flex-col gap-8">
         <div className="gap-4 flex items-center justify-center">
-          <div className="text-[4.375rem] h-16">
-            <Icon icon={<Logo />} size="inherit" />
+          <div className="text-[12.5rem] h-36">
+            <Icon icon={<LogoMain />} size="inherit" />
           </div>
-          <h1 className="tracking-[0.45rem] text-4xl font-bold">SHUTTLE</h1>
         </div>
         <div
           className={`${

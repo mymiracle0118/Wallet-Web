@@ -1,18 +1,18 @@
-import React, { FC, useCallback, useState } from 'react'
 import classnames from 'classnames'
 import { createLocationState, useNavigate } from 'lib/woozie'
+import { FC, useCallback, useState } from 'react'
 
-import { SettingsIcon, SwapIcon, WalletIcon } from '@src/app/components/Icons'
 import { Button, Tooltip } from '@nextui-org/react'
+import { SettingsIcon, WalletIcon } from '@src/app/components/Icons' //SwapIcon
 
 const Footer: FC = () => {
   const { navigate } = useNavigate()
   const { pathname } = createLocationState()
-  const [isShowing, setIsShowing] = useState('')
+  const [isShowing, setIsShowing] = useState<string>('')
 
   const getColor = useCallback(
     (value: string) => {
-      const activeColor = 'fill-primary dark:fill-custom-white'
+      const activeColor = 'fill-custom-white dark:fill-custom-white'
       const inactiveColor = 'fill-footer-light-inactive dark:fill-footer-dark-inactive'
       return (pathname?.includes(value) ? activeColor : inactiveColor) as string
     },
@@ -21,15 +21,15 @@ const Footer: FC = () => {
 
   const footerItems = [
     {
-      path: '/home',
+      path: '/',
       hoverText: 'Wallet',
-      menuIcon: <WalletIcon hover={isShowing === '/home'} className={classnames('text-4xl ', getColor('/home'))} />,
+      menuIcon: <WalletIcon hover={isShowing === '/'} className={classnames('text-4xl ', getColor('/'))} />,
     },
-    {
-      path: '/swap',
-      hoverText: 'Swap Token',
-      menuIcon: <SwapIcon hover={isShowing === '/swap'} className={classnames('text-[2rem]', getColor('/swap'))} />,
-    },
+    // {
+    //   path: '/swap',
+    //   hoverText: 'Swap Token',
+    //   menuIcon: <SwapIcon hover={isShowing === '/swap'} className={classnames('text-[2rem]', getColor('/swap'))} />,
+    // },
     {
       path: '/settings',
       hoverText: 'Settings',

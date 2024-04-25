@@ -1,10 +1,11 @@
-import React, { ChangeEvent, useState } from 'react'
-import { Input, Button, CustomTypography } from 'components'
-import { useTranslation } from 'react-i18next'
-import { CHANGE_AVATAR } from '@src/constants/content'
 import { Checkbox, Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react'
 import { IAvatarModalProps } from '@portal/shared/utils/types'
-import { CheckPrimaryIcon, CloseRoundedIcon, SearchIcon } from '../Icons'
+import { CHANGE_AVATAR } from '@src/constants/content'
+import { Button, CustomTypography, Input } from 'components'
+import { ChangeEvent, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import NoTokenfound from '../../../assets/images/no-activity.png'
+import { CheckRoundedPrimaryIcon, CloseRoundedIcon, SearchIcon } from '../Icons'
 
 const ChangeProfileAvatar = ({
   openModal,
@@ -16,6 +17,7 @@ const ChangeProfileAvatar = ({
   const { t } = useTranslation()
   const [isSearchAvatar, setSearchAvatar] = useState<string>('')
   const [filteredAvatars, setFilteredAvatars] = useState(CHANGE_AVATAR)
+  const [avatar, setAvatar] = useState<string>(selectedAvatar as string)
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchAvatar(event.target.value)
@@ -50,7 +52,7 @@ const ChangeProfileAvatar = ({
               <Input
                 fullWidth
                 dataAid="searchBar"
-                placeholder={t('Actions.search')}
+                placeholder={t('Actions.search') as string}
                 className="search-input font-bold"
                 icon={
                   filteredAvatars.length === 0 ? (
@@ -73,34 +75,43 @@ const ChangeProfileAvatar = ({
                 onChange={handleSearchChange}
                 value={isSearchAvatar}
               />
-              <div className="py-4 mx-auto w-fit flex flex-wrap gap-3 min-h-[9rem]">
-                {filteredAvatars.map((avatarItems) => (
-                  <button
-                    type="button"
-                    key={avatarItems.image}
-                    className="h-[4.375rem] w-[4.375rem] rounded-md relative"
-                    onClick={() => setSelectedAvatar(avatarItems?.image)}
-                  >
-                    {selectedAvatar === avatarItems.image && (
-                      <div className="z-10 relative flex bg-surface-dark/50 h-full justify-center pl-4">
-                        <Checkbox
-                          size="lg"
-                          radius="sm"
-                          isSelected={selectedAvatar}
-                          onValueChange={setSelectedAvatar}
-                          icon={<CheckPrimaryIcon className="w-6 h-6 after:bg-transparent" />}
-                          className="rounded-full mr-0 items-center"
-                        />
-                      </div>
-                    )}
-                    <img src={avatarItems.image} alt="avatar" className="rounded-md absolute top-0" />
-                  </button>
-                ))}
-              </div>
-              {filteredAvatars.length === 0 && (
-                <CustomTypography variant="subtitle" type="secondary">
-                  {t('Account.noImagefound')}
-                </CustomTypography>
+
+              {filteredAvatars.length === 0 ? (
+                <div className="space-y-4 py-8">
+                  <img src={NoTokenfound} alt="No Avatar found" className="mx-auto" />
+                  <CustomTypography variant="subtitle" type="secondary" className="text-center">
+                    {t('Account.noImagefound')}
+                  </CustomTypography>
+                </div>
+              ) : (
+                <div className="py-4 mx-auto w-fit flex flex-wrap gap-3 min-h-[9rem]">
+                  {filteredAvatars.map((avatarItems) => (
+                    <button
+                      type="button"
+                      key={avatarItems.image}
+                      className="h-[4.375rem] w-[4.375rem] rounded-md relative"
+                      onClick={() => setAvatar(avatarItems?.image)}
+                    >
+                      {avatar === avatarItems.image && (
+                        <div
+                          className={`z-10 relative flex bg-surface-dark/50 h-full justify-center pl-4 ${
+                            avatar === avatarItems.image ? 'border-2 border-primary rounded-md shadow-lg' : ''
+                          }`}
+                        >
+                          <Checkbox
+                            size="lg"
+                            radius="sm"
+                            isSelected={avatar}
+                            onValueChange={setAvatar}
+                            icon={<CheckRoundedPrimaryIcon className="w-6 h-6 after:bg-transparent" />}
+                            className="rounded-full mr-0 items-center"
+                          />
+                        </div>
+                      )}
+                      <img src={avatarItems.image} alt="avatar" className="rounded-md absolute top-0" />
+                    </button>
+                  ))}
+                </div>
               )}
             </div>
             <div className="mt-4 flex justify-between items-center gap-2">
@@ -118,10 +129,13 @@ const ChangeProfileAvatar = ({
               <Button
                 fullWidth
                 type="submit"
-                isDisabled={!selectedAvatar}
-                onClick={handleAvatarChange}
+                isDisabled={!avatar}
+                onClick={() => {
+                  setSelectedAvatar(avatar)
+                  handleAvatarChange()
+                }}
                 data-test-id="create-subaccount-btn"
-                color={`${!selectedAvatar ? 'disabled' : 'primary'}`}
+                color={`${!avatar ? 'disabled' : 'primary'}`}
               >
                 {t('Actions.change')}
               </Button>

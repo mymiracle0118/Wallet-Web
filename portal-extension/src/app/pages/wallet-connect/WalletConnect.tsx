@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import React, { useState, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import HomeWalletLayout from 'app/layouts/wallet-layout/WalletLayout'
-import { useModalContext, CustomTypography, Input, Button } from 'components'
-import { useWalletConnect } from '@portal/shared/hooks/useWalletConnect'
-import { useSettings } from '@portal/shared/hooks/useSettings'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
 import { default as networks } from '@portal/shared/data/networks.json'
-import classnames from 'classnames'
-import AccountItem from './AccountItem'
-import { DropdownTrigger, DropdownMenu, Dropdown, DropdownItem } from '@nextui-org/react'
+import { useSettings } from '@portal/shared/hooks/useSettings'
+import { useWalletConnect } from '@portal/shared/hooks/useWalletConnect'
 import { AngleDownIcon, CheckPrimaryIcon } from '@src/app/components/Icons'
+import HomeWalletLayout from 'app/layouts/wallet-layout/WalletLayout'
+import classnames from 'classnames'
+import { Button, CustomTypography, Input, useModalContext } from 'components'
+import React, { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import AccountItem from './AccountItem'
 
 const WalletConnect = () => {
   const { t } = useTranslation()
@@ -17,7 +17,7 @@ const WalletConnect = () => {
   const { accounts } = useSettings()
   const { setModalData } = useModalContext()
 
-  const [walletConnectURI, setWalletConnectURI] = useState('')
+  const [walletConnectURI, setWalletConnectURI] = useState<string>('')
 
   const connectedAccounts = useMemo(() => {
     return (
@@ -95,10 +95,10 @@ const WalletConnect = () => {
             {t('Account.connectedAccounts', { length: connectedAccounts.length })}
           </CustomTypography>
 
-          {/* Account list */}
           {connectedAccounts.map((val) => (
             <AccountItem
               key={val.address}
+              accountId={val.id}
               selected={val.address === session.accounts[0]}
               address={val.address}
               username={val.username}

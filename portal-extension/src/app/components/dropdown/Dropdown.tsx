@@ -1,8 +1,9 @@
 import { Menu, Transition } from '@headlessui/react'
+import { Avatar } from '@nextui-org/react'
+import { IDropdownItemProps } from '@portal/shared/utils/types'
 import classnames from 'classnames'
-import { Icon } from 'components'
 import { Fragment, ReactElement } from 'react'
-import { CheckPrimaryIcon } from '../Icons'
+import { CheckRoundedGreyIcon, CheckRoundedPrimaryIcon } from '../Icons'
 
 interface DropdownProps extends ComponentProps {
   anchor: ReactElement
@@ -10,14 +11,7 @@ interface DropdownProps extends ComponentProps {
   classDynamicMenu?: string
 }
 
-type DropdownItemProps = {
-  text: string
-  active?: boolean
-  icon?: ReactElement | string
-  onSelect?: (text: string) => void
-  isImg?: boolean | false // if icon is image then true else false
-}
-export const DropdownItem = ({ text, active, onSelect, icon, isImg }: DropdownItemProps) => (
+export const DropdownItem = ({ text, active, onSelect, icon, isImg }: IDropdownItemProps) => (
   <div
     className={classnames(
       'py-1 hover:bg-custom-grey10 cursor-pointer bg-surface-dark',
@@ -35,10 +29,10 @@ export const DropdownItem = ({ text, active, onSelect, icon, isImg }: DropdownIt
       >
         {icon && !isImg && (
           <div>
-            <Icon icon={icon} size="medium" />
+            <Avatar src={icon} alt="icon" className="h-7 w-7 rounded-full overflow-hidden bg-custom-white" />
             {active && (
               <div className="absolute rounded-full top-3">
-                <CheckPrimaryIcon className="w-4 h-4" />
+                <CheckRoundedPrimaryIcon className="w-4 h-4" />
               </div>
             )}
           </div>
@@ -46,12 +40,10 @@ export const DropdownItem = ({ text, active, onSelect, icon, isImg }: DropdownIt
 
         {icon && typeof icon === 'string' && isImg && (
           <div>
-            <img alt="icon" src={icon} className="h-6 rounded-full" />
-            {active && (
-              <div className="absolute rounded-full right-4 top-3">
-                <CheckPrimaryIcon className="w-4 h-4" />
-              </div>
-            )}
+            <Avatar alt="icon" src={icon} className="h-7 w-7 rounded-full overflow-hidden bg-custom-white" />
+            <div className="absolute rounded-full right-4 top-3">
+              {active ? <CheckRoundedPrimaryIcon className="w-4 h-4" /> : <CheckRoundedGreyIcon className="w-4 h-4" />}
+            </div>
           </div>
         )}
 

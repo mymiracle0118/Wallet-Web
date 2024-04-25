@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import classnames from 'classnames'
-import { NFTCard, Input, CustomTypography, Button } from 'app/components'
-import { SearchIcon, SortIcon } from '@src/app/components/Icons'
-import { useNavigate } from 'lib/woozie'
 import { Listbox } from '@headlessui/react'
+import { SearchIcon, SortIcon } from '@src/app/components/Icons'
+import { Button, CustomTypography, Input, NFTCard } from 'app/components'
+import classnames from 'classnames'
+import { useNavigate } from 'lib/woozie'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import mascotEmptyNft from 'assets/images/mascot-empty-nft.png'
@@ -11,8 +11,8 @@ import mascotEmptyNft from 'assets/images/mascot-empty-nft.png'
 import { useWallet } from '@portal/shared/hooks/useWallet'
 import { isNFTOwner } from '@portal/shared/services/nft'
 
-import { sortFilters } from '../token/add-token/TokensTab'
 import { Chip } from '@nextui-org/react'
+import { sortFilters } from '../token/add-token/TokensTab'
 
 const NFTTab = () => {
   const { navigate } = useNavigate()
@@ -79,13 +79,14 @@ const NFTTab = () => {
               image={nft.metadata?.image as string}
               price="$9,000"
               currency="ETH"
-              onClick={() => navigate(`/nft/${nft.network}/${nft.contractAddress as string}/${nft.id}`)}
+              onClick={() =>
+                navigate(`/nft/${nft.network as string}/${nft.contractAddress as string}/${nft.id as string}`)
+              }
             />
           ))}
         </div>
       ) : (
         <div className="grayscale-[50%]">
-          {/* mascotEmptyNft */}
           <img className="mx-auto my-0" alt="empty-nft" src={mascotEmptyNft} />
           <CustomTypography className="text-center mx-auto mt-2 mb-4" variant="body">
             {t('Nft.emptyList')}

@@ -1,9 +1,8 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
-import { TokenActivity, CustomTypography } from 'app/components'
 import { Divider } from '@nextui-org/react'
+import { CustomTypography, TokenActivity } from 'app/components'
+import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
 
 const sampleData = [
   {
@@ -28,7 +27,6 @@ const sampleData = [
 
 const ScheduledTransactionHistory = () => {
   const { t } = useTranslation()
-
   return (
     <SinglePageTitleLayout title={t('ScheduledTransaction.feeSaved')}>
       <CustomTypography variant="body" className="mb-4 p-4">
@@ -46,6 +44,7 @@ const ScheduledTransactionHistory = () => {
             date={data.date}
             price={data.price}
             status={data.status}
+            tokenName="ETH"
           />
           <Divider />
         </div>

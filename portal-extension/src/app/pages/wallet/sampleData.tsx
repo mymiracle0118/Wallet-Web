@@ -1,20 +1,19 @@
-import React from 'react'
-import { TokenBalanceProps } from 'app/components'
-import ETH from 'assets/coins/ETH.svg'
+import { ITokenBalanceProps } from '@portal/shared/utils/types'
+import BNB from 'assets/coins/BNB.svg'
+import BSC from 'assets/coins/BSC.svg'
 import BTC from 'assets/coins/BTC.svg'
 import DAI from 'assets/coins/DAI.svg'
+import ETH from 'assets/coins/ETH.svg'
+import FTM from 'assets/coins/FTM.svg'
+import POLY from 'assets/coins/POLY.svg'
+import SOL from 'assets/coins/SOL.svg'
+import SUP from 'assets/coins/SUP.svg'
 import SUSHI from 'assets/coins/SUSHI.svg'
 import USDC from 'assets/coins/USDC.svg'
 import USDT from 'assets/coins/USDT.svg'
 import WETH from 'assets/coins/WETH.svg'
-import BSC from 'assets/coins/BSC.svg'
-import SUP from 'assets/coins/SUP.svg'
-import SOL from 'assets/coins/SOL.svg'
-import POLY from 'assets/coins/POLY.svg'
-import FTM from 'assets/coins/FTM.svg'
-import BNB from 'assets/coins/BNB.svg'
 
-const sampleData: Array<TokenBalanceProps> = [
+const sampleData: Array<ITokenBalanceProps> = [
   {
     token: 'Bitcoin',
     acronym: 'BTC',

@@ -1,11 +1,14 @@
-import React from 'react'
 import classnames from 'classnames'
+import React from 'react'
 
+import { IAccountItemProps } from '@portal/shared/utils/types'
 import CheckIcon from 'assets/icons/check.svg'
 import TrashIcon from 'assets/icons/trash-2.svg'
-import { IAccountItemProps } from '@portal/shared/utils/types'
+import { useTranslation } from 'react-i18next'
 
 const AccountItem = ({ selected, onSelect, onDelete, address, username }: IAccountItemProps) => {
+  const { t } = useTranslation()
+
   const handleDelete = (event: React.MouseEvent<HTMLElement>) => {
     // eslint-disable-next-line
     event.stopPropagation()
@@ -29,10 +32,10 @@ const AccountItem = ({ selected, onSelect, onDelete, address, username }: IAccou
         >
           <CheckIcon />
         </div>
-        {`@${username}`}
+        {`@${username || ''}`}
       </span>
 
-      {selected && <div className="p-1 mr-2 bg-[#19865F] rounded text-[#FFF]">Connected</div>}
+      {selected && <div className="p-1 mr-2 bg-[#19865F] rounded text-[#FFF]">{t('Wallet.connected')}</div>}
 
       <button type="button" className="text-[24px] stroke-[#2C2D3C] dark:stroke-[#FFF]" onClick={handleDelete}>
         <TrashIcon />

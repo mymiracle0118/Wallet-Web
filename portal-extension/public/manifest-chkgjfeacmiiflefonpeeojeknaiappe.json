@@ -1,7 +1,8 @@
 {
-  "name": "Shuttle Wallet - Nightly TEST",
-  "description": "Shuttle Wallet - NIGHTLY TEST build\nNon-custodial wallet for holding Ethereum and tokens.",
-  "version": "2022.06.02-212134",
+  "name": "Star Key Wallet - Nightly TEST",
+  "description": "Star Key Wallet - NIGHTLY TEST build\nNon-custodial wallet for holding Ethereum and tokens.",
+  "version": "2024.03.26.1550",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnnHDJ6zIXQND7oSy4ME2sIAcxEL7z2v7B7HckTp7ZsODa/MF5Q7/F+RLelV4EvkX1vMrc/PrPRNJVKAJhDUPHJZ467MVJDLTHkWeNkH1yptjsfWl/53X6eH5wWeHmzTgxjuLIljsf8CD1QFa8tJHCxzmKcZ9uOe0yVzHW4fMG3RHRmeUj6n8EWLlc5iuzurwIKir32revg4L2to2PhX7CEMzEJxq0GHWHIAWRrTnhKzbCDP0y8xFuR1KGFZ8xk7sx5Jm8nA+j2g7jrrb51By/MY1k+W6DLDCEO+raco+/SbwuabRzefuER7q02kbTAqJN57ERwDnX5CLG0HtwFa1JwIDAQAB",
   "manifest_version": 3,
   "action": {
     "default_popup": "popup.html",
@@ -10,14 +11,12 @@
       "48": "./images/logo_48.png",
       "128": "./images/logo_128.png"
     },
-    "default_title": "Shuttle Wallet - Nightly TEST"
+    "default_title": "Star Key Wallet - Nightly TEST"
   },
   "background": {
     "service_worker": "scripts/background.js"
   },
-
-  "short_name": "Shuttle Wallet - ALPHA",
-
+  "short_name": "Star Key Wallet - ALPHA",
   "icons": {
     "16": "./images/logo_16.png",
     "48": "./images/logo_48.png",
@@ -40,6 +39,17 @@
   "permissions": [
     "storage",
     "unlimitedStorage",
-    "clipboardWrite"
-  ]
+    "clipboardWrite",
+    "notifications",
+    "alarms",
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "116531681819-e5d37uikm8d5s2kmrmtsqql2s6j1dasv.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive.appdata",
+      "https://www.googleapis.com/auth/drive.appfolder",
+      "https://www.googleapis.com/auth/drive.file"
+    ]
+  }
 }

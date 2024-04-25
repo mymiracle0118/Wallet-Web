@@ -1,28 +1,29 @@
-import React, { useState, useCallback } from 'react'
-import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
-import { useTranslation } from 'react-i18next'
-import { Input, CustomTypography, PasswordInput, Form, Button } from 'app/components'
-import { useNavigate, goBack } from 'lib/woozie'
 import { useWallet } from '@portal/shared/hooks/useWallet'
-import { useSettings } from '@portal/shared/hooks/useSettings'
+import { Button, CustomTypography, Form, Input, PasswordInput } from 'app/components'
+import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
+import { goBack, useNavigate } from 'lib/woozie'
+import { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { QuestionMarkIcon, SpinnerIcon } from '@src/app/components/Icons'
 import { Tooltip } from '@nextui-org/react'
-
-const schema = yup.object().shape({
-  privateKey: yup.string().required(),
-  password: yup.string().min(8).max(32).required(),
-})
+import { QuestionMarkIcon, SpinnerIcon } from '@src/app/components/Icons'
+import { useForm } from 'react-hook-form'
+import { passwordRegex } from 'utils/constants'
+import * as yup from 'yup'
 
 const ImportAccount = () => {
   const { navigate } = useNavigate()
   const { t } = useTranslation()
+  const schema = yup.object().shape({
+    privateKey: yup.string().required(),
+    password: yup
+      .string()
+      .required(t('Onboarding.passwordIsRequired') as string)
+      .matches(passwordRegex.password, t('Onboarding.passwordRegexDontMatch') as string),
+  })
   const [loading, setLoading] = useState<boolean>(false)
   const { openWallet, importPrivateKey } = useWallet()
-  const { saveAccount } = useSettings()
 
   const methods = useForm({
     resolver: yupResolver(schema),
@@ -36,13 +37,10 @@ const ImportAccount = () => {
 
   const importAccountFromPrivateKey = useCallback(
     async (privateKey: string, password: string) => {
-      saveAccount()
       await importPrivateKey(privateKey, password, 'mainnet', 'username')
-      saveAccount()
-
       goBack()
     },
-    [importPrivateKey, saveAccount]
+    [importPrivateKey]
   )
 
   const handleImportPrivateKey = useCallback(
@@ -94,7 +92,6 @@ const ImportAccount = () => {
             name="password"
             placeholder={t('Account.enterPassword')}
             error={errors.password?.message}
-            subTitle={'Min 8 characters'}
             className="mb-8"
             disabled={loading}
           />

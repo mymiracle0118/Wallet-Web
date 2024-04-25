@@ -1,33 +1,68 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'lib/woozie'
-import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
-import { Switch } from 'components'
 import { useSettings } from '@portal/shared/hooks/useSettings'
-import SettingItem from '../SettingItem'
-import PasswordPromptModal from 'app/pages/wallet/PasswordPromptModal'
+import { useWallet } from '@portal/shared/hooks/useWallet'
 import { ArrowRight } from '@src/app/components/Icons'
+import PasswordPromptModal from 'app/pages/wallet/PasswordPromptModal'
+import { Switch } from 'components'
+import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
+import { useNavigate } from 'lib/woozie'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import SettingItem from '../SettingItem'
 
 const Security = () => {
   const { t } = useTranslation()
   const { navigate } = useNavigate()
-  const { enablePasswordProtection, setEnablePasswordProtection } = useSettings()
+  const { isAccountCreatedByPrivateKey } = useWallet()
+  const {
+    enablePasswordProtection,
+    setEnablePasswordProtection,
+    isSavedRecoveryFile,
+    enableHideBalance,
+    setEnableHideBalance,
+  } = useSettings()
   const [openPasswordModal, setOpenPasswordModal] = useState<boolean>(false)
-  const [isHideAccountBlalance, setHideAccountBlalance] = useState<boolean>(false)
+  const [checkedFeature, setCheckedFeature] = useState<string>('password')
 
   const passwordPromptFailure = (error: Error) => {
     console.log('Wrong Password', error)
   }
+  const handlePasswordOnSuccess = () => {
+    switch (checkedFeature) {
+      case 'password':
+        setEnablePasswordProtection(false)
+        break
+      case 'balance':
+        setEnableHideBalance(false)
+        break
+    }
+    setOpenPasswordModal(false)
+  }
+
+  const handleSaveRecoveryFile = () => {
+    navigate('/settings/security/recovery-file')
+  }
 
   return (
-    <SinglePageTitleLayout title="Security">
+    <SinglePageTitleLayout title="Security" disableBack customGoBack onClickAction={() => navigate('/settings')}>
       <div className="border border-solid border-custom-white10 rounded-lg bg-surface-dark-alt">
-        <SettingItem
-          dataAid="secretRecoveryPhraseNavigation"
-          title={t('Security.secretRecoveryPhrase')}
-          endAndorment={<ArrowRight />}
-          onClick={() => navigate('/settings/security/secret-recovery-phrase')}
-        />
+        {!isAccountCreatedByPrivateKey && (
+          <>
+            <SettingItem
+              dataAid="secretRecoveryPhraseNavigation"
+              title={t('Security.secretRecoveryPhrase')}
+              endAndorment={<ArrowRight />}
+              onClick={() => navigate('/settings/security/secret-recovery-phrase')}
+            />
+            {!isSavedRecoveryFile && (
+              <SettingItem
+                dataAid="savedRecoveryFile"
+                title={t('Security.filesRecovery')}
+                endAndorment={<ArrowRight />}
+                onClick={() => handleSaveRecoveryFile()}
+              />
+            )}
+          </>
+        )}
         <SettingItem
           dataAid="passwordProtectionPop"
           title={t('Security.passwordProtectionTitle')}
@@ -37,9 +72,10 @@ const Security = () => {
               dataAid="passwordSwitch"
               id="switch-enable-password-protection"
               checked={enablePasswordProtection}
-              onChange={(checked: boolean) =>
-                checked ? setOpenPasswordModal(true) : setEnablePasswordProtection(checked)
-              }
+              onChange={(checked: boolean) => {
+                setCheckedFeature('password')
+                return checked ? setEnablePasswordProtection(checked) : setOpenPasswordModal(true)
+              }}
             />
           }
         />
@@ -50,10 +86,11 @@ const Security = () => {
             <Switch
               dataAid="hideAccountBalanceSwitch"
               id="hide-account-balance"
-              checked={isHideAccountBlalance}
-              onChange={(checked: boolean) =>
-                checked ? setHideAccountBlalance(true) : setHideAccountBlalance(checked)
-              }
+              checked={enableHideBalance}
+              onChange={(checked: boolean) => {
+                setCheckedFeature('balance')
+                return checked ? setEnableHideBalance(checked) : setOpenPasswordModal(true)
+              }}
             />
           }
         />
@@ -65,7 +102,7 @@ const Security = () => {
         />
         <SettingItem
           dataAid="passwordChangeNavigation"
-          title={t('Security.changePassword')}
+          title={t('Security.loginPassword')}
           endAndorment={<ArrowRight />}
           onClick={() => navigate('/settings/change-password')}
         />
@@ -75,8 +112,7 @@ const Security = () => {
         modalState={openPasswordModal}
         closePromptModal={() => setOpenPasswordModal(false)}
         onSuccess={() => {
-          setEnablePasswordProtection(true)
-          setOpenPasswordModal(false)
+          handlePasswordOnSuccess()
         }}
         onFail={passwordPromptFailure}
       />

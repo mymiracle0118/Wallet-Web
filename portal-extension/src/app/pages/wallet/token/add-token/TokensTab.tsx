@@ -10,35 +10,24 @@ import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Listbox } from '@headlessui/react'
-import { Tooltip } from '@nextui-org/react'
+import { Skeleton, Tooltip } from '@nextui-org/react'
 import { Button, CustomTypography, Input, TokenBalance } from 'components'
-
-import RealodIcon from 'assets/icons/reload.svg'
-import HighValueIcon from 'assets/icons/value-high.svg'
-import LowValueIcon from 'assets/icons/value-low.svg'
 
 import { useBalance } from '@portal/shared/hooks/useBalance'
 import { usePricing } from '@portal/shared/hooks/usePricing'
+// import { useSettings } from '@portal/shared/hooks/useSettings'
 import { useStore } from '@portal/shared/hooks/useStore'
 import { useWallet } from '@portal/shared/hooks/useWallet'
-import { NetworkToken } from '@portal/shared/utils/types'
-import { PlusIcon, SearchIcon, SortIcon, SpinnerIcon, StarEmptyIcon } from '@src/app/components/Icons'
-import AlphabetIcon from 'assets/icons/alphabet.svg'
+import { ITokenBalanceRow, ITokenSortFilter, ITotatBalanceProps, NetworkToken } from '@portal/shared/utils/types'
+import { PlusIcon, ReloadIcon, SearchIcon, SortIcon, SpinnerIcon } from '@src/app/components/Icons'
+import { TOKEN_SORT_FILTER } from '@src/constants/content'
 import NoTokenfound from '../../../../../assets/images/no-activity.png'
 
-const TokenBalanceRow = ({
-  assetId,
-  // hideZeroBalance,
-  token,
-}: {
-  assetId: string
-  // hideZeroBalance: boolean
-  token: NetworkToken
-}) => {
+const TokenBalanceRow = ({ assetId, token, hideBalance, hideLawBalance }: ITokenBalanceRow) => {
   const { navigate } = useNavigate()
   const { getAssetValue } = usePricing()
   const { setTokenProfitLoss } = useWallet()
-  const { balance, balanceFormatted } = useBalance(token)
+  const { balance, balanceFormatted } = useBalance(token, hideBalance)
   const assetBalance = useMemo(() => Number(token.formattedBalance) || 0, [token])
   const assetValue = useMemo(() => getAssetValue(token.coingeckoTokenId, assetBalance), [assetBalance, getAssetValue])
 
@@ -53,59 +42,30 @@ const TokenBalanceRow = ({
     }
   }, [balanceFormatted]) // eslint-disable-line
 
+  if (hideLawBalance && assetValue < 1) {
+    return <div className="hidden" />
+  }
+
   return (
     <TokenBalance
       id={token.shortName}
-      network={!token.isCustom ? token.networkName : ''}
+      network={token.isCustom && token.tokenType === 'Native' ? '' : token.networkName}
       isFavorite={token.isFavorite}
       isFavIcon={true}
       token={token.shortName}
       isTestnet={false}
       acronym={token.title}
-      // balance={`$${ethers.utils.commify(assetValue)}`}
-      balance={`$${assetValue}`}
+      balance={assetValue ? `$${assetValue}` : ''}
       nativeBalance={balanceFormatted}
       tokenFullName={token.subTitle}
       thumbnail={token.image}
       onClick={() => navigate(`/token/${token.networkName}/${assetId}`)}
+      hideBalance={hideBalance}
     />
   )
 }
 
-export const sortFilters = [
-  {
-    id: 1,
-    icon: <StarEmptyIcon className="fill-custom-black dark:fill-custom-white mr-3" />,
-    name: 'favorites',
-    label: 'Favorites',
-  },
-  {
-    id: 2,
-    icon: (
-      <HighValueIcon className="stroke-custom-black dark:stroke-custom-white fill-custom-black dark:fill-custom-white mr-3" />
-    ),
-    name: 'highestValue',
-    label: 'Highest value',
-  },
-  {
-    id: 3,
-    icon: (
-      <LowValueIcon className="stroke-custom-black dark:stroke-custom-white fill-custom-black dark:fill-custom-white mr-3" />
-    ),
-    name: 'lowestValue',
-    label: 'Lowest value',
-  },
-  {
-    id: 4,
-    icon: <AlphabetIcon className="fill-custom-black dark:fill-custom-white mr-3" />,
-    name: 'alphabetically',
-    label: 'Alphabetically',
-  },
-]
-type totatBalance = {
-  totalBalance: number
-}
-const TokensTab = (totalBalance: totatBalance) => {
+const TokensTab = ({ totalBalance, hideBalance, hideLawBalance }: ITotatBalanceProps) => {
   const { getAssetValue } = usePricing()
   const { t } = useTranslation()
   const { navigate } = useNavigate()
@@ -114,38 +74,35 @@ const TokensTab = (totalBalance: totatBalance) => {
   const [selectedSort, setSelectedSort] = useState<string>('highestValue')
   const [searchValue, setSearchValue] = useState<string>('')
   const [isRefreshToken, setRefreshToken] = useState<boolean>(false)
-  // const [hideZeroBalance, setHideZeroBalance] = useState<boolean>(false)
-  // const { assets, setAssets } = useState<NetworkToken[] | undefined>([])
-  // useEffect(() => {
-  //   setAssets(Object.values(currentTokenArrayWithBalance) as NetworkToken[])
-  // }, [currentTokenArrayWithBalance])
+  const [tokenListWithBalanceExists, setTokenListWithBalanceExists] = useState<number>(1)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  useEffect(() => {
+    setTokenListWithBalanceExists(document.querySelectorAll('#tokenListWithBalance').length)
+    setIsLoading(false)
+  }, [document.querySelectorAll('#tokenListWithBalance')])
+  // Sorting function for highest value
+  const sortByHighestValue = (a: any, b: any) => b.formattedBalance - a.formattedBalance
+
+  // Sorting function for lowest value
+  const sortByLowestValue = (a: any, b: any) => a.formattedBalance - b.formattedBalance
   const assets = useMemo(() => {
     return Object.values(currentTokenArrayWithBalance)
   }, [currentTokenArrayWithBalance])
-
   const sortedList = useMemo(() => {
     const sorted = {
       alphabetically: [...assets].sort((a, b) => a.title.localeCompare(b.title)),
-
-      // Sort by isFavorite=true first
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       favorites: [...assets].sort((a, b) => (b.isFavorite || 0) - (a.isFavorite || 0)),
-
-      // highestValue: [...assets].sort(
-      //   (key1, key2) => getAssetValue(key2.id, key2.formattedBalance) - getAssetValue(key1.id, key1.formattedBalance)
-      // ),
-      // lowestValue: [...assets].sort(
-      //   (key1, key2) => getAssetValue(key1.id, key1.formattedBalance) - getAssetValue(key2.id, key2.formattedBalance)
-      // ),
+      highestValue: [...assets].sort(sortByHighestValue),
+      lowestValue: [...assets].sort(sortByLowestValue),
     }[selectedSort]
 
     return sorted || assets
   }, [selectedSort, assets, getAssetValue]).filter((v: NetworkToken) =>
     selectedNetwork ? v.networkName.toLowerCase() == selectedNetwork.toLowerCase() : v
   )
-
   const filteredTokensWithSort = !searchValue
     ? sortedList
     : sortedList.filter(
@@ -181,11 +138,7 @@ const TokensTab = (totalBalance: totatBalance) => {
                 onClick={() => setRefreshToken(!isRefreshToken)}
                 isDisabled={!filteredTokensWithSort.length === true}
               >
-                <RealodIcon
-                  className={`fill-custom-black text-xl transition-all ease-in-out duration-200 ${
-                    isRefreshToken && 'animate-spin'
-                  }`}
-                />
+                <ReloadIcon className={`transition-all ease-in-out duration-200 ${isRefreshToken && 'animate-spin'}`} />
               </Button>
             </Tooltip>
             <Listbox className="relative px-1 flex" as="div" value={selectedSort} onChange={setSelectedSort}>
@@ -194,9 +147,9 @@ const TokensTab = (totalBalance: totatBalance) => {
               </Listbox.Button>
 
               <Listbox.Options className="absolute z-10 shadow-md right-0 dark:bg-surface-dark-alt bg-surface-light rounded-md overflow-hidden w-48">
-                {sortFilters.map((filter) => (
+                {TOKEN_SORT_FILTER.map((filter: ITokenSortFilter) => (
                   <Listbox.Option
-                    key={filter.id}
+                    key={filter.name}
                     value={filter.name}
                     className={classnames(
                       'text-sm text-custom-black dark:text-custom-white font-extrabold px-6 py-3.5 flex justify-start items-center gap-1 [&>svg]:w-5 [&>svg]:h-5 stroke-custom-black dark:stroke-custom-white hover:bg-custom-grey10 dark:hover:bg-custom-white10 cursor-pointer',
@@ -228,37 +181,54 @@ const TokensTab = (totalBalance: totatBalance) => {
             </CustomTypography>
           </div>
         )}
-        {filteredTokensWithSort.length > 0 ? (
-          filteredTokensWithSort.map((asset) => (
-            <TokenBalanceRow
-              key={`${asset.shortName}:${asset.networkName}`}
-              // hideZeroBalance={hideZeroBalance}
-              assetId={asset.shortName}
-              token={asset}
-            />
-          ))
-        ) : (
-          <div className="mx-auto flex flex-col items-center space-y-2 pt-4">
-            <img src={NoTokenfound} alt="no token found" />
-            <CustomTypography variant="body" type="secondary">
-              {t('Wallet.noTokenfound')}
-            </CustomTypography>
-          </div>
-        )}
+        {filteredTokensWithSort.map((asset) => (
+          <TokenBalanceRow
+            key={`${asset.shortName}:${asset.networkName}`}
+            // hideZeroBalance={hideZeroBalance}
+            assetId={asset.shortName}
+            token={asset}
+            hideBalance={hideBalance}
+            hideLawBalance={hideLawBalance}
+          />
+        ))}
       </div>
-      {filteredTokensWithSort.length <= 0 && (
-        <div className="py-6 flex justify-center">
-          <Button
-            variant="bordered"
-            data-aid="addToken"
-            className="w-40"
-            color="outlined"
-            onClick={() => navigate('/token/add')}
-          >
-            <PlusIcon /> {t('Wallet.addToken')}
-          </Button>
-        </div>
-      )}
+      {isLoading
+        ? [0, 1, 2].map((id) => (
+            <div className="flex px-2 mt-4" key={id}>
+              <div className="w-full flex items-center gap-3 mb-3">
+                <div>
+                  <Skeleton className="flex rounded-full w-8 h-8" />
+                </div>
+                <div className="w-full flex flex-col gap-2">
+                  <Skeleton className="h-2.5 w-full rounded-lg" />
+                  <Skeleton className="h-2.5 w-full rounded-lg" />
+                </div>
+              </div>
+            </div>
+          ))
+        : !isLoading &&
+          (tokenListWithBalanceExists === 0 || filteredTokensWithSort.length <= 0) && (
+            <div>
+              <div className="mx-auto flex flex-col items-center space-y-2 pt-4">
+                <img src={NoTokenfound} alt="no token found" />
+                <CustomTypography variant="body" type="secondary">
+                  {t('Wallet.noTokenfound')}
+                </CustomTypography>
+              </div>
+
+              <div className="py-6 flex justify-center">
+                <Button
+                  variant="bordered"
+                  data-aid="addToken"
+                  className="w-40"
+                  color="outlined"
+                  onClick={() => navigate('/token/add')}
+                >
+                  <PlusIcon /> {t('Wallet.addToken')}
+                </Button>
+              </div>
+            </div>
+          )}
     </div>
   )
 }

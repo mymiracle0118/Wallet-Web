@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { BigNumber, ethers } from 'ethers'
-import Decimal from 'decimal.js'
+import { ethers } from 'ethers'
+import { NetworkToken } from '../utils/types'
 
 const apiKey = '3NH4NS54WSDEEPUS4PX1VNITFYRESTS1WS'
 
@@ -12,54 +12,72 @@ export type ContractTransaction = {
   from: string
   to: string
   value: string
-  gas: BigNumber
-  gasPrice: BigNumber
-  gasUsed: BigNumber
-  cumulativeGasUsed: BigNumber
+  gas: BigInt
+  gasPrice: BigInt
+  gasUsed: BigInt
+  cumulativeGasUsed: BigInt
   tokenDecimal: number
   networkFees?: string
   status?: string
+  address?: string
+  networkName?: string
+  shortName?: string
+  isCustomToken?: boolean
 }
 
 export const getTransactions = async (
-  apiUrl: string,
+  provider: any,
+  asset: NetworkToken,
   address: string,
   contractAddress?: string
-): Promise<Array<ContractTransaction>> => {
-  let query = `?module=account`
-  query += `&action=${contractAddress ? 'tokentx' : 'txlist'}`
-  query += `&address=${address}`
-  if (contractAddress) {
-    query += `&contractaddress=${contractAddress}`
-  }
-  query += `&startblock=0`
-  query += `&endblock=99999999`
-  query += `&page=1`
-  query += `&offset=100`
-  query += `&sort=desc`
-  query += `&apikey=${apiKey}`
-
-  const { data } = await axios.get(`${apiUrl}${query}`)
+): Promise<any> => {
   const transactions: Array<ContractTransaction> = []
-
-  for (const txData of data.result) {
-    transactions.push({
-      blockNumber: txData.blockNumber,
-      time: txData.timeStamp,
-      hash: txData.hash,
-      nonce: txData.nonce,
-      from: txData.from,
-      to: txData.to,
-      value: new Decimal(ethers.utils.formatUnits(txData.value, txData.tokenDecimal)).toDecimalPlaces(18).toString(),
-      gas: ethers.utils.parseUnits(txData.value, 'wei'),
-      gasPrice: ethers.utils.parseUnits(txData.gasPrice, 'wei'),
-      gasUsed: ethers.utils.parseUnits(txData.gasUsed, 'wei'),
-      cumulativeGasUsed: ethers.utils.parseUnits(txData.cumulativeGasUsed, 'wei'),
-      tokenDecimal: txData.tokenDecimal,
-    })
+  let txDataList: any = []
+  try {
+    let etherscanProvider = new ethers.EtherscanProvider(
+      asset.networkName === 'ETH' ? asset.providerNetworkRPC_Network_Name : asset.networkName.toLowerCase()
+    )
+    if (contractAddress) {
+      txDataList = await etherscanProvider.fetch('account', {
+        action: 'tokentx',
+        address: address,
+        sort: 'desc',
+        contractaddress: contractAddress,
+        page: 1,
+        offset: 20,
+      })
+    } else {
+      txDataList = await etherscanProvider.fetch('account', {
+        action: 'txlist',
+        address: address,
+        page: 1,
+        offset: 20,
+        sort: 'desc',
+      })
+    }
+    for (const txData of txDataList) {
+      transactions.push({
+        blockNumber: txData.blockNumber,
+        time: txData.timeStamp ? txData.timeStamp : '',
+        hash: txData.hash,
+        nonce: txData.nonce,
+        from: txData.from,
+        to: txData.to,
+        value: ethers.formatUnits(
+          txData.value,
+          txData.tokenDecimal ? Number(txData.tokenDecimal) : Number(asset.decimal)
+        ),
+        gas: ethers.parseUnits(txData.value, 'wei'),
+        gasPrice: ethers.parseUnits(txData.gasPrice, 'wei'),
+        gasUsed: ethers.parseUnits(txData.gasUsed, 'wei'),
+        cumulativeGasUsed: ethers.parseUnits(txData.cumulativeGasUsed, 'wei'),
+        tokenDecimal: Number(txData.tokenDecimal || asset.decimal),
+      })
+    }
+    return transactions
+  } catch (error) {
+    return []
   }
-
-  return transactions
 }
 
 export const getTransactionDetail = async (apiUrl: string, network: string, txhash: string) => {

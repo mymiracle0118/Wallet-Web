@@ -1,0 +1,24 @@
+{
+  "SUPRA": {
+    "testNet": {
+      "subTitle": "Supra Devnet",
+      "providerNetworkRPC_URL": "https://rpc-devnet.supraoracles.com",
+      "explorerURL": "",
+      "explorerAccountURL": "",
+      "providerNetworkRPC_Network_Name": "3",
+      "networkId": "3",
+      "tokenGasFeeUnitToDisplay": "gwei",
+      "indexerClient": "https://indexer-devnet.staging.gcp.aptosdev.com/v1/graphql"
+    },
+    "mainNet": {
+      "subTitle": "Supra Devnet",
+      "providerNetworkRPC_URL": "https://rpc-devnet.supraoracles.com",
+      "explorerURL": "",
+      "explorerAccountURL": "",
+      "providerNetworkRPC_Network_Name": "3",
+      "networkId": "3",
+      "tokenGasFeeUnitToDisplay": "gwei",
+      "indexerClient": "https://indexer-devnet.staging.gcp.aptosdev.com/v1/graphql"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import OnboardingLayout from 'app/layouts/onboarding-layout/OnboardingLayout'
-import { Button, CustomTypography } from 'components'
+import LogoText from 'assets/logos/logo-text.svg'
+import { Button, CustomTypography, Icon } from 'components'
 import { useAppEnv } from 'env'
 import { useNavigate } from 'lib/woozie'
 import { useTranslation } from 'react-i18next'
@@ -15,21 +16,17 @@ const Onboarding = () => {
           <CustomTypography variant="subtitle" dataAid="welcomeMsg">
             {t('Onboarding.welcomeTo')}
           </CustomTypography>
-          <h1 className="text-custom-black dark:text-custom-white tracking-[0.45rem] text-[2.25rem] font-bold leading-[2rem]">
-            {t('Onboarding.shuttleWallet')}
-          </h1>
+          <div className="text-[8.5rem] h-[5.5rem] !-mt-10">
+            <Icon icon={<LogoText />} size="inherit" />
+          </div>
 
           <CustomTypography dataAid="deFiSlogan" variant="body" className="dark:text-custom-white80 mb-14 pt-2">
             {t('Onboarding.exploreMultiChain')}
           </CustomTypography>
         </div>
 
-        <div className="flex flex-col gap-2 mt-14">
-          <Button
-            color="primary"
-            data-aid="newWalletCreation"
-            onClick={() => navigate('/onboarding/recovery-video-app')}
-          >
+        <div className="flex flex-col gap-2 mt-16">
+          <Button color="primary" data-aid="newWalletCreation" onClick={() => navigate('/onboarding/create')}>
             {t('Onboarding.getNewWallet')}
           </Button>
           <Button

@@ -1,20 +1,12 @@
-# frontend-web-wallet-extension
+# Star Key Web Wallet Extension
 
 ## CONTENTS OF THIS FILE
 
-- Introduction
 - Installation
-- Starting storybook
-  - starting extension storybook
-  - Starting mobile storybook
 - Running extension locally
 - Deploying
 - Repository structure
 - Testing Transactions
-
-## INTRODUCTION
-
-[Shuttle Wallet Documentation.](https://supra-oracles.atlassian.net/wiki/spaces/ECOSYSTEM/pages/90079233/Shuttle+Wallet+Documentation)
 
 ## INSTALLATION EXTENSTION DEPENDENCIES
 
@@ -28,42 +20,37 @@ npm install --global yarn
 yarn
 ```
 
-## STARTING EXTENSION'S STORYBOOK
-
-```
-yarn storybook
-```
+> Copy `.env.development` to `.env` in portal-extension
 
 ## RUNNING EXTENSION LOCALLY
 
 > build the extension
-
 ```
 yarn build
 ```
 
-> add it to your browser
+> Add it to your browser
 > ![Alt Text](extension.gif)
 
 ## DEPLOYING TO VERCEL
 
-> Deploying is automated for both storybook and the extension
+> Deploying is automated for the extension
 
 ## Repository structure
 
 ```
-|- Shuttle Extension
+|- Star Key Wallet Extension
   |- UI Components
-	|- Rest of folders
-|- Mobile
-	|- UI Components
-	|- Rest of folders
+  |- Rest of folders
 |- Shared
-  |- UI
-    |- Colors and fonts and other theme configuration for light and dark theme
+  |- Factory
+    |- Helpers
+    |- Network factory to call services depends on current network
+  |- Hooks
+    |- All storage hooks
   |- Services
+    |- All network services and common services
 |- Extension - Build file. Git ignored
-|- storybook-static - Build file. Git ignored
 ```
 
 ## TESTING TRANSACTIONS
@@ -80,4 +67,4 @@ oven cigar apology become okay nice soldier right situate trend runway baby
 
 You can view transactions from this wallet using the etherscan link below to verify everything has worked
 
-https://goerli.etherscan.io/address/0x63c100ac0c36549c7218070294b60c18d813675c
+https://sepolia.etherscan.io/address/0x63c100ac0c36549c7218070294b60c18d813675c

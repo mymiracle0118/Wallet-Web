@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import HomeWalletLayout from 'layouts/wallet-layout/WalletLayout'
-import { CustomTypography, Button } from 'components'
-import Copy from 'assets/icons/copy.svg'
 import nftDemo from 'assets/demo/nft-demo.png'
+import Copy from 'assets/icons/copy.svg'
+import { Button, CustomTypography } from 'components'
+import HomeWalletLayout from 'layouts/wallet-layout/WalletLayout'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import NftScheduledModal from './NftScheduledModal'
 import { Divider } from '@nextui-org/react'
+import { ISendNFTProps } from '@portal/shared/utils/types'
+import NftScheduledModal from './NftScheduledModal'
 
-type ISendNFTProps = {
-  title?: string
-}
 const SendReview = ({ title = "Machine Hallucinations - Huble Dreams - NG Collector's Edit..." }: ISendNFTProps) => {
   const { t } = useTranslation()
   const [openNftModal, setOpenModal] = useState<boolean>(false)

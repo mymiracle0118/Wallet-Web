@@ -1,26 +1,11 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+import { IPasswordInputProps } from '@portal/shared/utils/types'
 import { CustomTypography, Input } from 'app/components'
-import EyeOff from 'assets/icons/eye-off.svg'
-import Eye from 'assets/icons/eye.svg'
 import classNames from 'classnames'
 import { FC, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { EyeIcon, EyeOffIcon } from '../../Icons'
 
-export interface IPasswordInputProps {
-  placeholder: string
-  id?: string
-  value?: string
-  onChange?: (value: string) => void
-  onSubmit?: () => void
-  subTitle?: string
-  color?: 'primary' | 'secondary' | string
-  mainColor?: boolean
-  disabled?: boolean
-  dataAid?: string
-  name: string
-  className?: string
-  error?: unknown
-  dataTestId?: string
-}
 export const PasswordInput: FC<IPasswordInputProps> = ({
   id,
   subTitle,
@@ -63,7 +48,7 @@ export const PasswordInput: FC<IPasswordInputProps> = ({
             className="dark:stroke-custom-white stroke-custom-black w-6"
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
+            {showPassword ? <EyeIcon className="w-5 h-5" /> : <EyeOffIcon className="w-5 h-5" />}
           </button>
         }
       />

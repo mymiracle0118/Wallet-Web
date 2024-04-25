@@ -61,7 +61,7 @@ module.exports = merge(common, {
     }),
 
     new WebpackBar({
-      name: 'Shuttle Wallet',
+      name: 'Star Key Wallet',
       color: '#ed8936',
     }),
 

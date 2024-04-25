@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import { CrossRoundedRed } from '../Icons'
 
 interface IInputProps extends ComponentProps {
-  placeholder: string
+  placeholder?: string
   id?: string
   dataTestId?: string
   icon?: ReactNode
@@ -18,7 +18,7 @@ interface IInputProps extends ComponentProps {
   onBlur?: React.FocusEventHandler<HTMLDivElement>
   onClick?: React.MouseEventHandler<HTMLDivElement>
   onSubmit?: () => void
-  value?: string
+  value?: ReactNode
   type?: string
   fullWidth?: boolean
   disabled?: boolean
@@ -81,8 +81,8 @@ export const Input = ({
   }
 
   const methods = useFormContext()
-  const handleSubmit = (event) => {
-    if (event.key === 'Enter' && onSubmit) {
+  const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event?.key === 'Enter' && onSubmit) {
       onSubmit()
     }
   }
@@ -118,11 +118,11 @@ export const Input = ({
               data-aid={dataAid}
               autoComplete="off"
               onWheel={(e) => e.target.blur()}
-              className={classnames(inputProps.className, 'bg-transparent text-h4 ')}
+              className={classnames(inputProps.className, 'bg-transparent text-h4 placeholder:font-extrabold ')}
             />
           </>
         )}
-        {(icon || endAdornment) && <div className="pr-3.5">{icon || endAdornment}</div>}
+        {(icon || endAdornment) && <div className="pr-2.5 flex items-center">{icon || endAdornment}</div>}
       </div>
       {error && (
         <CustomTypography
@@ -130,8 +130,8 @@ export const Input = ({
           className="mt-1 text-left font-normal flex items-center"
           variant="small"
         >
-          {errorIcon && <CrossRoundedRed className="mr-1" />}
-          {error}
+          {errorIcon && <CrossRoundedRed className="mr-1 w-3 h-3" />}
+          <span className="w-[95%]">{error as string}</span>
         </CustomTypography>
       )}
     </>

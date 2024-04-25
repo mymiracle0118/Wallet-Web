@@ -1,3 +1,9 @@
+import { getErrorMessage } from '@portal/portal-extension/src/utils/errorConstants'
+import { useSessionStore } from '@portal/shared/hooks/useSessionStore'
+import { useWallet } from '@portal/shared/hooks/useWallet'
+import { decryptData } from '@portal/shared/services/EncryptionService'
+import { IResponse } from '@portal/shared/utils/types'
+import { fromUTF8Array } from '@portal/shared/utils/utf8'
 import {
   APTOS_COIN,
   AptosAccount,
@@ -8,14 +14,8 @@ import {
   TRANSFER_COINS,
 } from 'aptos'
 import { ethers } from 'ethers'
-import { IResponse } from '@portal/shared/utils/types'
 
 export const APTOS_COIN_STORE = '0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>'
-
-export const APTOS_CLIENT = new AptosClient(
-  process.env.APTOS_PROVIDER_LINK || 'https://fullnode.testnet.aptoslabs.com/v1'
-)
-
 export const APTOS_DECIMALS = 8
 
 function formatErc20TokenConvertNormal(amountStr: string, decimals = 6) {
@@ -23,14 +23,14 @@ function formatErc20TokenConvertNormal(amountStr: string, decimals = 6) {
   return Math.round(amount * Math.pow(10, decimals)).toString()
 }
 
-export const getAptosWalletUsingSeed = async (mnemonic?: string, deriveIndex?: number) => {
+export const getAptosWalletUsingSeed = async (mnemonic?: string, derivationPathIndex?: number) => {
   try {
     if (!mnemonic) {
       return
     }
 
     // eslint-disable-next-line quotes
-    const derivationPath = `m/44'/637'/0'/0'/${deriveIndex || 0}'`
+    const derivationPath = `m/44'/637'/0'/0'/${derivationPathIndex || 0}'`
     const account = AptosAccount.fromDerivePath(derivationPath, mnemonic)
 
     const accountObj = account.toPrivateKeyObject()
@@ -50,13 +50,13 @@ export const PAGINATION_COUNT_100 = 100
 export const PAGINATION_COUNT_5 = 5
 export const PAGINATION_COUNT_50 = 50
 
-export const getBalance = async (address?: string, aptosType?: string): Promise<any> => {
+export const getBalance = async (address?: string, aptosType?: string, provider?: any): Promise<any> => {
   if (!address) return '0'
 
   if (!aptosType) aptosType = '0x1::aptos_coin::AptosCoin'
 
   try {
-    const accountResources = await APTOS_CLIENT.getAccountResources(address)
+    const accountResources = await provider.getAccountResources(address)
     const coinStoreResource = accountResources.find(
       (resource) => resource.type === `0x1::coin::CoinStore<${aptosType}>`
     )
@@ -70,9 +70,14 @@ export const getBalance = async (address?: string, aptosType?: string): Promise<
   }
 }
 
-export const getAptosTransactions = async (walletAddress, page) => {
+export const getAptosTransactions = async (
+  walletAddress: string,
+  page: number,
+  provider: any,
+  contractAddress?: string
+) => {
   try {
-    const client = APTOS_CLIENT
+    const client = provider
     const indexerClient = new IndexerClient('https://indexer-testnet.staging.gcp.aptosdev.com/v1/graphql')
 
     const transactionVersion = await indexerClient.getAccountTransactionsData(walletAddress, {
@@ -90,53 +95,78 @@ export const getAptosTransactions = async (walletAddress, page) => {
         return null
       }
 
+      const functionName = getTransactionFunctionName(transaction, contractAddress)
       return {
         blockNumber: '',
-        time: Math.floor(new Date(Number(transaction?.timestamp ?? 0) / 1000).getTime() / 1000),
+        time: transaction?.timestamp
+          ? Math.floor(new Date(Number(transaction?.timestamp ?? 0) / 1000).getTime() / 1000)
+          : '',
         hash: transaction?.hash,
         nonce: '',
         from: transaction?.sender,
         to: transaction?.payload?.arguments?.length === 2 ? transaction?.payload?.arguments[0] : '',
         value:
           transaction?.payload?.arguments?.length === 2
-            ? ethers.utils.formatUnits(transaction?.payload?.arguments[1], 8)
-            : ethers.utils.formatUnits(transaction?.payload?.arguments[0], 8),
+            ? ethers.formatUnits(transaction?.payload?.arguments[1], 8)
+            : ethers.formatUnits(transaction?.payload?.arguments[0], 8),
         gas: transaction?.gas_used ?? '0',
         gasPrice: transaction?.gas_unit_price ?? '0',
+        functionName,
       }
     })
 
     const transactions = await Promise.all(transactionsPromises)
 
-    return transactions.filter((tx) => tx !== null)
+    const filteredTransactions = contractAddress
+      ? transactions.filter((transaction) => transaction.functionName === contractAddress)
+      : transactions.filter((transaction) => transaction.functionName === '')
+
+    return filteredTransactions
   } catch (error) {
     console.error('Error fetching Aptos transactions:', error)
     return []
   }
 }
 
-export const sendAptos = async (toAddress: string, amount: string, privateKey?: string) => {
+const getTransactionFunctionName = (transaction: any, contractAddress: string) => {
+  const functionName =
+    contractAddress && contractAddress === transaction?.payload?.type_arguments[0]
+      ? transaction?.payload?.type_arguments[0]
+      : transaction?.payload?.type_arguments?.toString()?.toLowerCase()?.includes('aptos') ||
+        transaction?.payload?.type_arguments?.length === 0
+      ? ''
+      : transaction?.payload?.type_arguments[0]
+  return functionName
+}
+
+export const sendAptos = async (transaction: any, privateKey?: string, provider?: any) => {
   try {
-    if (!privateKey) {
+    const { to: toAddress, amount, asset } = transaction
+    if (!privateKey || !amount) {
       throw new SyntaxError('Transaction failed')
     }
 
-    const amountInBigInt = BigInt(formatErc20TokenConvertNormal(amount, 8))
+    const amountInBigInt = BigInt(formatErc20TokenConvertNormal(amount, asset?.decimal))
 
     const privateKeyBytes = HexString.ensure(privateKey).toUint8Array()
     const myAccount = new AptosAccount(privateKeyBytes)
 
-    const client = APTOS_CLIENT
+    const client = provider
 
     const builder = new TransactionBuilderRemoteABI(client, {
       sender: myAccount.address(),
     })
-    const rawTxn = await builder.build(TRANSFER_COINS, [APTOS_COIN], [toAddress, amountInBigInt])
+
+    let coin = APTOS_COIN
+    if (asset.tokenContractAddress) {
+      coin = asset.tokenContractAddress
+    }
+
+    const rawTxn = await builder.build(TRANSFER_COINS, [coin], [toAddress, amountInBigInt])
     const bcsTxn = AptosClient.generateBCSTransaction(myAccount, rawTxn)
     const pendingTransaction = await client.submitSignedBCSTransaction(bcsTxn)
 
     const transactions = await client.waitForTransactionWithResult(pendingTransaction.hash)
-
     if (transactions?.success) {
       return successResponse({
         gasPrice: transactions?.gas_unit_price,
@@ -148,7 +178,14 @@ export const sendAptos = async (toAddress: string, amount: string, privateKey?: 
       throw new SyntaxError('Transaction failed')
     }
   } catch (error: any) {
-    throw new SyntaxError('Transaction failed', error)
+    const validationCodeMatch = error.message.match(/Validation Code: (\w+)/)
+    let validationCode = 'error'
+    if (validationCodeMatch && validationCodeMatch.length > 1) {
+      validationCode = validationCodeMatch[1]
+      throw new Error(getErrorMessage(validationCode))
+    } else {
+      throw new Error('Something went wrong')
+    }
   }
 }
 
@@ -156,9 +193,11 @@ const successResponse = (args: IResponse) => {
   return args
 }
 
-export const getFeeData = async (walletAddress?: string, privateKey?: string) => {
+export const getFeeDataAptos = async (walletAddress?: string, provider?: any, encryptedPrivateKey?: string) => {
   try {
-    if (!walletAddress || !privateKey) {
+    const client = provider
+    const mnemonic = useWallet.getState().getPhrase()
+    if (!walletAddress) {
       return {
         gasPrice: '',
         maxFeePerGas: '',
@@ -166,11 +205,26 @@ export const getFeeData = async (walletAddress?: string, privateKey?: string) =>
         gasUsed: '',
       }
     }
-
-    const privateKeyBytes = HexString.ensure(privateKey).toUint8Array()
-    const myAccount = new AptosAccount(privateKeyBytes)
-
-    const client = APTOS_CLIENT
+    let myAccount: any
+    if (mnemonic) {
+      const derivationPath = `m/44'/637'/0'/0'/0'`
+      myAccount = AptosAccount.fromDerivePath(derivationPath, mnemonic)
+    } else if (encryptedPrivateKey && encryptedPrivateKey !== '') {
+      const { getPassword } = useSessionStore.getState()
+      const password = getPassword()
+      const privateKey = (encryptedPrivateKey = fromUTF8Array(
+        JSON.parse(decryptData(encryptedPrivateKey as string, password as string) as string)
+      ))
+      const privateKeyBytes = HexString.ensure(privateKey).toUint8Array()
+      myAccount = new AptosAccount(privateKeyBytes)
+    } else {
+      return {
+        gasPrice: '',
+        maxFeePerGas: '',
+        maxPriorityFeePerGas: '',
+        gasUsed: '',
+      }
+    }
 
     const builder = new TransactionBuilderRemoteABI(client, {
       sender: myAccount.address(),
@@ -208,31 +262,33 @@ export const getFeeData = async (walletAddress?: string, privateKey?: string) =>
   }
 }
 
-export const getAptosTransactionByHash = async (hash: string) => {
-  const client = APTOS_CLIENT
+export const getAptosTransactionByHash = async (hash: string, provider: any) => {
+  const client = provider
 
   const transaction = await client.getTransactionByHash(hash)
 
   return {
     blockNumber: 1,
-    time: Math.floor(new Date(Number(transaction?.timestamp ?? 0) / 1000).getTime() / 1000),
+    time: transaction?.timestamp
+      ? Math.floor(new Date(Number(transaction?.timestamp ?? 0) / 1000).getTime() / 1000)
+      : '',
     hash: transaction?.hash,
     nonce: '',
     from: transaction?.sender,
     to: transaction?.payload?.arguments?.length === 2 ? transaction?.payload?.arguments[0] : '',
     value:
       transaction?.payload?.arguments?.length === 2
-        ? ethers.utils.formatUnits(transaction?.payload?.arguments[1], 8)
-        : ethers.utils.formatUnits(transaction?.payload?.arguments[0], 8),
+        ? ethers.formatUnits(transaction?.payload?.arguments[1], 8)
+        : ethers.formatUnits(transaction?.payload?.arguments[0], 8),
     gas: transaction?.gas_used ?? '0',
-    gasPrice: transaction?.gas_unit_price ? ethers.utils.formatUnits(transaction?.gas_unit_price, 8) : '0',
+    gasPrice: transaction?.gas_unit_price ? ethers.formatUnits(transaction?.gas_unit_price, 8) : '0',
     confirmations: 0,
     wait: 0,
     gasLimit: '',
     data: '',
     chainId: '',
     networkFees: transaction?.gas_unit_price
-      ? ethers.utils.formatUnits(transaction?.gas_unit_price * transaction?.gas_used, 8)
+      ? ethers.formatUnits(transaction?.gas_unit_price * transaction?.gas_used, 8)
       : '0',
   }
 }

@@ -1,16 +1,9 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+import { INftScheduledModalProps } from '@portal/shared/utils/types'
 import { Button, ModalComponent } from 'app/components'
 import mascot from 'assets/images/mascot.png'
+import { useTranslation } from 'react-i18next'
 
-type NftScheduledModalProps = {
-  modalState: boolean
-  nftImage: string
-  nftTitle: string
-  closeModal: () => void
-}
-
-const NftScheduledModal = ({ modalState, nftImage, nftTitle, closeModal }: NftScheduledModalProps) => {
+const NftScheduledModal = ({ modalState, nftImage, nftTitle, closeModal }: INftScheduledModalProps) => {
   const { t } = useTranslation()
   return (
     <ModalComponent

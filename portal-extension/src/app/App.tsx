@@ -1,34 +1,33 @@
-import 'regenerator-runtime/runtime'
 import { Buffer } from 'buffer'
+import 'regenerator-runtime/runtime'
 window.Buffer = window.Buffer || Buffer
 
-import React, { FC, useEffect } from 'react'
-import format from 'date-fns/format'
 import { NextUIProvider } from '@nextui-org/react'
-import { createClient, Provider as URQLProvider } from 'urql'
+import { useSettings } from '@portal/shared/hooks/useSettings'
+import i18n from '@portal/shared/i18n/config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { I18nextProvider } from 'react-i18next'
-import i18n from '@portal/shared/i18n/config'
-import { useSettings } from '@portal/shared/hooks/useSettings'
+import { ModalProvider } from 'components'
+import format from 'date-fns/format'
 import { AppEnvProvider } from 'env'
 import * as Woozie from 'lib/woozie'
-import PageRouter from './PageRouter'
+import React, { FC, useEffect } from 'react'
+import { I18nextProvider } from 'react-i18next'
 import Modal from 'react-modal'
-import DevPanel from './components/dev-panel/DevPanel'
-import { ModalProvider } from 'components'
 import { BrowserRouter } from 'react-router-dom'
+import PageRouter from './PageRouter'
+import DevPanel from './components/dev-panel/DevPanel'
 
+import { ApolloProvider } from '@apollo/client'
+import '@portal/shared/i18n/config'
+import { IAppProps } from '@portal/shared/utils/types'
 import 'assets/style/normalize.css'
 import '../main.css'
-import '@portal/shared/i18n/config'
-import { ApolloProvider } from '@apollo/client'
 import getClient from './services/apollo'
-import { IAppProps } from '@portal/shared/utils/types'
 
-const client = createClient({
-  url: process.env.BFF_API_ENDPOINT || 'http://localhost:8080/graphql',
-})
+// const client = createClient({
+//   url: process.env.BFF_API_ENDPOINT || 'http://localhost:8080/graphql',
+// })
 
 const queryClient = new QueryClient()
 
@@ -90,13 +89,13 @@ const App: FC<IAppProps> = ({ env }) => {
             <ApolloProvider client={getClient()}>
               <ModalProvider>
                 <AppProvider env={env}>
-                  <URQLProvider value={client}>
-                    <QueryClientProvider client={queryClient}>
-                      {process.env.NODE_ENV === 'development' && <DevPanel />}
-                      <PageRouter />
-                      <ReactQueryDevtools initialIsOpen={false} />
-                    </QueryClientProvider>
-                  </URQLProvider>
+                  {/* <URQLProvider value={client}> */}
+                  <QueryClientProvider client={queryClient}>
+                    {process.env.NODE_ENV === 'development' && <DevPanel />}
+                    <PageRouter />
+                    <ReactQueryDevtools initialIsOpen={false} />
+                  </QueryClientProvider>
+                  {/* </URQLProvider> */}
                 </AppProvider>
               </ModalProvider>
             </ApolloProvider>

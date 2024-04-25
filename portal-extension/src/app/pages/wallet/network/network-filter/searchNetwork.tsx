@@ -1,44 +1,39 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Avatar, Listbox, ListboxItem } from '@nextui-org/react'
+import { Avatar, Button, Listbox, ListboxItem } from '@nextui-org/react'
 import { NetworkFactory } from '@portal/shared/factory/network.factory'
 import { useSettings } from '@portal/shared/hooks/useSettings'
 import { useStore } from '@portal/shared/hooks/useStore'
 import { useWallet } from '@portal/shared/hooks/useWallet'
 import { NetworkToken } from '@portal/shared/utils/types'
+import CustomThumbnail from '@src/app/components/CustomThumbnail'
 import { CheckPrimaryIcon, CloseRoundedIcon, SearchIcon } from '@src/app/components/Icons'
-import PasswordPromptModal from 'app/pages/wallet/PasswordPromptModal'
 import classnames from 'classnames'
-import { Button, CustomTypography, Icon, Input, TokenAddressButton } from 'components'
-import { ethers } from 'ethers'
+import { CustomTypography, Icon, Input, TokenAddressButton } from 'components'
 import { useNavigate } from 'lib/woozie'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import NoTokenfound from '../../../../../assets/images/no-activity.png'
 
 const SearchNetwork = () => {
   const { t } = useTranslation()
   const { networkEnvironment: networkType, currentAccount } = useSettings()
-  const { setSelectedNetwork, selectedNetwork, isAccountCreatedByPrivateKey, getNetworksList, storeWallet } =
+  const { setSelectedNetwork, selectedNetwork, isAccountCreatedByPrivateKey, getNetworksList, storeWallet, getPhrase } =
     useWallet()
   const { walletsList } = useStore()
 
   const [selectedNetworks, setSelectedNetworks] = useState(new Set([selectedNetwork]))
-  const [searchInput, setSearchInput] = useState('')
+  const [searchInput, setSearchInput] = useState<string>('')
   const [filteredNetworks, setFilteredNetworks] = useState<NetworkToken[]>([])
   const { navigate } = useNavigate()
-  const [openPasswordModal, setOpenPasswordModal] = useState<boolean>(false)
-  const [responseData, setResponseData] = useState<any>()
-  const [loading, setLoading] = useState<boolean>(false)
 
-  const [checkCreateNetworkWallet, setCheckCreateNetworkWallet] = useState<NetworkToken | null>()
+  const [loading, setLoading] = useState<boolean>(false)
 
   const filteredData: NetworkToken[] = getNetworksList()
   const syncWithSavedNetworks = (filteredList: NetworkToken[]) => {
-    if (isAccountCreatedByPrivateKey || currentAccount?.isAccountImported) {
-      filteredList = filteredData.filter((token) => token.networkName === currentAccount?.networkName)
-    }
-    const filtered: NetworkToken[] = filteredList.map((network: NetworkToken) => {
-      if (currentAccount && walletsList[currentAccount.address]) {
-        const accountWallet = walletsList[currentAccount.address][network.shortName]
+    let filtered: NetworkToken[] = filteredList.map((network: NetworkToken) => {
+      if (currentAccount && walletsList[currentAccount.id]) {
+        const walletNetworkName = network.isEVMNetwork ? 'ETH' : network.networkName
+        const accountWallet = walletsList[currentAccount.id][walletNetworkName]
         if (accountWallet) {
           return {
             ...network,
@@ -48,6 +43,10 @@ const SearchNetwork = () => {
       }
       return network
     }) as NetworkToken[]
+
+    if (isAccountCreatedByPrivateKey || currentAccount?.isAccountImported) {
+      filtered = filtered.filter((token) => token.address)
+    }
     setFilteredNetworks(filtered)
   }
   useEffect(() => {
@@ -71,53 +70,37 @@ const SearchNetwork = () => {
   const listItemClasses = classnames(
     'relative font-sm font-extrabold px-4 py-3 first:rounded-t-medium last:rounded-b-medium rounded-none gap-3 h-14 data-[hover=true]:bg-default-100/80'
   )
-  const selectedIconClass = classnames('absolute left-10 bottom-4 z-20')
+  const selectedIconClass = classnames('absolute left-[33px] bottom-[11px] z-20 w-4 h-4')
 
   const handleSelectNetwork = () => {
     setSelectedNetwork(Array.from(selectedNetworks)[0])
     navigate('/home')
   }
 
-  const handlePasswordPromptSuccess = async (password: string) => {
+  const createNetworkWallet = async (network: NetworkToken) => {
     try {
       setLoading(true)
-      if (checkCreateNetworkWallet && currentAccount) {
-        const accountWallet = walletsList[currentAccount.address][currentAccount.networkName]
-        const currentWallet = await ethers.Wallet.fromEncryptedJson(
-          accountWallet.encryptedWallet as string,
-          password as string
+      const mnemonic = getPhrase()
+      if (network && currentAccount && mnemonic) {
+        const { wallet, derivationPathIndex } = await NetworkFactory.checkAndCreateNextDeriveWallet(
+          mnemonic,
+          network.networkName
         )
-        if (currentWallet) {
-          const { wallet, encryptedPrivateKey, deriveIndex } = await NetworkFactory.checkAndCreateNextDeriveWallet(
-            currentWallet.mnemonic.phrase as string,
-            checkCreateNetworkWallet.networkName
-          )
 
-          await storeWallet(
-            { wallet, encryptedPrivateKey, deriveIndex },
-            '',
-            password,
-            checkCreateNetworkWallet.networkName,
-            currentAccount.address
-          )
-        }
-        setResponseData({ status: true, data: {} })
-        setOpenPasswordModal(false)
+        await storeWallet(
+          { address: wallet.address, derivationPathIndex },
+          '',
+          '',
+          network.networkName,
+          currentAccount.id
+        )
       }
+      setLoading(false)
     } catch (error) {
-      setResponseData({ status: false, data: error })
       setLoading(false)
     }
   }
-  const handlePasswordPromptFail = (error: never) => {
-    setOpenPasswordModal(false)
-    return error
-  }
 
-  const createNetworkWallet = (network: NetworkToken) => {
-    setCheckCreateNetworkWallet(network)
-    setOpenPasswordModal(true)
-  }
   return (
     <>
       <div className="px-1 py-2">
@@ -128,7 +111,7 @@ const SearchNetwork = () => {
       <div className="space-y-4 px-1">
         <Input
           dataAid="networkSearch"
-          placeholder={t('Network.networkName')}
+          placeholder={t('Network.networkName') as string}
           mainColor
           fullWidth
           value={searchInput}
@@ -153,7 +136,7 @@ const SearchNetwork = () => {
         />
         {filteredNetworks.length > 0 && searchInput && (
           <CustomTypography type="secondary" variant="subtitle">
-            {filteredNetworks.length} Result
+            {filteredNetworks.length} {filteredNetworks.length > 1 ? 'Results' : 'Result'}
           </CustomTypography>
         )}
 
@@ -176,37 +159,26 @@ const SearchNetwork = () => {
                   key={data.networkName}
                   data-testid={`${data.networkName}-btn`}
                   className={`text-ellipsis ${selectedNetworks.has(data.id) ? 'bg-default-100/80' : ''}`}
-                  selectedIcon={
-                    selectedNetworks &&
-                    selectedNetworks.has(data.id) && (
-                      <CheckPrimaryIcon className="mr-2 border-3 w-4 h-4 border-solid border-surface-dark-alt rounded-full" />
-                    )
-                  }
+                  selectedIcon={({ isSelected }) => (
+                    <CheckPrimaryIcon
+                      className={`mr-2 w-[18px] h-[18px] checkmark-icon ${isSelected ? 'active' : ''} `}
+                    />
+                  )}
                   startContent={
-                    <>
-                      <div className="flex items-center">
-                        {typeof data.image === 'string' ? (
-                          <Avatar
-                            alt="Networks"
-                            className="flex-shrink-0 rounded-full justify-center w-8 h-8"
-                            size="sm"
-                            src={data.image}
-                          />
-                        ) : (
-                          data.image && <Icon icon={data.image} size="large" />
-                        )}
-                        {!data.image && (
-                          <div className="w-8 h-8 uppercase rounded-full bg-gradient-bg text-custom-white flex items-center justify-center">
-                            {data.networkName.slice(0, 1)}
-                          </div>
-                        )}
-                      </div>
-                      {/* {activeNetwork && selectedNetworks.has(data.id) && (
-                      <div className="absolute left-8 bottom-3 z-10 border-3 border-solid border-surface-dark-alt rounded-full">
-                        <CheckPrimaryIcon />
-                      </div>
-                    )} */}
-                    </>
+                    <div className="flex items-center">
+                      {!data.image ? (
+                        <CustomThumbnail thumbName={data.subTitle} />
+                      ) : typeof data.image === 'string' ? (
+                        <Avatar
+                          alt="Networks"
+                          className="flex-shrink-0 rounded-full justify-center w-8 h-8 bg-custom-white"
+                          size="sm"
+                          src={data.image}
+                        />
+                      ) : (
+                        data.image && <Icon icon={data.image} size="large" />
+                      )}
+                    </div>
                   }
                   endContent={
                     data.address ? (
@@ -221,6 +193,7 @@ const SearchNetwork = () => {
                         variant="bordered"
                         fullWidth={false}
                         size="sm"
+                        disabled={loading}
                         className="rounded-xl font-regular"
                         onClick={() => createNetworkWallet(data)}
                       >
@@ -234,40 +207,37 @@ const SearchNetwork = () => {
               )}
             </Listbox>
           ) : (
-            <CustomTypography type="secondary" className="text-center pt-6" variant="subtitle">
-              No Network Found
-            </CustomTypography>
+            <div className="mx-auto flex flex-col items-center space-y-2 pt-10">
+              <img src={NoTokenfound} alt="no token found" />
+              <CustomTypography variant="body" type="secondary">
+                {t('Network.noNetworkFound')}
+              </CustomTypography>
+            </div>
           )}
         </div>
         <div className={`mt-3 flex items-start ${filteredNetworks.length > 0 ? 'gap-2' : ''}`}>
-          {filteredNetworks.length > 0 && (
-            <Button variant="bordered" data-aid="setCancel" color="outlined" onClick={() => setSelectedNetworks([''])}>
+          {selectedNetworks.size > 0 && ![...selectedNetworks].includes('') && (
+            <Button
+              data-aid="setCancel"
+              variant="bordered"
+              className="h-11"
+              onClick={() => setSelectedNetworks(new Set())}
+            >
               {t('Actions.clear')}
             </Button>
           )}
+
           <Button
             fullWidth
             radius="md"
             data-aid="addNetwork"
-            // isDisabled={selectedNetworks.size === 0}
-            // className={`${selectedNetworks.size > 0 ? 'bg-gradient-button font-extrabold' : ''}`}
-            className={'bg-gradient-button font-extrabold h-11'}
-            // onClick={() => navigate(`/token/${coin.network}/${assetId}`)}
+            className="font-extrabold h-11 bg-gradient-button"
             onClick={handleSelectNetwork}
           >
             {t('Actions.apply')}
           </Button>
         </div>
       </div>
-      <PasswordPromptModal
-        modalState={openPasswordModal}
-        closePromptModal={() => setOpenPasswordModal(false)}
-        onPromptPassword={handlePasswordPromptSuccess}
-        onFail={handlePasswordPromptFail}
-        responseData={responseData}
-        isDismissable={false}
-        buttonDisable={loading}
-      />
     </>
   )
 }

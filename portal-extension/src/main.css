@@ -92,3 +92,24 @@ li {
     @apply appearance-none;
   }
 }
+
+.checkmark-icon {
+  scale: 0;
+  opacity: 0;
+  transition: scale 150ms cubic-bezier(0.7, 0, 0.3, 1), opacity 200ms cubic-bezier(0.7, 0, 0.3, 1);
+}
+.checkmark-icon.active {
+  scale: 1;
+  opacity: 1;
+}
+.checkmark-icon path {
+  stroke-width: 2px;
+  fill: none;
+  stroke-dashoffset: 20;
+  stroke-dasharray: 20;
+  transition: stroke-dashoffset 300ms cubic-bezier(0.7, 0, 0.3, 1);
+}
+.checkmark-icon.active path {
+  stroke-dashoffset: 0;
+  transition-delay: 150ms;
+}

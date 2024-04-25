@@ -1,10 +1,10 @@
-import React, { Fragment, useMemo } from 'react'
-import { CustomTypography, Input, TokenAddressButton } from 'components'
 import { Popover } from '@headlessui/react'
+import { IAddressDropdownProps } from '@portal/shared/utils/types'
+import { CustomTypography, Input, TokenAddressButton } from 'components'
+import { Fragment, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SAFETY_MEASURE, getWalletAddressRegex } from 'utils/constants'
 import { ContactIcon } from '../Icons'
-import { IAddressDropdownProps } from '@portal/shared/utils/types'
 
 export const AddressDropdown = ({
   data,
@@ -23,7 +23,7 @@ export const AddressDropdown = ({
   const regex = getWalletAddressRegex(network)
 
   const invalid_message = useMemo(
-    () => !!selectedUser?.address.length && !selectedUser?.address.match(regex) && 'Invalid address',
+    () => !!selectedUser?.address.length && !selectedUser?.address.match(regex) && t('Actions.invalidAddress'),
     [selectedUser]
   )
   return (
@@ -50,7 +50,7 @@ export const AddressDropdown = ({
             }
             error={invalid_message}
             mainColor
-            placeholder={t('Token.sendAddressPlaceholder')}
+            placeholder={t('Token.sendAddressPlaceholder') as string}
             fullWidth
             icon={
               <div onClick={onBookmarkClick} className="cursor-pointer">
@@ -86,9 +86,6 @@ export const AddressDropdown = ({
                   <div
                     role="button"
                     tabIndex={0}
-                    onKeyPress={() => {
-                      // placeholder
-                    }}
                     key={user.username}
                     onClick={() => onChange(user)}
                     className="flex justify-between items-center shadow-sm pt-[10px] pb-[10px] pl-3 pr-3 cursor-pointer"

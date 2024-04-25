@@ -1,26 +1,24 @@
 import { Menu } from '@headlessui/react'
-import { useSettings } from '@portal/shared/hooks/useSettings'
-import { useWallet } from '@portal/shared/hooks/useWallet'
-import { useNavigate } from 'lib/woozie'
-import React, { Fragment, useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-// import { default as assetsDefaultList } from '@portal/shared/data/assets.json'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Avatar } from '@nextui-org/react'
 import { default as networkTokenList } from '@portal/shared/data/networkTokens.json'
 import { NetworkFactory } from '@portal/shared/factory/network.factory'
-import { useStore } from '@portal/shared/hooks/useStore'
+import { TAccount, useSettings } from '@portal/shared/hooks/useSettings'
+import { useWallet } from '@portal/shared/hooks/useWallet'
+import { useNavigate } from 'lib/woozie'
+import React, { Fragment, useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import { ImportUsernameProps, NetworkToken } from '@portal/shared/utils/types'
 import ChangeProfileAvatar from '@src/app/components/ChangeProfileAvatar'
-import { SpinnerIcon } from '@src/app/components/Icons'
-import { decryptData } from '@src/utils/constants'
-import { Button, CustomTypography, Dropdown, DropdownItem, Form, Icon, Input } from 'app/components'
-import PasswordPromptModal from 'app/pages/wallet/PasswordPromptModal'
+import { CaretDownIcon, SpinnerIcon } from '@src/app/components/Icons'
+
+import { useSessionStore } from '@portal/shared/hooks/useSessionStore'
+import { encryptData } from '@portal/shared/services/EncryptionService'
+import { Button, CustomTypography, Dropdown, DropdownItem, Form, Input } from 'app/components'
 import defaultAvatar from 'assets/images/Avatar.png'
-import { ethers } from 'ethers'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import DropDownIcon from '../../../../../public/images/backgrounds/dropdown_icon.svg'
 
 const networkTokens = Object.values(networkTokenList).filter((token) => token.tokenType === 'Native')
 
@@ -34,26 +32,19 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
   const [errorText, setErrorText] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
   const { clearWallet, storeWallet } = useWallet()
-  const [activeNetwork, setActiveNetwork] = useState<NetworkToken>(networkTokens[0])
-  const { clearAccounts, clearAddressbook, currentAccount } = useSettings()
-  const [showUsernameView, setShowUsernameView] = useState(false)
-  const { saveAccount } = useSettings()
-  // const { importPrivateKey } = useWallet()
-  const [openPasswordModal, setOpenPasswordModal] = useState<boolean>(false)
+  const { getPassword } = useSessionStore()
+  const [activeNetwork, setActiveNetwork] = useState<NetworkToken | any>(null)
+  const { clearAccounts, clearAddressbook, saveAccount, getNewAccountId, accounts, setCurrentAccount } = useSettings()
+  const [showUsernameView, setShowUsernameView] = useState<boolean>(false)
   const [selectedAvatar, setSelectedAvatar] = useState<null | string>(null)
   const [isShowAvatarModal, setShowAvatarModal] = useState<boolean>(false)
-  const [username, setUsername] = useState('')
-  const [responseData, setResponseData] = useState<any>()
-
-  const { walletsList } = useStore()
 
   const schema = yup.object().shape({
     username: yup
       .string()
-      .min(3, t('Account.usernameMinimum'))
-      .max(15, t('Account.usernameMaximum'))
-      .required(t('Account.usernameRequired'))
-      .matches(/^\S*$/, t('Account.usernameNoSpace')),
+      .min(3, t('Account.usernameMinimum') as string)
+      .required(t('Account.usernameRequired') as string)
+      .matches(/^\S*$/, t('Account.usernameNoSpace') as string),
   })
 
   const handleChangeNetwork = (val: string) => {
@@ -77,14 +68,14 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
               setShowUsernameView(true)
             } else {
               // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-              setErrorText(checkPKey.msg)
+              setErrorText(checkPKey?.msg || 'Incorrect Private Key')
             }
           } else {
             setErrorText('Not supporting this network key!')
           }
         } else {
           // import when onboarding
-          clearWallet()
+          await clearWallet()
           clearAccounts()
           clearAddressbook()
 
@@ -94,10 +85,10 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
             const checkKey = await networkFactory.importWalletByPrivateKey(privateKey, activeNetwork.networkName)
             if (checkKey && checkKey.result) {
               const fetchusername = nextToFetchUsername ? nextToFetchUsername.toString() : '' // Use an empty string if nextToFetchUsername is undefined
-              const chain = activeNetwork.networkName || '' // Use an empty string if activeNetwork.networkName is undefined
+              const chain: string = activeNetwork.networkName || '' // Use an empty string if activeNetwork.networkName is undefined
               navigate(fetchusername + '/' + chain)
             } else {
-              setErrorText(checkKey.msg)
+              setErrorText('Incorrect Private Key')
             }
             setLoading(false)
           } else {
@@ -119,54 +110,59 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
   const {
     register,
     handleSubmit,
-    // setError,
     formState: { errors, isValid, isDirty },
+    setError,
     watch,
   } = methods
 
-  const handleImportPrivateKey = ({ username }: { username: string }) => {
-    setOpenPasswordModal(true)
-    setUsername(username)
-  }
+  const handleImportPrivateKey = async ({ username }: { username: string }) => {
+    const hasUsername = Object.values(accounts).some((account) => account.username === username)
+    if (hasUsername) {
+      setError('username', { type: 'custom', message: 'Duplicated label' })
+    } else {
+      const password = getPassword()
+      try {
+        setLoading(true)
+        const accountId = getNewAccountId()
 
-  const handlePasswordPromptSuccess = async (password: string) => {
-    try {
-      setLoading(true)
-      if (currentAccount) {
-        const accountWallet = walletsList[currentAccount.address][currentAccount.networkName]
-        const networkToken = useWallet.getState().getNetworkTokenWithCurrentEnv(currentAccount.networkName)
-        let checkPassword: any
-        if (networkToken.isEVMNetwork) {
-          checkPassword = await ethers.Wallet.fromEncryptedJson(
-            accountWallet.encryptedWallet as string,
-            password as string
-          )
-        } else {
-          checkPassword = await decryptData(accountWallet.encryptedWallet as string, password as string)
-        }
-
-        if (checkPassword) {
+        if (password) {
           const networkFactory = NetworkFactory.selectByNetworkId(activeNetwork.networkName)
-          const { wallet, encryptedPrivateKey, address } = await networkFactory.importPrivateKey(privateKey)
-          await storeWallet({ wallet, encryptedPrivateKey, address }, '', password, activeNetwork.networkName, address)
-            .then(() => saveAccount(username, address, activeNetwork.networkName, false, true))
-            .catch((e: Error) => console.log(e.message))
-        }
-        setResponseData({ status: true, data: {} })
-        setOpenPasswordModal(false)
-        setLoading(false)
-        navigate('/account')
-      }
-    } catch (error) {
-      setResponseData({ status: false, data: error })
-      setLoading(false)
-    }
-  }
+          const { encryptedPrivateKey: newPrivateKey, address } = await networkFactory.importPrivateKey(privateKey)
+          const encryptedPrivateKey = encryptData(JSON.stringify(newPrivateKey), password)
 
-  const handlePasswordPromptFail = (error: never) => {
-    console.log(error)
-    setOpenPasswordModal(false)
-    return error
+          await storeWallet({ address }, '', '', activeNetwork.networkName, accountId)
+            .then(async () => {
+              const accountObj = {
+                id: accountId,
+                username,
+                address,
+                networkName: activeNetwork.networkName,
+                isPrimary: false,
+                isAccountImported: true,
+                encryptedPrivateKey,
+                avatar: selectedAvatar || defaultAvatar,
+              }
+              saveAccount(accountObj)
+
+              if (activeNetwork.networkName === 'APT') {
+                await storeWallet({ address }, '', '', 'SUPRA', accountId).then()
+              }
+              if (activeNetwork.networkName === 'SUPRA') {
+                await storeWallet({ address }, '', '', 'APT', accountId).then()
+              }
+              setCurrentAccount(accountObj as TAccount)
+            })
+            .catch((e: Error) => console.log(e.message))
+
+          setLoading(false)
+          navigate('/account')
+        } else {
+          setLoading(false)
+        }
+      } catch (error) {
+        setLoading(false)
+      }
+    }
   }
 
   return (
@@ -179,15 +175,26 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
 
           <Dropdown
             classDynamicChild="h-[16.25rem] overflow-x-hidden overflow-y-scroll w-full border border-solid border-[#424250]"
-            classDynamicMenu="bg-custom-white10 mb-4 mt-6 rounded-md p-1 !table"
+            classDynamicMenu="bg-custom-white10 mb-4 mt-6 rounded-md p-1 w-full"
             anchor={
-              <Menu.Button data-aid="currencyDropdown" className="p-2 rounded-xl flex items-center gap-2">
-                <img alt="icon" src={activeNetwork?.image} className="h-6 rounded-full" />
+              <Menu.Button
+                data-aid="currencyDropdown"
+                className={`rounded-xl flex items-center gap-2 justify-between w-full ${
+                  activeNetwork?.networkName ? 'px-2 py-1' : 'p-2'
+                }`}
+              >
+                {activeNetwork?.networkName && (
+                  <Avatar
+                    src={activeNetwork?.image}
+                    alt={activeNetwork?.title}
+                    className="w-10 !h-auto overflow-hidden rounded-full bg-custom-white"
+                  />
+                )}
 
-                <CustomTypography className="w-60 text-left mr-4" variant="subtitle">
-                  {activeNetwork?.networkName}
+                <CustomTypography className="w-full text-left mr-4" variant="subtitle">
+                  {activeNetwork?.networkName || 'Choose Network'}
                 </CustomTypography>
-                <Icon size="small" icon={<DropDownIcon />} />
+                <CaretDownIcon className="w-6 h-6" />
               </Menu.Button>
             }
           >
@@ -202,28 +209,46 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
               />
             ))}
           </Dropdown>
-          <Input
-            name="privateKey"
-            multiline={3}
-            dataTestId="input-private-key"
-            placeholder="Enter your private key"
-            value={privateKey}
-            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
-              setPrivateKey(event.target.value), setErrorText('')
-            }}
-            mainColor
-            // error={errors.privateKey?.message}
-          />
-          <span className="text-feedback-negative font-semibold mt-2">{errorText}</span>
+          <div className="relative">
+            <Input
+              name="privateKey"
+              multiline={3}
+              dataTestId="input-private-key"
+              placeholder="Enter your private key"
+              value={privateKey}
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+                setPrivateKey(event.target.value), setErrorText('')
+              }}
+              mainColor
+              error={errorText}
+            />
+            {privateKey.length > 0 && (
+              <div className={`flex justify-end w-full absolute right-0 ${errorText ? '-bottom-4' : '-bottom-9'}`}>
+                <Button
+                  onClick={() => {
+                    setPrivateKey('')
+                    setErrorText('')
+                  }}
+                  variant="bordered"
+                  color="outlined"
+                  size="sm"
+                  type="clear"
+                  className="w-12 h-7 mt-3 font-bold"
+                >
+                  {t('Actions.clear')}
+                </Button>
+              </div>
+            )}
+          </div>
 
           <Button
             type="submit"
-            className="mt-4"
+            className="mt-12"
             data-aid="nextNavigation"
             data-test-id="button-next"
             onClick={handleNextClick}
-            color={`${!privateKey.length || loading ? 'disabled' : 'primary'}`}
-            isDisabled={!privateKey.length || loading}
+            color={`${!privateKey.length || loading || !activeNetwork?.networkName ? 'disabled' : 'primary'}`}
+            isDisabled={!privateKey.length || loading || !activeNetwork?.networkName}
           >
             {t('Actions.next')}
           </Button>
@@ -255,9 +280,20 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
                   dataTestId="username"
                   mainColor
                   id="username"
-                  placeholder={t('Onboarding.accountName')}
+                  placeholder={t('Onboarding.accountName') as string}
                   endAdornment={
-                    <div className="text-[12px] text-fotter-dark-inactive">{watch('username')?.length || 0}/15</div>
+                    <div
+                      className={`text-xs ${
+                        watch('username')?.length > 15 ? 'text-feedback-negative' : 'text-fotter-dark-inactive'
+                      }`}
+                    >
+                      {watch('username')?.length || 0}/15
+                    </div>
+                  }
+                  className={
+                    errors.username || watch('username')?.length > 15
+                      ? '!text-feedback-negative !border !border-feedback-negative'
+                      : ''
                   }
                   fullWidth
                   disabled={loading}
@@ -272,8 +308,12 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
               <Button
                 type="submit"
                 data-test-id="create-subaccount-btn"
-                color={!isDirty || !isValid || loading ? 'disabled' : 'primary'}
-                isDisabled={!isDirty || !isValid || loading}
+                color={
+                  !isDirty || !isValid || loading || errors.username || watch('username')?.length > 15
+                    ? 'disabled'
+                    : 'primary'
+                }
+                isDisabled={!isDirty || !isValid || loading || errors.username || watch('username')?.length > 15}
                 isLoading={loading}
                 spinner={<SpinnerIcon />}
               >
@@ -292,21 +332,6 @@ const ImportByPrivateKeyComponents = ({ nextToFetchUsername }: ImportUsernamePro
               handleAvatarChange={() => setShowAvatarModal(false)}
             />
           </Form>
-          {/* <PasswordPromptModal
-            modalState={openPasswordModal}
-            closePromptModal={() => setOpenPasswordModal(false)}
-            onSuccess={handlePasswordPromptSuccess}
-            getPassword={setPassword}
-          /> */}
-          <PasswordPromptModal
-            modalState={openPasswordModal}
-            closePromptModal={() => setOpenPasswordModal(false)}
-            onPromptPassword={handlePasswordPromptSuccess}
-            onFail={handlePasswordPromptFail}
-            responseData={responseData}
-            isDismissable={false}
-            buttonDisable={loading}
-          />
         </Fragment>
       )}
     </>

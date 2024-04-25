@@ -1,27 +1,27 @@
+import { ethers } from 'ethers'
+import { produce } from 'immer'
 import create from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { ethers } from 'ethers'
-import produce from 'immer'
 
 import { default as defaultAssets } from '../data/assets.json'
 import { default as networkTokens } from '../data/networkTokens.json'
+import { default as networkUrlsSupraDevnet } from '../data/networkUrls-SupraDevnet.json'
+import { default as networkUrlsSupraQanet } from '../data/networkUrls-SupraQanet.json'
 import { default as networkUrls } from '../data/networkUrls.json'
 
 import moment from 'moment'
 
-import { toUTF8Array } from '@portal/shared/utils/utf8'
-import { getNetworkProvider } from '@portal/shared/utils/getNetworkProvider'
-import { chromeSyncStorage } from '@portal/shared/utils/chromeSyncStorage'
 import { ContractTransaction } from '@portal/shared/services/etherscan'
+import { chromeLocalStorage } from '@portal/shared/utils/chromeSyncStorage'
 import { NetworkFactory } from '../factory/network.factory'
 
+import { GasOption, NetworkToken, NetworkTokensList } from '@portal/shared/utils/types'
 import { useSettings } from './useSettings'
-import { EnvironmentType, GasOption, NetworkToken, NetworkTokensList } from '@portal/shared/utils/types'
 // @ts-ignore
-import defaultAvatar from 'assets/images/Avatar.png'
+import { isAlphaBuild, isBetaBuild } from '@portal/portal-extension/src/app/services/config'
+import { decryptData } from '../services/EncryptionService'
+import { useSessionStore } from './useSessionStore'
 import { useStore } from './useStore'
-import { decryptData, encryptData } from '@portal/portal-extension/src/utils/constants'
-
 export type AssetType = 'layer1' | 'erc20' | 'erc721'
 
 export type listNetwork = {
@@ -93,7 +93,16 @@ export type TokenProfitCollection = {
   time: Date
 }
 
+export enum OnBoardingTypes {
+  privateKey = 'privateKey',
+  recoveryPhrase = 'recoveryPhrase',
+  fileRecovery = 'fileRecovery',
+  createdAccount = 'createdAccount',
+}
+
 export type WalletState = {
+  onboardingBy: OnBoardingTypes | string
+  isCreateWalletProcessCompleted: boolean
   isAccountCreatedByPrivateKey: boolean
   isAccountImported: boolean
   assets: Array<Asset>
@@ -111,86 +120,68 @@ export type WalletState = {
   lockTime: number
   lockWallet: boolean
   createWallet: () => void
-  clearWallet: () => void
-  suiWallet?: any
-  setSuiWallet?: (wallet: any) => void
+  clearWallet: () => Promise<void>
   storeWallet: (
     walletObj: any,
     username: string,
     password: string,
     network?: string,
-    accountKey?: string,
-    deriveIndex?: number
+    accountId?: string,
+    derivationPathIndex?: number
   ) => Promise<string>
   openWallet: (password: string) => Promise<void>
-  recoverWallet: (mnemonic: string) => void
   getAsset: (network: string, assetId: string) => Asset
   getDefaultAsset: (network: string, assetId: string) => Asset
   getNFTAsset: (network: string, contractAddress: string, assetId: string) => Asset
   setTransaction: (transaction: Transaction) => void
-  addNetworkAsset: (networkAsset: NetworkAssetsCollection) => void
-  removeNetworkAsset: (networkAssetId: string) => void
   setTransactionDetails: (transactionDetails: ContractTransaction) => void
   setPendingTransactions: (pendingTransactions: ContractTransaction[] | undefined) => void
   sendTransaction: (
-    maxPriorityFeePerGas: ethers.BigNumber,
-    maxFeePerGas: ethers.BigNumber,
-    gasLimit: number
+    maxPriorityFeePerGas: number,
+    maxFeePerGas: number,
+    gasLimit: number,
+    password?: string,
+    shouldCancelTransaction?: boolean,
+    cancelTransactionObject?: any
   ) => Promise<{}>
   cancelTransaction: (
     network: string,
     txData: {
-      nonce: string
-      maxPriorityFeePerGas: ethers.BigNumber
-      maxFeePerGas: ethers.BigNumber
+      nonce: number
+      maxPriorityFeePerGas: number
+      maxFeePerGas: number
     }
   ) => Promise<void>
   setLockTimer: (lockTime: number) => void
   setLockWallet: (lock: boolean) => void
   setActiveWallet: (address: string) => void
-  addCustomToken: (tokenData: Asset) => Promise<void>
-  removeToken: (network: string, assetId: string) => void
   addNFT: (nft: Asset) => void
   removeNFT: (nft: Asset) => void
   changeAvatar: (avatar: string) => void
-  getNetworkList: () => Array<{ network: string; image: string | undefined }>
   tokenProfitLossCollection: Array<TokenProfitCollection>
   setTokenProfitLoss: (data: TokenProfitCollection) => void
   setUsername: (username: string) => void
   selectedNetwork?: string
   setSelectedNetwork: (selectedNetwork: string) => void
   networkType: string
-  setNetworkType: (type: any) => void
   defaultOnboardingNetwork: string
-  defaultNetworkTokens: { [key: string]: { [x: string]: string } } | null
-  defaultNetworkUrls: { [key: string]: { [envType: string]: { [key: string]: string } } } | null
+  defaultPrimaryNetwork: string[]
   walletAddress: { [key: string]: { [key: string]: string } }
-  tokenArrayWithBalance: NetworkTokensList
   currentSelectedToken: NetworkToken | null
   selectedTokensList: string[]
-  tokensList: NetworkTokensList
   getNetworksList: () => NetworkToken[]
-  getNetworksTokenList: () => NetworkTokensList
-  refreshTokenList: (envType: EnvironmentType) => void
+  getNetworksTokenList: (defaultNetworkOnly?: boolean) => NetworkTokensList
   getNetworkTokenWithCurrentEnv: (key: string) => NetworkToken
+  getPhrase: () => string | null
+  setCreateWalletProcessCompleted: (isCreateWalletProcessCompleted: boolean) => void
+  setOnboardingBy: (onboardingBy: OnBoardingTypes) => void
 }
 
 export type AccountWallet = {
   address: string
-  encryptedWallet?: string | null
-  encryptedPrivateKey?: (string | number)[] | undefined
-  isPrimary: boolean
-  deriveIndex?: number
+  derivationPathIndex: number
 }
 
-const getTokensListWithEnvUrls = (envType: EnvironmentType): NetworkTokensList => {
-  let tokens: NetworkTokensList = {}
-  for (const key in networkTokens) {
-    const token = networkTokens[key]
-    tokens[key] = { ...token, ...networkUrls[token.networkName][envType] }
-  }
-  return tokens
-}
 const initialState = {
   assets: [],
   networkAssets: [],
@@ -209,13 +200,12 @@ const initialState = {
   networkType: 'testnet',
   isAccountCreatedByPrivateKey: false,
   defaultOnboardingNetwork: 'ETH',
-  defaultNetworkTokens: null, // networkTokens as any,
-  defaultNetworkUrls: null, //networkUrls as any,
+  defaultPrimaryNetwork: ['ETH', 'SUPRA'], //The primary network is not hidden from the token list.
   walletAddress: {},
-  tokenArrayWithBalance: {},
   currentSelectedToken: null,
   selectedTokensList: [],
-  tokensList: getTokensListWithEnvUrls('testNet'),
+  isCreateWalletProcessCompleted: false,
+  onboardingBy: '',
 }
 
 const encryptOptions = {
@@ -224,112 +214,86 @@ const encryptOptions = {
   },
 }
 
-export const defaultNetworkTokens = networkTokens as any
-export const defaultNetworkUrls = networkUrls as any
+// Set supra network Devnet & Qanet url according build type
+let defaultNetworkUrls = networkUrls as any
+if (isAlphaBuild) {
+  defaultNetworkUrls = { ...networkUrls, ...networkUrlsSupraDevnet } as any
+} else if (isBetaBuild) {
+  defaultNetworkUrls = { ...networkUrls, ...networkUrlsSupraQanet } as any
+}
 
 export const useWallet = create<WalletState>()(
   devtools(
     persist(
       (set, get) => ({
         ...initialState,
-        refreshTokenList: (envType: EnvironmentType) => {
-          const tokens: { [key: string]: NetworkToken } = getTokensListWithEnvUrls(envType)
-          set({ tokensList: tokens })
-        },
         getNetworkTokenWithCurrentEnv: (key: string): NetworkToken => {
           const { networkEnvironment } = useSettings.getState()
           const networkTokenList = get().getNetworksTokenList()
           const token = networkTokenList[key] as NetworkToken
           if (token) {
             const networkUrlsObject =
-              networkUrls[token.networkName] && networkUrls[token.networkName][networkEnvironment]
-                ? { ...networkUrls[token.networkName][networkEnvironment] }
+              defaultNetworkUrls[token.networkName] && defaultNetworkUrls[token.networkName][networkEnvironment]
+                ? { ...defaultNetworkUrls[token.networkName][networkEnvironment] }
                 : {}
             return { ...token, ...networkUrlsObject }
           }
           throw new Error(`Invalid network token :: ${key}`)
         },
-        getNetworksTokenList: (): NetworkTokensList | any => {
-          const { networkEnvironment, currentAccount, accounts } = useSettings.getState()
-
+        getNetworksTokenList: (defaultNetworkOnly?: boolean): NetworkTokensList | any => {
           const defaultNetworkTokensList = networkTokens as unknown as NetworkTokensList
-          let accountsCustomToken: NetworkTokensList =
-            currentAccount && accounts[currentAccount.address]
-              ? accounts[currentAccount.address].customTokens[networkEnvironment]
+          if (defaultNetworkOnly) {
+            return defaultNetworkTokensList
+          }
+
+          const { networkEnvironment, currentAccount, accounts } = useSettings.getState()
+          const { customNetworks } = useStore.getState()
+
+          const accountsCustomToken: NetworkTokensList =
+            currentAccount && accounts[currentAccount.id]
+              ? accounts[currentAccount.id].customTokens[networkEnvironment]
               : {}
-          return { ...defaultNetworkTokensList, ...accountsCustomToken }
+
+          return { ...defaultNetworkTokensList, ...customNetworks[networkEnvironment], ...accountsCustomToken }
         },
         getNetworksList: (): NetworkToken[] => {
-          const { tokensList } = get()
           const networkTokenList = get().getNetworksTokenList()
           const tokens: NetworkToken[] = Object.values(networkTokenList).filter((token) => {
             return token.tokenType === 'Native'
           }) as NetworkToken[]
           return tokens
         },
-        setNetworkType: (type) => {
-          set({ networkType: type })
-        },
         createWallet: () => {
           const asset = defaultAssets.find((n) => n.network === 'mainnet') as Asset
           const wallet = NetworkFactory.selectNetwork(asset).createWallet()
           set(wallet)
         },
-        setSuiWallet: (wallet) => {
-          set({ suiWallet: wallet })
-        },
-        clearWallet: () => {
+        clearWallet: async () => {
           set(initialState)
-          useStore.getState().clearStore()
+          await useStore.getState().clearStore()
+          await useSessionStore.getState().clearStore()
+          await useSettings.getState().clearStore()
         },
-
-        addNetworkAsset: (networkAsset: NetworkAssetsCollection) => {
-          set(
-            produce((state: WalletState) => {
-              state.networkAssets.push(networkAsset)
-            })
-          )
-        },
-        removeNetworkAsset: (networkAssetId: string) => {
-          set(
-            produce((state: WalletState) => {
-              state.networkAssets = state.networkAssets.filter((n) => n.networkId !== networkAssetId)
-            })
-          )
-        },
-        storeWallet: async (
-          walletObj: any,
-          username: string,
-          password: string,
-          network: string,
-          accountKey?: string
-        ) => {
-          const { wallet, encryptedPrivateKey, address, deriveIndex } = walletObj
+        storeWallet: async (walletObj: any, username: string, password: string, network: string, accountId: string) => {
+          const { address: walletAddress, derivationPathIndex } = walletObj
           const networkToken = get().getNetworkTokenWithCurrentEnv(network)
 
-          if (!wallet) {
-            throw new Error('no wallet created')
-          }
-
-          const walletAddress = address ? address : wallet.address
-          let encryptedWallet = null
-
-          if (networkToken.isEVMNetwork) {
-            encryptedWallet = await wallet.encrypt(password, encryptOptions)
-          } else {
-            encryptedWallet = encryptData(wallet, password)
-          }
+          // const walletAddress = address ? address : wallet.address
+          // let encryptedWallet = null
+          //
+          // if (networkToken.isEVMNetwork) {
+          //   encryptedWallet = await wallet.encrypt(password, encryptOptions)
+          // } else {
+          //   encryptedWallet = encryptData(wallet, password)
+          // }
 
           const newWalletObj: AccountWallet = {
             address: walletAddress,
-            encryptedPrivateKey: encryptedPrivateKey,
-            encryptedWallet,
-            isPrimary: false,
-            deriveIndex: deriveIndex,
+            derivationPathIndex: derivationPathIndex ? derivationPathIndex : 0,
           }
           const { addWalletToList, addTokenToList } = useStore.getState()
-          await addWalletToList(accountKey || walletAddress, networkToken.networkName, newWalletObj)
-          await addTokenToList(accountKey || walletAddress, networkToken.shortName)
+          await addWalletToList(accountId, networkToken.networkName, newWalletObj)
+          await addTokenToList(accountId, networkToken.shortName)
 
           return walletAddress
         },
@@ -343,40 +307,26 @@ export const useWallet = create<WalletState>()(
         },
 
         openWallet: async (password: string) => {
-          const { currentAccount } = useSettings.getState()
-          const { walletsList } = useStore.getState()
+          const { currentAccount, accounts } = useSettings.getState()
+          const primaryAccount = Object.values(accounts).find((acc) => acc.isPrimary)
           try {
-            if (currentAccount) {
-              const accountWallet = walletsList[currentAccount.address][currentAccount.networkName]
-              const networkToken = useWallet.getState().getNetworkTokenWithCurrentEnv(currentAccount.networkName)
-              let checkPassword: any
-              if (networkToken.isEVMNetwork) {
-                checkPassword = await ethers.Wallet.fromEncryptedJson(
-                  accountWallet.encryptedWallet as string,
-                  password as string
-                )
-              } else {
-                checkPassword = await decryptData(accountWallet.encryptedWallet as string, password as string)
-              }
-              if (checkPassword) {
+            if (currentAccount && primaryAccount) {
+              const { encryptedWallet, encryptedPrivateKey } = primaryAccount
+              const wallet = decryptData((encryptedWallet || encryptedPrivateKey) as string, password)
+              if (wallet) {
+                const { setPassword } = useSessionStore.getState()
+                setPassword(password)
                 set({
                   lockWallet: false,
                 })
+              } else {
+                throw new Error('Incorrect password')
               }
             }
-            throw new Error('Invalid password.')
           } catch (error) {
-            throw new Error(`Error: ${error.message}`)
+            console.log(error)
+            throw new Error('Incorrect password')
           }
-        },
-
-        recoverWallet: (mnemonic: string) => {
-          if (!ethers.utils.isValidMnemonic(mnemonic)) {
-            throw new Error('Incorrect secret recovery phrase')
-          }
-
-          const wallet = ethers.Wallet.fromMnemonic(mnemonic)
-          set({ wallet, encryptedPrivateKey: toUTF8Array(wallet.privateKey) })
         },
 
         getAsset: (network: string, assetId: string) => {
@@ -425,44 +375,99 @@ export const useWallet = create<WalletState>()(
         },
 
         sendTransaction: async (
-          maxPriorityFeePerGas: ethers.BigNumber,
-          maxFeePerGas: ethers.BigNumber,
-          gasLimit: number
+          maxPriorityFeePerGas: number,
+          maxFeePerGas: number,
+          gasLimit: number,
+          password?: string,
+          shouldCancelTransaction?: boolean,
+          cancelTransactionObject?: any
         ) => {
           const { transaction } = get()
-          const getCurrentAccount = useSettings.getState().currentAccount
-          if (getCurrentAccount && transaction) {
-            const currentAccountWallet = useStore.getState().walletsList[getCurrentAccount?.address]
-            const encryptedPrivateKey = currentAccountWallet[transaction.asset.shortName]?.encryptedPrivateKey
 
-            const fromAddress = transaction.asset.address
+          const { accounts, currentAccount } = useSettings.getState()
+          const primaryAccount = Object.values(accounts).find((acc) => acc.isPrimary)
 
-            const tranData = await NetworkFactory.selectByNetworkId(transaction.asset.shortName).sendTransaction({
-              maxPriorityFeePerGas,
-              maxFeePerGas,
-              gasLimit,
-              encryptedPrivateKey,
-              transaction,
-              fromAddress,
-            })
-            const { nonce, txHash, txDetails } = tranData
-            set(
-              produce((state: WalletState) => {
-                if (state.transaction) {
-                  state.transaction.hash = txHash
-                  state.transaction.nonce = nonce || ''
-                }
-                if (txDetails) {
-                  state.pendingTransactions?.unshift({
-                    ...txDetails,
-                    hash: txHash,
-                    nonce,
-                    value: state.transaction?.amount,
-                  })
-                }
-              })
-            )
-            return tranData
+          if (currentAccount && transaction) {
+            const walletNetworkName = transaction.asset.isEVMNetwork ? 'ETH' : transaction.asset.networkName
+            const networkFactory = NetworkFactory.selectByNetworkId(transaction.asset.shortName)
+            const currentAccountWallet = useStore.getState().walletsList[currentAccount?.id]
+
+            let encryptedPrivateKey: any
+            if (
+              currentAccount.isAccountImported ||
+              (currentAccount.encryptedPrivateKey && !currentAccount.encryptedWallet)
+            ) {
+              encryptedPrivateKey = JSON.parse(
+                decryptData(currentAccount.encryptedPrivateKey as string, password as string) as string
+              )
+            } else {
+              let encryptedWallet = primaryAccount?.encryptedWallet
+
+              const mnemonic = decryptData(encryptedWallet as string, password as string)
+              if (mnemonic) {
+                const networkFactory = NetworkFactory.selectByNetworkId(walletNetworkName)
+                const walletObj = await networkFactory.createWallet(
+                  mnemonic,
+                  currentAccountWallet[walletNetworkName].derivationPathIndex
+                )
+                encryptedPrivateKey = walletObj.encryptedPrivateKey
+              }
+            }
+            if (encryptedPrivateKey) {
+              const fromAddress = transaction.asset.address
+              let tranData: any
+              if (shouldCancelTransaction) {
+                tranData = await NetworkFactory.selectByNetworkId(transaction.asset.shortName).sendTransaction({
+                  maxPriorityFeePerGas,
+                  maxFeePerGas,
+                  gasLimit,
+                  encryptedPrivateKey,
+                  transaction,
+                  fromAddress,
+                  shouldCancelTransaction,
+                  cancelTransactionObject,
+                })
+                tranData.value = Number(cancelTransactionObject.value as string)
+              } else {
+                tranData = await NetworkFactory.selectByNetworkId(transaction.asset.shortName).sendTransaction({
+                  maxPriorityFeePerGas,
+                  maxFeePerGas,
+                  gasLimit,
+                  encryptedPrivateKey,
+                  transaction,
+                  fromAddress,
+                })
+              }
+              const { nonce, txHash, txDetails } = tranData
+              set(
+                produce((state: WalletState) => {
+                  if (state.transaction) {
+                    state.transaction.hash = txHash
+                    state.transaction.nonce = nonce || ''
+                  }
+                  if (txDetails) {
+                    state.pendingTransactions?.unshift({
+                      ...txDetails,
+                      hash: txHash,
+                      nonce,
+                      value:
+                        tranData.value === 'undefined' || tranData.value === undefined
+                          ? state.transaction?.amount
+                          : tranData.value,
+                      address: fromAddress,
+                      from: fromAddress,
+                      networkName: transaction.asset.networkName,
+                      shortName: transaction.asset.shortName,
+                      status: 'Pending',
+                      isCustomToken: transaction.asset.tokenContractAddress ? true : false,
+                    })
+                  }
+                })
+              )
+              return tranData
+            } else {
+              throw new Error('Transaction signer not found.')
+            }
           } else {
             throw new Error('Current Account Or Transaction not found')
           }
@@ -471,22 +476,35 @@ export const useWallet = create<WalletState>()(
         cancelTransaction: async (
           network: string,
           txData: {
-            nonce: string
-            maxPriorityFeePerGas: ethers.BigNumber
-            maxFeePerGas: ethers.BigNumber
+            nonce: number
+            maxPriorityFeePerGas: number
+            maxFeePerGas: number
           }
         ) => {
-          const { wallet } = get()
-          if (wallet) {
-            const provider = getNetworkProvider(network)
-            const walletSigner = wallet.connect(provider)
-            await walletSigner.sendTransaction({
+          try {
+            const cancelTransactionObject = {
               ...txData,
               data: '0x',
-              to: ethers.constants.AddressZero,
-              value: ethers.utils.parseEther('0.1'),
+              to: ethers.ZeroAddress,
+              value: ethers.parseEther('0'),
               gasLimit: 58000,
-            })
+            }
+            const password = useSessionStore.getState().getPassword()
+            if (password) {
+              const cancelledResponse = await useWallet
+                .getState()
+                .sendTransaction(
+                  txData.maxPriorityFeePerGas,
+                  txData.maxFeePerGas,
+                  58000,
+                  password,
+                  true,
+                  cancelTransactionObject
+                )
+              return cancelledResponse
+            }
+          } catch (errorCancel) {
+            throw new Error(errorCancel)
           }
         },
 
@@ -498,45 +516,19 @@ export const useWallet = create<WalletState>()(
         setLockWallet: (lockWallet: boolean) => {
           set({ lockWallet })
         },
-
-        addCustomToken: async (tokenData: Asset) => {
-          set(
-            produce((state: WalletState) => {
-              state.assets.push(tokenData)
-            })
-          )
-
-          useSettings.getState().saveAccount()
-        },
-
-        removeToken: (network: string, assetId: string) => {
-          set(
-            produce((state: WalletState) => {
-              state.assets = state.assets.filter((a) => !(a.id === assetId && a.network === network))
-            })
-          )
-
-          useSettings.getState().saveAccount()
-        },
-
         changeAvatar: (avatar: string) => {
           set(
             produce((state: WalletState) => {
               state.avatar = avatar
             })
           )
-
-          useSettings.getState().saveAccount()
         },
-
         addNFT: (nft: Asset) => {
           set(
             produce((state: WalletState) => {
               state.NFTs.push(nft)
             })
           )
-
-          useSettings.getState().saveAccount()
         },
 
         removeNFT: (nft: Asset) => {
@@ -545,18 +537,6 @@ export const useWallet = create<WalletState>()(
               state.NFTs = state.NFTs.filter((i) => i.id !== nft.id && i.contractAddress === nft.contractAddress)
             })
           )
-
-          useSettings.getState().saveAccount()
-        },
-
-        getNetworkList: () => {
-          const { assets } = get()
-          const assetsWithImage = assets.map(({ image, network }) => ({
-            network,
-            image,
-          }))
-
-          return [...new Map(assetsWithImage.map((item) => [item['network'], item])).values()]
         },
 
         setTokenProfitLoss: (data: TokenProfitCollection) => {
@@ -590,13 +570,35 @@ export const useWallet = create<WalletState>()(
             selectedNetwork: selectedNetwork,
           })
         },
+        getPhrase: () => {
+          const { accounts } = useSettings.getState()
+          const { getPassword } = useSessionStore.getState()
+          try {
+            const primaryAccount = Object.values(accounts).find((acc) => acc.isPrimary)
+            const password = getPassword()
+            if (primaryAccount && primaryAccount.encryptedWallet && password) {
+              return decryptData(primaryAccount.encryptedWallet as string, password)
+            } else {
+              return null
+            }
+          } catch (e) {
+            console.log(e.message)
+            return null
+          }
+        },
+        setCreateWalletProcessCompleted: (isCreateWalletProcessCompleted: boolean) => {
+          set({ isCreateWalletProcessCompleted })
+        },
+        setOnboardingBy: (onboardingBy: OnBoardingTypes) => {
+          set({ onboardingBy })
+        },
       }),
       {
         name: 'wallet-storage',
-        getStorage: () => chromeSyncStorage,
+        getStorage: () => chromeLocalStorage,
         partialize: (state) => Object.fromEntries(Object.entries(state).filter(([key]) => !['wallet'].includes(key))),
       }
     ),
-    { name: 'Shuttle - Wallet' }
+    { name: 'Star Key - Wallet' }
   )
 )

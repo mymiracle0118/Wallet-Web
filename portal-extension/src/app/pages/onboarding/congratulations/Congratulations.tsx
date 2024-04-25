@@ -1,24 +1,42 @@
-import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'lib/woozie'
+import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import OnboardingLayout from 'app/layouts/onboarding-layout/OnboardingLayout'
+import { OnBoardingTypes, useWallet } from '@portal/shared/hooks/useWallet'
 import { Button, CustomTypography } from 'app/components'
+import OnboardingLayout from 'app/layouts/onboarding-layout/OnboardingLayout'
 import Robot from 'assets/images/robot.png'
 
 const Congratulations: FC = () => {
   const { navigate } = useNavigate()
   const { t } = useTranslation()
+  const { onboardingBy } = useWallet()
 
-  const [isImported, setIsImported] = useState('')
-  // const [isDefaultWallet, setIsDefaultWallet] = useState<boolean>(true)
-  // const [isShareData, setIsShareData] = useState<boolean>(true)
-
-  useEffect(() => {
-    const [, query] = window.location.href.split('#')[1].split('?')
-    const params = Object.fromEntries(new URLSearchParams(query))
-    setIsImported(params.accountImported)
-  }, [])
+  const getTitle = () => {
+    switch (onboardingBy) {
+      case OnBoardingTypes.recoveryPhrase:
+      case OnBoardingTypes.privateKey:
+      case OnBoardingTypes.createdAccount:
+        return t('Onboarding.congratulations')
+      case OnBoardingTypes.fileRecovery:
+        return t('Onboarding.waletRecoveredTitle')
+      default:
+        return t('Onboarding.congratulations')
+    }
+  }
+  const getDescription = () => {
+    switch (onboardingBy) {
+      case OnBoardingTypes.recoveryPhrase:
+      case OnBoardingTypes.privateKey:
+        return t('Onboarding.allSetUp')
+      case OnBoardingTypes.createdAccount:
+        return t('Onboarding.allSetUpCreate')
+      case OnBoardingTypes.fileRecovery:
+        return t('Onboarding.waletRecoveredDescription')
+      default:
+        return t('Onboarding.allSetUpFileRecovery')
+    }
+  }
 
   return (
     <OnboardingLayout disableLogo>
@@ -28,56 +46,11 @@ const Congratulations: FC = () => {
 
       <div className="text-center space-y-3">
         <CustomTypography dataAid="congratsMsg" variant="h1">
-          {t('Onboarding.congratulations')}
+          {getTitle()}
         </CustomTypography>
         <CustomTypography dataAid="setupMsg" className="dark:text-custom-white80" variant="body">
-          {isImported && isImported === 'false' ? t('Onboarding.allSetUpCreate') : t('Onboarding.allSetUp')}
+          {getDescription()}
         </CustomTypography>
-
-        {/* {isImported && isImported === 'false' ? (
-          <div className="border border-custom-grey rounded-[1.5rem] mt-4 p-4 space-y-4">
-            <div className="flex items-center justify-center gap-x-6">
-              <div>
-                <CustomTypography
-                  dataAid="createWalletDataDefault"
-                  variant="body"
-                  className="!font-extrabold text-left"
-                >
-                  {t('Onboarding.setDefaultWallet')}
-                </CustomTypography>
-
-                <CustomTypography
-                  dataAid="createWalletDataDefaultGuide"
-                  variant="body"
-                  className="dark:text-custom-white40 text-left"
-                >
-                  {t('Onboarding.setGuide')}
-                </CustomTypography>
-              </div>
-              <div>
-                <Switch id="setDefault" checked={isDefaultWallet} onChange={(e: boolean) => setIsDefaultWallet(e)} />
-              </div>
-            </div>
-            <div className="flex items-center justify-center gap-x-6">
-              <div>
-                <CustomTypography dataAid="createWalletDataShare" variant="body" className="!font-extrabold text-left">
-                  {t('Onboarding.shareData')}
-                </CustomTypography>
-
-                <CustomTypography
-                  dataAid="createWalletDataShareGuide"
-                  variant="body"
-                  className="dark:text-custom-white40 text-left"
-                >
-                  {t('Onboarding.shareGuide')}
-                </CustomTypography>
-              </div>
-              <div>
-                <Switch id="shareData" checked={isShareData} onChange={(e: boolean) => setIsShareData(e)} />
-              </div>
-            </div>
-          </div>
-        ) : null} */}
       </div>
       <Button data-aid="walletHomeButton" onClick={() => navigate('/home')} className="mt-6" color="primary">
         {t('Actions.openWallet')}

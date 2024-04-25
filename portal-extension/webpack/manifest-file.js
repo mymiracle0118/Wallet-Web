@@ -1,4 +1,5 @@
 const fs = require('fs')
+require('dotenv').config()
 
 const ALPHA_APP_ID = 'chkgjfeacmiiflefonpeeojeknaiappe'
 const BETA_APP_ID = 'hcjhpkgbmechpabifbggldplacolbkoh'
@@ -26,8 +27,10 @@ const manifestFileVerification = (appId) => {
 
 const getManifestFile = () => {
   let manifestAppId = process.env.MANIFEST_APP_ID
-  const isAlphaBuild = process.env.BUILD_ALPHA
-  const isBetaBuild = process.env.BUILD_BUILD
+  const isAlphaBuild = process.env.BUILD_ALPHA === 'true'
+
+  // BUILD_LOCAL is only for locally use the beta build manifest.
+  const isBetaBuild = process.env.BUILD_BETA === 'true' || process.env.BUILD_LOCAL === 'true'
 
   if (isAlphaBuild) {
     manifestAppId = ALPHA_APP_ID

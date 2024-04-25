@@ -1,19 +1,19 @@
 import { Menu } from '@headlessui/react'
+import { Avatar } from '@nextui-org/react'
 import { default as networkTokenList } from '@portal/shared/data/networkTokens.json'
+import { NetworkFactory } from '@portal/shared/factory/network.factory'
 import { useSettings } from '@portal/shared/hooks/useSettings'
 import { useStore } from '@portal/shared/hooks/useStore'
+import { decryptData } from '@portal/shared/services/EncryptionService'
 import { NetworkToken } from '@portal/shared/utils/types'
 import { fromUTF8Array } from '@portal/shared/utils/utf8'
-import { useWallet } from '@src/../../shared/hooks/useWallet'
-import { CopyIcon, SpinnerIcon } from '@src/app/components/Icons'
-import { decryptData } from '@src/utils/constants'
-import { Button, CustomTypography, Dropdown, DropdownItem, Icon, Input, ToolTip } from 'app/components'
-import { ethers } from 'ethers'
+import { CaretDownIcon, CopyIcon, SpinnerIcon } from '@src/app/components/Icons'
+import { Button, CustomTypography, Dropdown, DropdownItem, Input, ToolTip } from 'app/components'
 import SinglePageTitleLayout from 'layouts/single-page-layout/SinglePageLayout'
 import { createLocationState, goBack, useNavigate } from 'lib/woozie'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import DropDownIcon from '../../../../../public/images/backgrounds/dropdown_icon.svg'
+
 const networkTokens = Object.values(networkTokenList).filter((token) => token.tokenType === 'Native')
 
 const ShowPrivateKey = () => {
@@ -22,26 +22,29 @@ const ShowPrivateKey = () => {
   const address = paths.slice(-1).pop()
   const { navigate } = useNavigate()
   const { t } = useTranslation()
-  const [privateKeyPassword, setPrivateKeyPassword] = useState('')
+  const [privateKeyPassword, setPrivateKeyPassword] = useState<string>('')
   const [showKey, setShowKey] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
-  const [errorMsg, setErrorMsg] = useState('')
+  const [errorMsg, setErrorMsg] = useState<string>('')
   const [privateKeyToShow, setPrivateKeyToShow] = useState<string>('')
-  const { currentAccount } = useSettings()
+  const { currentAccount, accounts } = useSettings()
   const [isCopied, setIsCopied] = useState<boolean>(false)
   const textRef = useRef<HTMLSpanElement | null>(null)
   const { walletsList } = useStore()
-  const [activeNetwork, setActiveNetwork] = useState<NetworkToken>()
+  const [activeNetwork, setActiveNetwork] = useState<NetworkToken | null>(null)
   const [filteredTokens, setFilteredTokens] = useState<NetworkToken[]>([])
 
   useEffect(() => {
-    if (address) {
-      const selectedAddressKeys = Object.keys(walletsList[address])
-      const filteredData = networkTokens.filter((token) => selectedAddressKeys.includes(token.shortName))
-      setActiveNetwork(filteredData[0])
+    if (address && walletsList) {
+      const accountsWalletsList = walletsList[address]
+      const filteredData = networkTokens
+        .map((token) => {
+          return { ...token, address: accountsWalletsList[token.shortName]?.address } as unknown as NetworkToken
+        })
+        .filter((token) => token.address)
       setFilteredTokens(filteredData)
     }
-  }, [])
+  }, [address, walletsList])
 
   const copyToClipboard = () => {
     if (textRef.current) {
@@ -55,93 +58,98 @@ const ShowPrivateKey = () => {
 
   const handleShowPrivateKey = async () => {
     try {
-      setShowKey(true)
       if (currentAccount && address && activeNetwork) {
-        const accountWallet = walletsList[currentAccount.address][currentAccount.networkName]
-        const networkToken = useWallet.getState().getNetworkTokenWithCurrentEnv(currentAccount.networkName)
-        if (networkToken.isEVMNetwork) {
-          await ethers.Wallet.fromEncryptedJson(accountWallet.encryptedWallet as string, privateKeyPassword as string)
+        const selectedAccount = accounts[address]
+
+        let encryptedPrivateKey: any
+        if (!selectedAccount.encryptedWallet && selectedAccount.encryptedPrivateKey) {
+          encryptedPrivateKey = JSON.parse(
+            decryptData(selectedAccount.encryptedPrivateKey as string, privateKeyPassword as string) as string
+          )
         } else {
-          await decryptData(accountWallet.encryptedWallet as string, privateKeyPassword as string)
+          const primaryAccount = Object.values(accounts).find((acc) => acc.isPrimary)
+          const accountWallet = walletsList[selectedAccount.id][activeNetwork.networkName]
+
+          const mnemonic = decryptData(
+            primaryAccount?.encryptedWallet as string,
+            privateKeyPassword as string
+          ) as string
+          if (mnemonic) {
+            const networkFactory = NetworkFactory.selectByNetworkId(activeNetwork.networkName)
+            const walletObj = await networkFactory.createWallet(mnemonic, accountWallet.derivationPathIndex)
+            encryptedPrivateKey = walletObj.encryptedPrivateKey
+          }
         }
-        const selectedAccount = walletsList[address]
-        const encPK = selectedAccount[activeNetwork?.shortName]?.encryptedPrivateKey
-        const PK = fromUTF8Array(encPK)
-        setPrivateKeyToShow(PK)
-        setError(false), setErrorMsg('')
+        setShowKey(true)
+
+        if (encryptedPrivateKey) {
+          const PK = fromUTF8Array(encryptedPrivateKey)
+          setPrivateKeyToShow(PK)
+          setError(false), setErrorMsg('')
+        } else {
+          setError(true), setErrorMsg(t('Actions.invalidPassword') as string)
+        }
       }
     } catch (error) {
       setShowKey(false)
-      setError(true), setErrorMsg('Invalid password!')
+      setError(true), setErrorMsg(t('Actions.invalidPassword') as string)
     }
   }
 
-  const handleChangeNetwork = (val: string) => {
-    const selected = filteredTokens.find((v) => v.networkName === val) as NetworkToken
-    setActiveNetwork(selected)
-  }
-
   return (
-    <SinglePageTitleLayout title="Show Private Key">
+    <SinglePageTitleLayout title={t('Account.option2')}>
       <div className="space-y-5">
         <CustomTypography variant="body">{t('Settings.privateKeyDisclosure')}</CustomTypography>
 
-        {(showKey && privateKeyToShow) || error ? (
+        {showKey && privateKeyToShow && !error ? (
           <>
-            <CustomTypography variant="subtitle" className="my-4" type="secondary">
-              {error ? (
-                <label className="dark:text-feedback-negative text-sm font-bold"> {errorMsg}</label>
-              ) : (
-                <>{t('Settings.showPrivateKeyLabel')}</>
-              )}
-            </CustomTypography>
-            {/* {!error && wallet?.privateKeyPassword ? ( */}
-            {!error && privateKeyToShow ? (
-              <>
-                <div className="bg-surface-dark-alt rounded-md p-4 mb-3">
-                  <CustomTypography variant="body" ref={textRef} className="break-words text-white leading-5">
-                    {/* {wallet?.privateKeyPassword} */}
-                    {privateKeyToShow}
-                  </CustomTypography>
+            <div className="bg-surface-dark-alt rounded-md p-4 mb-3">
+              <CustomTypography variant="body" ref={textRef} className="break-words text-white leading-5">
+                {privateKeyToShow}
+              </CustomTypography>
 
-                  <div className="flex justify-end cursor-pointer mt-3 ml-auto w-fit">
-                    <ToolTip title={`${isCopied ? 'Copied' : 'Copy'}`} placement="left">
-                      <Button
-                        isIconOnly
-                        size="sm"
-                        radius="none"
-                        variant="light"
-                        className="bg-transparent"
-                        onClick={copyToClipboard}
-                      >
-                        <CopyIcon className="fill-custom-white" />
-                      </Button>
-                    </ToolTip>
-                  </div>
-                </div>
-              </>
-            ) : null}
-            <Button
-              color={`${!privateKeyPassword.length ? 'disabled' : 'primary'}`}
-              isDisabled={!privateKeyPassword.length}
-              onClick={() => navigate('/account')}
-            >
-              {error ? t('Actions.tryAgain') : t('Actions.done')}
+              <div className="flex justify-end cursor-pointer mt-3 ml-auto w-fit">
+                <ToolTip title={`${isCopied ? 'Copied' : 'Copy'}`}>
+                  <Button
+                    isIconOnly
+                    size="sm"
+                    radius="none"
+                    variant="light"
+                    className="bg-transparent"
+                    onClick={copyToClipboard}
+                  >
+                    <CopyIcon className="fill-custom-white" />
+                  </Button>
+                </ToolTip>
+              </div>
+            </div>
+            <Button color="primary" onClick={() => navigate('/account')}>
+              {t('Actions.done')}
             </Button>
           </>
         ) : (
           <>
             <Dropdown
               classDynamicChild="max-h-[16.25rem] h-auto overflow-x-hidden overflow-y-scroll w-full border border-solid border-[#424250]"
-              classDynamicMenu="bg-custom-white10 mb-4 mt-6 rounded-md p-1 !table"
+              classDynamicMenu="bg-custom-white10 mb-4 mt-6 rounded-md p-1 w-full"
               anchor={
-                <Menu.Button data-aid="currencyDropdown" className="p-2 rounded-xl flex items-center gap-4">
-                  <img alt="icon" src={activeNetwork?.image} className="h-6 rounded-full" />
-
-                  <CustomTypography className="w-60 text-left mr-4" variant="subtitle">
-                    {activeNetwork?.networkName}
+                <Menu.Button
+                  data-aid="currencyDropdown"
+                  className={`rounded-xl flex items-center gap-4 justify-between w-full ${
+                    activeNetwork?.networkName ? 'px-2 py-1' : 'p-2'
+                  }`}
+                >
+                  {activeNetwork?.networkName && (
+                    <Avatar
+                      src={activeNetwork?.image}
+                      alt={activeNetwork?.title}
+                      className="w-10 overflow-hidden rounded-full !h-auto  bg-custom-white"
+                    />
+                  )}
+                  <CustomTypography className="w-full text-left mr-4" variant="subtitle">
+                    {activeNetwork?.networkName || 'Choose Network'}
                   </CustomTypography>
-                  <Icon size="small" icon={<DropDownIcon />} />
+                  <CaretDownIcon className="w-6 h-6" />
                 </Menu.Button>
               }
             >
@@ -150,19 +158,33 @@ const ShowPrivateKey = () => {
                   key={network.networkName}
                   active={network.networkName === activeNetwork?.networkName}
                   text={network.networkName}
+                  onSelect={() => {
+                    setActiveNetwork(network)
+                  }}
                   icon={network.image}
                   isImg={true}
-                  onSelect={handleChangeNetwork}
                 />
               ))}
             </Dropdown>
-            <Input
-              type="password"
-              placeholder="Password"
-              mainColor
-              fullWidth
-              onChange={(e) => setPrivateKeyPassword(e.target.value as string)}
-            />
+            {activeNetwork && (
+              <div className="border-small p-4 rounded-lg dark:border-custom-white10 my-3 space-y-2">
+                <CustomTypography variant="subTitle" className="font-extrabold dark:text-custom-white40">
+                  {t('Wallet.walletAddress')}
+                </CustomTypography>
+                <CustomTypography className="break-all">{activeNetwork.address}</CustomTypography>
+              </div>
+            )}
+
+            <div>
+              <Input
+                type="password"
+                placeholder="Password"
+                mainColor
+                fullWidth
+                onChange={(e) => setPrivateKeyPassword(e.target.value as string)}
+                error={errorMsg}
+              />
+            </div>
 
             <div className="mt-4 flex gap-2">
               <Button color="outlined" variant="bordered" onClick={goBack}>
@@ -170,23 +192,14 @@ const ShowPrivateKey = () => {
               </Button>
               <Button
                 data-aid="nextNavigation"
-                color={`${!privateKeyPassword.length || showKey ? 'disabled' : 'primary'}`}
-                isDisabled={!privateKeyPassword.length || showKey}
-                // onClick={async () => {
-                //   setShowKey(true),
-                //     await openWallet(privateKeyPassword, address)
-                //       .then((privateKeyShow: string) => {
-                //         setPrivateKeyToShow(privateKeyShow)
-                //         setError(false), setErrorMsg('')
-                //       })
-                //       .catch(() => {
-                //         setShowKey(false)
-                //         setError(true), setErrorMsg('Invalid password!')
-                //       })
-                // }}
+                color={`${
+                  !privateKeyPassword.length || (showKey && !error) || !activeNetwork ? 'disabled' : 'primary'
+                }`}
+                isDisabled={!privateKeyPassword.length || (showKey && !error) || !activeNetwork}
                 onClick={handleShowPrivateKey}
+                spinner={<SpinnerIcon />}
               >
-                {showKey ? <SpinnerIcon /> : t('Actions.show')}
+                {t('Actions.show')}
               </Button>
             </div>
           </>
