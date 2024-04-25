@@ -17852,9 +17852,9 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-"supra-l1-devnet-sdk@github:Entropy-Foundation/supra-l1-sdk":
+"supra-l1-devnet-sdk@git+https://supra-bharatjain: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@github.com/Entropy-Foundation/supra-l1-sdk.git":
   version "1.0.0"
-  resolved "github:Entropy-Foundation/supra-l1-sdk"
+  resolved "git+https://supra-bharatjain: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@github.com/Entropy-Foundation/supra-l1-sdk.git#da28cbb2657f3e3b8573c0f25acea04863a78a52"
   dependencies:
     aptos "^1.21.0"
 
