@@ -61,7 +61,7 @@
     "react-toastify": "^9.1.3",
     "regexparam": "1.3.0",
     "styled-components": "^5.3.5",
-    "supra-l1-devnet-sdk": "github:Entropy-Foundation/supra-l1-sdk",
+    "supra-l1-devnet-sdk": "git+https://supra-bharatjain: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@github.com/Entropy-Foundation/supra-l1-sdk.git",
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.3.5",
     "use-force-update": "^1.0.8",
