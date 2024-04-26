@@ -38,7 +38,7 @@
     "@solana/spl-token-registry": "^0.2.4574",
     "@uniswap/token-lists": "^1.0.0-beta.30",
     "ajv": "^8.11.0",
-    "ajv-formats": "^2.1.1",
+    "ajv-formats": "^3.0.1",
     "i18next": "^23.10.1",
     "react-i18next": "^14.0.1"
   }
